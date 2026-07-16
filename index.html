@@ -43,6 +43,13 @@
     
     body.is-loading { overflow: hidden; }
 
+    /* --- 新增功能 1：自訂反白選取文字顏色 --- */
+    ::selection { background-color: var(--accent-color); color: #fff; }
+    ::-moz-selection { background-color: var(--accent-color); color: #fff; }
+
+    /* --- 新增功能 2：網頁主體捲動慣性傾斜的過渡動畫 --- */
+    main { transition: transform 0.15s ease-out; transform-origin: center top; }
+
     /* 滑鼠跟隨粉紅蝶火環境光 */
     .cursor-glow {
       position: fixed;
@@ -154,7 +161,6 @@
     .btn-secondary { background: #fff; color: var(--primary-color); border: 2px solid var(--card-border); margin-top: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); width: 100%; padding: 14px; font-size: 1rem; font-weight: 700; transition: all 0.3s ease; }
     .btn-secondary:hover { background: var(--bg-color); transform: translateY(-3px); border-color: var(--primary-color); box-shadow: 0 6px 15px rgba(222,82,102,0.15); }
 
-    /* 右側聯絡名片卡 (加入滑鼠懸停Q彈特效) */
     .hero-contact-card {
       background: var(--card-bg); border: 3px solid var(--card-border); border-radius: 32px; padding: 30px;
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 15px 35px rgba(255, 182, 193, 0.2);
@@ -188,13 +194,16 @@
     .contact-item:hover .contact-item-hint { opacity: 1; transform: translateY(-50%) translateX(-3px); }
 
     /* ==========================================================================
-       5. 關於我區塊 (About Me 雙欄萌化)
+       5. 關於我區塊 (About Me)
        ========================================================================== */
     .section { padding: 90px 20px; max-width: 1200px; margin: 0 auto; position: relative; z-index: 2; }
     .about-grid-wrap { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 40px; }
     @media (max-width: 968px) { .about-grid-wrap { grid-template-columns: 1fr; } }
 
-    /* 關於我故事卡 (加入滑鼠懸停Q彈特效) */
+    /* 全域 360 旋轉特效類別 (新增功能使用) */
+    .spin-animation { animation: fullSpin 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards !important; }
+    @keyframes fullSpin { 100% { transform: rotate(360deg) scale(1); } }
+
     .about-story-card {
       background: var(--card-bg); border: 3px solid var(--card-border); border-radius: 32px; padding: 45px;
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 15px 35px rgba(255, 182, 193, 0.15);
@@ -228,7 +237,6 @@
     .about-meta-row { display: flex; gap: 15px; align-items: center; margin-top: 40px; color: var(--primary-color); font-size: 0.95rem; font-weight: 700; }
     .about-meta-dot { width: 6px; height: 6px; background: var(--accent-color); border-radius: 50%; animation: cutePulse 1.5s infinite alternate; }
 
-    /* 右側個人屬性特質卡 (加入滑鼠懸停Q彈特效) */
     .profile-trait-card {
       background: var(--card-bg); border: 3px solid var(--card-border); border-radius: 32px; padding: 40px;
       backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); height: fit-content; box-shadow: 0 15px 35px rgba(255, 182, 193, 0.15);
@@ -260,28 +268,40 @@
     .section-title { font-size: 2.4rem; font-weight: 700; margin-bottom: 10px; color: var(--primary-color); }
     .section-desc { color: var(--text-muted); font-weight: 600; }
 
-    /* 作品展示卡 (加入滑鼠懸停Q彈特效) */
     .feature-showcase-box {
       background: var(--card-bg); border: 3px solid var(--card-border); border-radius: 32px; padding: 40px;
       max-width: 800px; margin: 0 auto; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 15px 35px rgba(255, 182, 193, 0.15);
       transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s, border-color 0.4s;
+      position: relative;
     }
     .feature-showcase-box:hover {
       transform: translateY(-8px);
       border-color: var(--primary-color);
       box-shadow: 0 20px 40px rgba(255, 182, 193, 0.3);
     }
-    .feature-showcase-header { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 30px; }
+    
+    /* --- 新增功能 3：3D卡片內層高光反射特效 (JS聯動) --- */
+    .glare-overlay {
+      position: absolute; inset: 0; border-radius: 28px; pointer-events: none;
+      background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.6) 0%, transparent 60%);
+      opacity: 0; transition: opacity 0.3s; mix-blend-mode: overlay; z-index: 10;
+    }
+    .feature-showcase-box:hover .glare-overlay { opacity: 1; }
+
+    .feature-showcase-header { display: flex; gap: 20px; align-items: flex-start; margin-bottom: 30px; position: relative; z-index: 2; }
     .feature-icon-box { background: rgba(222, 82, 102, 0.1); border-radius: 16px; padding: 12px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(222,82,102,0.2); transition: transform 0.3s; }
     .feature-showcase-box:hover .feature-icon-box { transform: scale(1.1) rotate(-5deg); }
     .feature-header-text h3 { font-size: 1.5rem; margin-bottom: 6px; color: var(--primary-color); font-weight: 700; }
     .feature-header-text p { color: var(--text-muted); font-weight: 600; line-height: 1.6; }
 
-    /* 往生堂特製精緻終端機 */
-    .terminal-panel { background: #36292b; border: 2px solid #4a3739; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(74, 55, 57, 0.25); margin-bottom: 25px; transition: border-color 0.3s; }
+    .terminal-panel { background: #36292b; border: 2px solid #4a3739; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(74, 55, 57, 0.25); margin-bottom: 25px; transition: border-color 0.3s; position: relative; z-index: 2; cursor: pointer; }
     .feature-showcase-box:hover .terminal-panel { border-color: var(--primary-color); }
     .terminal-header { background: #291f20; padding: 14px 20px; font-size: 0.85rem; color: #ffb3c1; border-bottom: 2px solid #4a3739; letter-spacing: 0.5px; font-weight: bold; }
-    .terminal-screen { padding: 25px; font-family: 'Courier New', Courier, monospace; font-size: 1rem; line-height: 1.8; }
+    .terminal-screen { padding: 25px; font-family: 'Courier New', Courier, monospace; font-size: 1rem; line-height: 1.8; transition: filter 0.1s; }
+    
+    /* --- 新增功能 4：終端機點擊閃爍特效 --- */
+    .terminal-screen.glitch { filter: contrast(2) brightness(1.5) hue-rotate(90deg); transform: skewX(-5deg); }
+
     .terminal-line { margin-bottom: 6px; }
 
     .t-gray { color: #a38a8d; }
@@ -297,9 +317,6 @@
       50% { transform: translateY(-10px) rotate(3deg); }
     }
 
-    /* ==========================================================================
-       9. 捲動顯現動畫 (Scroll Reveal)
-       ========================================================================== */
     .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
     .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
@@ -327,6 +344,11 @@
     }
     .mascot-wrap:hover .mascot-body { transform: scale(1.08) rotate(-4deg); }
     .mascot-wrap:active .mascot-body { transform: scale(0.92) rotate(4deg); }
+    
+    /* --- 新增功能 5：空白鍵吉祥物跳躍動畫 --- */
+    .mascot-body.jump { animation: mascotJumpAnim 0.5s ease-out !important; }
+    @keyframes mascotJumpAnim { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-40px) scale(1.1); } }
+
     @keyframes mascotBob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-9px) rotate(2deg); } }
     .mascot-wing { animation: wingFlap 1.4s ease-in-out infinite; transform-origin: 50% 50%; }
     .mascot-wing.right { animation-delay: 0.15s; }
@@ -377,9 +399,6 @@
     }
     .fortune-card-redraw:hover { background: var(--primary-color); color: #fff; transform: translateY(-2px); }
 
-    /* ==========================================================================
-       12. 點擊彩粒特效 (Click Burst)
-       ========================================================================== */
     .click-burst-particle {
       position: fixed; pointer-events: none; z-index: 300; font-size: 18px;
       animation: burstFly 0.9s ease-out forwards;
@@ -389,31 +408,29 @@
       100% { transform: var(--burst-end) scale(1.1) rotate(180deg); opacity: 0; }
     }
 
-    /* ==========================================================================
-       13. 頂部閱讀進度條 (Scroll Progress)
-       ========================================================================== */
+    /* --- 新增功能 6：全域點擊水波紋特效 --- */
+    .ripple-effect {
+      position: fixed; pointer-events: none; z-index: 299;
+      width: 20px; height: 20px; border: 2px solid var(--primary-color); border-radius: 50%;
+      transform: translate(-50%, -50%) scale(1); opacity: 0.8;
+      animation: rippleExpand 0.6s ease-out forwards;
+    }
+    @keyframes rippleExpand { 100% { transform: translate(-50%, -50%) scale(5); opacity: 0; } }
+
     .scroll-progress {
       position: fixed; top: 0; left: 0; height: 3px; width: 0%; z-index: 150;
       background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
       box-shadow: 0 0 8px var(--glow-color); transition: width 0.1s linear;
     }
 
-    /* ==========================================================================
-       14. 主標題逐字互動 (Hero Title Letters)
-       ========================================================================== */
     .hero-title .letter { display: inline-block; transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.25s; }
     .hero-title .letter:hover { transform: translateY(-10px) rotate(-6deg) scale(1.15); color: var(--accent-color); }
 
-    /* 心情狀態列可點擊切換 */
     .hero-status-left, .hero-status-right { cursor: pointer; transition: transform 0.25s; }
     .hero-status-left:active, .hero-status-right:active { transform: scale(0.9); }
 
-    /* ==========================================================================
-       15. 卡片3D傾斜跟隨滑鼠 (Tilt)
-       ========================================================================== */
-    .tilt-card { transform-style: preserve-3d; will-change: transform; }
+    .tilt-card { transform-style: preserve-3d; will-change: transform; position: relative; }
 
-    /* 遊戲代碼標籤 hover 波浪底線 */
     .game-list code { position: relative; }
     .game-list code::after {
       content: ''; position: absolute; left: 4px; right: 4px; bottom: -2px; height: 2px;
@@ -422,9 +439,6 @@
     }
     .game-list code:hover::after { opacity: 1; transform: scaleX(1); }
 
-    /* ==========================================================================
-       16. 頁尾區塊 (Footer)
-       ========================================================================== */
     .site-footer {
       position: relative; z-index: 2; max-width: 900px; margin: 0 auto; padding: 20px 20px 60px;
       text-align: center;
@@ -454,7 +468,6 @@
 
     .footer-signoff { color: var(--text-muted); font-size: 0.85rem; font-weight: 600; }
 
-    /* 回到頂部按鈕 */
     .back-to-top {
       position: fixed; right: 22px; bottom: 108px; z-index: 59;
       width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--card-border);
@@ -467,15 +480,17 @@
     .back-to-top.show { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
     .back-to-top:hover { transform: translateY(-4px) scale(1.08); background: var(--primary-color); color: #fff; }
 
-    /* ==========================================================================
-       17. 日夜模式切換 (Theme Toggle)
-       ========================================================================== */
     .theme-toggle {
       width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--card-border);
       background: #fff; font-size: 1.05rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
       transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); margin-left: 10px; flex-shrink: 0;
     }
     .theme-toggle:hover { transform: rotate(20deg) scale(1.1); border-color: var(--primary-color); }
+    
+    /* Konami Mode Override */
+    body.konami-mode { filter: invert(1) hue-rotate(180deg); animation: discoMode 2s infinite alternate; }
+    @keyframes discoMode { 100% { filter: invert(1) hue-rotate(360deg); } }
+
     body.dark-mode {
       --bg-color: #2c2230;
       --card-bg: rgba(58, 44, 63, 0.85);
@@ -496,9 +511,6 @@
     body.dark-mode .theme-toggle { background: rgba(58, 44, 63, 0.9); color: var(--text-color); }
     body.dark-mode .btn-secondary { background: rgba(58, 44, 63, 0.9); color: var(--accent-color); }
 
-    /* ==========================================================================
-       18. 成就通知 Toast
-       ========================================================================== */
     .achievement-toast {
       position: fixed; top: 90px; left: 50%; transform: translateX(-50%) translateY(-20px);
       background: linear-gradient(135deg, #fff, #fff0f3); border: 2px solid var(--card-border); border-radius: 20px;
@@ -509,9 +521,6 @@
     .achievement-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     .achievement-toast-icon { font-size: 1.3rem; animation: cutePulse 1s infinite alternate; }
 
-    /* ==========================================================================
-       19. 滑鼠星光軌跡 (Cursor Trail)
-       ========================================================================== */
     .cursor-star {
       position: fixed; pointer-events: none; z-index: 90; font-size: 12px;
       animation: starFade 0.8s ease-out forwards;
@@ -521,9 +530,6 @@
       100% { opacity: 0; transform: translate(-50%, -50%) scale(0.3) translateY(14px); }
     }
 
-    /* ==========================================================================
-       20. 雙擊比心特效
-       ========================================================================== */
     .heart-burst-particle {
       position: fixed; pointer-events: none; z-index: 300; font-size: 22px;
       animation: heartFly 1.1s ease-out forwards;
@@ -534,20 +540,11 @@
       100% { transform: translate(-50%, -50%) scale(1.4) translateY(-70px); opacity: 0; }
     }
 
-    /* ==========================================================================
-       21. 導覽列捲動高亮 (Scrollspy)
-       ========================================================================== */
     .nav-link.active { color: var(--primary-color); background: rgba(255, 182, 193, 0.25); }
 
-    /* ==========================================================================
-       22. 終端機逐行浮現
-       ========================================================================== */
     .terminal-line { opacity: 0; transform: translateX(-6px); transition: opacity 0.5s ease, transform 0.5s ease; }
     .terminal-line.line-visible { opacity: 1; transform: translateX(0); }
 
-    /* ==========================================================================
-       23. 方向鍵彩蛋：彩虹光暈全螢幕
-       ========================================================================== */
     .rainbow-flash {
       position: fixed; inset: 0; z-index: 250; pointer-events: none; opacity: 0;
       background: linear-gradient(120deg, #ffb6c8, #ffe1ea, #ffc9de, #ff9ebb, #ffd6e5);
@@ -558,9 +555,6 @@
     .rainbow-flash.show { opacity: 0.85; }
     @keyframes rainbowShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 
-    /* ==========================================================================
-       24. 蝴蝶吉祥物保底大彩蛋
-       ========================================================================== */
     .mascot-pity-text {
       position: fixed; top: 40%; left: 50%; transform: translate(-50%, -50%) scale(0.7);
       font-size: 1.6rem; font-weight: 700; color: var(--primary-color); text-shadow: 0 4px 20px rgba(255,255,255,0.9);
@@ -569,8 +563,26 @@
     }
     .mascot-pity-text.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 
-    /* 心情籤詩：上次抽到標籤 */
     .fortune-last-tag { font-size: 0.75rem; color: var(--text-muted); margin-top: 10px; font-weight: 600; }
+
+    /* --- 新增功能 7：閒置模式掛機動畫 --- */
+    .idle-overlay {
+      position: fixed; inset: 0; z-index: 9000; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none;
+      transition: opacity 0.8s; color: #fff; font-size: 2rem; font-weight: bold; letter-spacing: 2px;
+    }
+    .idle-overlay.show { opacity: 1; pointer-events: auto; }
+    .idle-overlay span { animation: float 3s infinite ease-in-out; }
+
+    /* --- 新增功能 8：專屬自訂右鍵選單 --- */
+    .custom-context-menu {
+      position: fixed; z-index: 9999; background: var(--card-bg); border: 2px solid var(--primary-color);
+      border-radius: 12px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); padding: 8px 0;
+      opacity: 0; pointer-events: none; transform: scale(0.9); transition: 0.2s; min-width: 140px;
+    }
+    .custom-context-menu.show { opacity: 1; pointer-events: auto; transform: scale(1); }
+    .ctx-item { padding: 10px 20px; font-size: 0.9rem; font-weight: 700; color: var(--text-color); cursor: pointer; transition: background 0.2s; }
+    .ctx-item:hover { background: rgba(255, 182, 193, 0.3); color: var(--primary-color); }
 
     @media (max-width: 640px) {
       .back-to-top { right: 12px; bottom: 84px; width: 38px; height: 38px; font-size: 1rem; }
@@ -578,21 +590,15 @@
       .footer-stat-chip { font-size: 0.78rem; padding: 8px 14px; }
       .achievement-toast { top: 76px; font-size: 0.8rem; padding: 10px 16px; }
       .mascot-pity-text { font-size: 1.15rem; padding: 0 20px; }
-    }
-
-    @media (max-width: 640px) {
       .mascot-wrap { right: 12px; bottom: 12px; }
       .mascot-body { width: 56px; height: 56px; }
       .fortune-btn { left: 12px; bottom: 12px; padding: 10px 16px; font-size: 0.8rem; }
       .mascot-bubble { font-size: 0.75rem; max-width: 46vw; white-space: normal; }
-
-      /* 全站排版舒適度優化：手機版縮小標題與留白，閱讀更不擁擠 */
       .nav-inner { padding: 12px 16px; }
       .nav-brand { font-size: 1.15rem; }
       .nav-links { gap: 14px; }
       .nav-link { font-size: 0.85rem; padding: 4px 6px; }
       .nav-cta { padding: 7px 14px; font-size: 0.8rem; }
-
       .hero { padding: 110px 16px 50px; min-height: auto; }
       .hero-title { font-size: 2.1rem; line-height: 1.35; }
       .hero-motto { font-size: 1.05rem; padding: 4px 12px; }
@@ -600,7 +606,6 @@
       .hero-contact-card, .about-story-card, .profile-trait-card, .feature-showcase-box {
         padding: 26px 20px; border-radius: 24px;
       }
-
       .section { padding: 56px 16px; }
       .about-title { font-size: 1.7rem; }
       .section-title { font-size: 1.7rem; }
@@ -622,15 +627,10 @@
 </head>
 <body class="is-loading">
 
-  <!-- 滑鼠櫻粉環境光 -->
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
-
   <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
-
-  <!-- 可愛漫飄微粒背景容器 -->
   <div id="particle-container" style="position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden;"></div>
 
-  <!-- 1. 開場載入畫面 -->
   <div class="loader" id="loader">
     <div class="loader-stage">
       <div class="loader-scene loader-scene--1">
@@ -652,7 +652,6 @@
     </div>
   </div>
 
-  <!-- 2. 頂部導覽列 -->
   <header class="nav" id="nav">
     <div class="nav-inner">
       <a href="#" class="nav-brand"><span>MY.SPACE 🌸</span></a>
@@ -665,8 +664,7 @@
     </div>
   </header>
 
-  <main>
-    <!-- 3. 首頁主視覺區 (Hero) -->
+  <main id="mainContent">
     <section class="hero" id="hero">
       <div class="hero-grid">
         <div class="hero-stage">
@@ -678,7 +676,6 @@
           </div>
         </div>
 
-        <!-- 右側快速聯絡名片卡 (移除了外框整體 reveal，改為內部物件逐條滑出) -->
         <aside class="hero-contact-card" aria-label="快速聯絡名片">
           <p class="hero-card-title reveal">🌸 聯絡資訊 🌸</p>
           <div class="hero-card-content">
@@ -688,14 +685,12 @@
             </div>
 
             <div class="contact-grid">
-              <!-- Discord 複製按鈕 -->
               <button type="button" class="contact-item reveal" data-copy="XiaoFeng_627">
                 <span class="contact-item-label">Discord 帳號 (點擊複製)</span>
                 <span class="contact-item-value">XiaoFeng_627</span>
                 <span class="contact-item-hint">點擊複製 🌸</span>
               </button>
 
-              <!-- Instagram 複製按鈕 -->
               <button type="button" class="contact-item reveal" data-copy="https://www.instagram.com/future_627/">
                 <span class="contact-item-label">Instagram (點擊複製連結)</span>
                 <span class="contact-item-value">Future_627</span>
@@ -707,12 +702,10 @@
       </div>
     </section>
 
-    <!-- 4. 關於我與特質卡片區區塊 (About Me 雙欄萌化) -->
     <section class="section" id="about">
       <div class="about-grid-wrap">
         
-        <!-- 左欄：自我介紹故事 (移除了外框整體 reveal，改為內部每一段落逐條滑出) -->
-        <div class="about-story-card">
+        <div class="about-story-card spin-target">
           <span class="section-tag reveal">About Me 🌸</span>
           <h2 class="about-title reveal">認識我<br><span>「以曉之光，照亮生命。以風之息，吹散陰霾」</span></h2>
 
@@ -745,7 +738,6 @@
             </div>
           </div>
 
-          <!-- 底部小標籤 -->
           <div class="about-meta-row reveal">
             <span>Gamer 🎮</span>
             <span class="about-meta-dot" aria-hidden="true"></span>
@@ -755,8 +747,7 @@
           </div>
         </div>
 
-        <!-- 右欄：個人特質卡片 (改為清單每一列在滑下去時才單獨冒出來) -->
-        <aside class="profile-trait-card">
+        <aside class="profile-trait-card spin-target">
           <h3 class="trait-card-title reveal">🌸 個人特質 🌸</h3>
           <div class="trait-list">
             <div class="trait-item reveal"><span class="trait-key">暱稱</span><span class="trait-value">一只曉風子 XiaoFeng</span></div>
@@ -773,7 +764,6 @@
       </div>
     </section>
 
-    <!-- 5. 技能與機器人展示區 (Skills) -->
     <section class="section" id="skills">
       <div class="section-header">
         <span class="section-tag reveal">My Projects 🌸</span>
@@ -781,8 +771,8 @@
         <p class="section-desc reveal">正在努力讓她變得更好 ✨</p>
       </div>
       
-      <!-- 作品展示卡 (拆分內部標頭、終端機外殼與邀請按鈕獨立 reveal) -->
-      <div class="feature-showcase-box tilt-card" id="tiltCard">
+      <div class="feature-showcase-box tilt-card spin-target" id="tiltCard">
+        <div class="glare-overlay" id="glareOverlay"></div>
         <div class="feature-showcase-header reveal">
           <div class="feature-icon-box">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#de5266" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.5 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
@@ -793,17 +783,15 @@
           </div>
         </div>
 
-        <!-- 往生堂堂主特製終端機 -->
-        <div class="terminal-panel reveal" aria-hidden="true">
+        <div class="terminal-panel reveal" aria-hidden="true" id="terminalPanel">
           <div class="terminal-header"> Hubuki_Bot_System ~ Core.log (HuTao Edition)</div>
-          <div class="terminal-screen">
+          <div class="terminal-screen" id="terminalScreen">
             <p class="terminal-line"><span class="t-gray">[System]</span> <span class="t-white">「太陽出來我曬太陽，月亮出來我曬月亮囉~」</span></p>
             <p class="terminal-line"><span class="t-green">✔ 休比機器人已更新到V6.0.0 </span></p>
             <p class="terminal-line"><span class="t-gray">[Status]</span> <span style="color: #ff94a4;">等待召喚中...  嗷！</span></p>
           </div>
         </div>
 
-        <!-- 機器人邀請連結按鈕 -->
         <div style="text-align: center;" class="reveal">
           <a href="https://discord.com/oauth2/authorize?client_id=1472251542156611777" target="_blank" class="btn btn-secondary">
             🤖 點此邀請「休比機器人」加入伺服器 
@@ -813,7 +801,6 @@
     </section>
   </main>
 
-  <!-- 頁尾區塊：曉風的碎碎念、小小紀錄 -->
   <footer class="site-footer">
     <div class="footer-divider"><span>🌸</span></div>
     <div class="footer-quote-box">
@@ -830,10 +817,9 @@
 
   <button type="button" class="back-to-top" id="backToTop" aria-label="回到頂部">↑</button>
 
-  <!-- 9. 胡桃小蝴蝶吉祥物：點一下會有小小回應喔 -->
   <div class="mascot-wrap" id="mascotWrap" role="button" tabindex="0" aria-label="點一下小蝴蝶吉祥物">
     <div class="mascot-bubble" id="mascotBubble">嗨嗨 🌸</div>
-    <div class="mascot-body">
+    <div class="mascot-body" id="mascotBody">
       <svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
         <ellipse class="mascot-wing" cx="28" cy="46" rx="20" ry="26" fill="#ffb6c8" opacity="0.9" transform="rotate(-18 28 46)"/>
         <ellipse class="mascot-wing right" cx="72" cy="46" rx="20" ry="26" fill="#ff8fa8" opacity="0.9" transform="rotate(18 72 46)"/>
@@ -846,7 +832,6 @@
     </div>
   </div>
 
-  <!-- 10. 心情籤詩按鈕與彈窗 -->
   <button type="button" class="fortune-btn" id="fortuneBtn">
     <span class="fortune-icon">🍡</span> 抽張心情籤
   </button>
@@ -862,7 +847,6 @@
     </div>
   </div>
 
-  <!-- 成就通知 / 彩虹光暈 / 蝴蝶保底彩蛋 容器 -->
   <div class="achievement-toast" id="achievementToast">
     <span class="achievement-toast-icon">🏆</span>
     <span id="achievementToastText">成就達成</span>
@@ -870,12 +854,82 @@
   <div class="rainbow-flash" id="rainbowFlash" aria-hidden="true"></div>
   <div class="mascot-pity-text" id="mascotPityText"></div>
 
-  <!-- ==========================================
-       8. 核心自動化腳本區 (100% 修正版)
-       ========================================== -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       
+      // --- 新增功能 9：分頁失焦改變網頁標題 ---
+      const originalTitle = document.title;
+      document.addEventListener("visibilitychange", () => {
+        if (document.hidden) {
+          document.title = "快回來喵～ 🌸";
+        } else {
+          document.title = originalTitle;
+          showAchievement("歡迎回來 ✨");
+        }
+      });
+
+      // --- 新增功能 10：全域點擊水波紋特效 ---
+      document.addEventListener('mousedown', (e) => {
+        if (e.target.closest('.mascot-wrap, .fortune-btn, .fortune-overlay, .theme-toggle, .btn, a, button')) return;
+        const ripple = document.createElement('div');
+        ripple.className = 'ripple-effect';
+        ripple.style.left = e.clientX + 'px';
+        ripple.style.top = e.clientY + 'px';
+        document.body.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+      });
+
+      // --- 新增功能 11：掛機閒置動畫 (30秒不動會暗下並顯示Zzz) ---
+      let idleTimeout;
+      const idleOverlay = document.createElement('div');
+      idleOverlay.className = 'idle-overlay';
+      idleOverlay.innerHTML = '<span>Zzz... 曉風掛機中</span>';
+      document.body.appendChild(idleOverlay);
+      const resetIdle = () => {
+        idleOverlay.classList.remove('show');
+        clearTimeout(idleTimeout);
+        idleTimeout = setTimeout(() => idleOverlay.classList.add('show'), 30000);
+      };
+      window.addEventListener('mousemove', resetIdle);
+      window.addEventListener('keydown', resetIdle);
+      window.addEventListener('scroll', resetIdle);
+      window.addEventListener('click', resetIdle);
+      resetIdle();
+
+      // --- 新增功能 12：捲動慣性傾斜特效 ---
+      let lastScrollY = window.scrollY;
+      const mainContent = document.getElementById('mainContent');
+      window.addEventListener('scroll', () => {
+        const delta = window.scrollY - lastScrollY;
+        lastScrollY = window.scrollY;
+        const skew = Math.min(Math.max(delta * 0.03, -2), 2);
+        mainContent.style.transform = `skewY(${skew}deg)`;
+        clearTimeout(mainContent.skewTimeout);
+        mainContent.skewTimeout = setTimeout(() => {
+          mainContent.style.transform = `skewY(0deg)`;
+        }, 150);
+      }, { passive: true });
+
+      // --- 新增功能 13：自訂專屬右鍵選單 ---
+      const ctxMenu = document.createElement('div');
+      ctxMenu.className = 'custom-context-menu';
+      ctxMenu.innerHTML = `
+        <div class="ctx-item" id="ctx-top">回到頂部 🌸</div>
+        <div class="ctx-item" id="ctx-theme">切換日夜 🌙</div>
+        <div class="ctx-item" id="ctx-fortune">抽心情籤 🍡</div>
+      `;
+      document.body.appendChild(ctxMenu);
+      document.addEventListener('contextmenu', e => {
+        e.preventDefault();
+        ctxMenu.style.top = Math.min(e.clientY, window.innerHeight - 150) + 'px';
+        ctxMenu.style.left = Math.min(e.clientX, window.innerWidth - 150) + 'px';
+        ctxMenu.classList.add('show');
+      });
+      document.addEventListener('click', () => ctxMenu.classList.remove('show'));
+      document.getElementById('ctx-top').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+      document.getElementById('ctx-theme').addEventListener('click', () => document.getElementById('themeToggle').click());
+      document.getElementById('ctx-fortune').addEventListener('click', () => document.getElementById('fortuneBtn').click());
+
       // 載入條模擬
       const loader = document.getElementById('loader');
       const barFill = document.getElementById('loaderBarFill');
@@ -892,21 +946,19 @@
             loader.classList.add('hidden');
             document.body.classList.remove('is-loading');
             startTypewriter();
-            startParticles(); // 網頁載入完成後開啟可愛漫飄動畫
+            startParticles();
           }, 300);
         }
         barFill.style.width = progress + '%';
         percentText.textContent = progress;
       }, 30);
 
-      // 環境隨滑鼠移動效果 (櫻粉柔光)
       const glow = document.getElementById('cursorGlow');
       window.addEventListener('mousemove', (e) => {
         glow.style.left = e.clientX + 'px';
         glow.style.top = e.clientY + 'px';
       });
 
-      // 複製功能
       document.querySelectorAll('[data-copy]').forEach(button => {
         button.addEventListener('click', () => {
           const textToCopy = button.getAttribute('data-copy');
@@ -919,7 +971,6 @@
         });
       });
 
-      // 打字機功能
       function startTypewriter() {
         const typewriter = document.getElementById('aboutTypewriter');
         if (!typewriter) return;
@@ -936,38 +987,23 @@
         setTimeout(type, 200);
       }
 
-      // 背景可愛微粒漫飄生產器
       function startParticles() {
         const container = document.getElementById('particle-container');
         if (!container) return;
-        
         const particlePool = ['🌸', '✨', '💗'];
-        
         setInterval(() => {
-          // 如果仍在載入中則不產生粒子
           if (document.body.classList.contains('is-loading')) return;
-          
           const particle = document.createElement('div');
           particle.className = 'bg-particle';
           particle.textContent = particlePool[Math.floor(Math.random() * particlePool.length)];
-          
-          // 隨機大小、水平位置與動畫速度
           particle.style.left = Math.random() * 100 + 'vw';
           particle.style.fontSize = (Math.random() * 14 + 12) + 'px';
           particle.style.animationDuration = (Math.random() * 5 + 6) + 's';
-          
           container.appendChild(particle);
-          
-          // 動畫結束後自動刪除元素釋放記憶體
-          setTimeout(() => {
-            particle.remove();
-          }, 11000);
-        }, 700); // 每 0.7 秒產生一個可愛小標誌
+          setTimeout(() => { particle.remove(); }, 11000);
+        }, 700);
       }
 
-      // ------------------------------------------------------------
-      // 捲動顯現動畫：項目進入畫面時輕輕浮現
-      // ------------------------------------------------------------
       const revealTargets = document.querySelectorAll('.reveal');
       if ('IntersectionObserver' in window && revealTargets.length) {
         const revealObserver = new IntersectionObserver((entries) => {
@@ -983,9 +1019,6 @@
         revealTargets.forEach(el => el.classList.add('is-visible'));
       }
 
-      // ------------------------------------------------------------
-      // 胡桃小蝴蝶吉祥物：點一下會說可愛的話
-      // ------------------------------------------------------------
       const mascotWrap = document.getElementById('mascotWrap');
       const mascotBubble = document.getElementById('mascotBubble');
       const mascotLines = [
@@ -1006,9 +1039,6 @@
         setTimeout(() => showMascotLine('嗨嗨，歡迎光臨 🌸'), 1400);
       }
 
-      // ------------------------------------------------------------
-      // 心情籤詩：點擊抽出一句可愛小語
-      // ------------------------------------------------------------
       const fortuneBtn = document.getElementById('fortuneBtn');
       const fortuneOverlay = document.getElementById('fortuneOverlay');
       const fortuneText = document.getElementById('fortuneText');
@@ -1051,9 +1081,6 @@
         fortuneRedraw.addEventListener('click', drawFortune);
       }
 
-      // ------------------------------------------------------------
-      // 點擊彩粒特效：在畫面任意點點擊時綻放可愛小粒子
-      // ------------------------------------------------------------
       const burstPool = ['🌸', '✨','🏵️'];
       document.addEventListener('click', (e) => {
         if (e.target.closest('.mascot-wrap, .fortune-btn, .fortune-overlay')) return;
@@ -1072,14 +1099,35 @@
         }
       });
 
-      // ------------------------------------------------------------
-      // 小彩蛋：輸入 hutao 會有胡桃花瓣雨驚喜
-      // ------------------------------------------------------------
+      // --- 新增功能：擴充鍵盤彩蛋 ("xiaofeng", Konami Code, 空白鍵跳躍) ---
       let easterBuffer = '';
+      let konamiBuffer = [];
+      const konamiCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+      
       window.addEventListener('keydown', (e) => {
+        // 吉祥物跳躍
+        if (e.code === 'Space') {
+          const mBody = document.getElementById('mascotBody');
+          if(mBody) {
+            mBody.classList.remove('jump');
+            void mBody.offsetWidth; // trigger reflow
+            mBody.classList.add('jump');
+          }
+        }
+
+        // Konami Code 經典彩蛋
+        konamiBuffer.push(e.key);
+        if (konamiBuffer.length > 10) konamiBuffer.shift();
+        if (konamiBuffer.join(',') === konamiCode.join(',')) {
+          document.body.classList.toggle('konami-mode');
+          showAchievement('無敵模式 🎮 (再打一次解除)');
+        }
+
         if (e.key.length !== 1) return;
-        easterBuffer = (easterBuffer + e.key.toLowerCase()).slice(-5);
-        if (easterBuffer === 'hutao') {
+        easterBuffer = (easterBuffer + e.key.toLowerCase()).slice(-8); // 加長 buffer 應對 xiaofeng
+
+        // 原本的 hutao 彩蛋
+        if (easterBuffer.slice(-5) === 'hutao') {
           showMascotLine('哇！被你發現彩蛋了 🏵️');
           showAchievement('隱藏彩蛋獵人 🏵️');
           for (let i = 0; i < 40; i++) {
@@ -1096,11 +1144,18 @@
             }, i * 60);
           }
         }
+
+        // "xiaofeng" 卡片 360 度迴旋彩蛋
+        if (easterBuffer === 'xiaofeng') {
+          showAchievement('曉風魔法 🌀');
+          document.querySelectorAll('.spin-target').forEach(el => {
+            el.classList.remove('spin-animation');
+            void el.offsetWidth;
+            el.classList.add('spin-animation');
+          });
+        }
       });
 
-      // ------------------------------------------------------------
-      // 頂部閱讀進度條
-      // ------------------------------------------------------------
       const scrollProgress = document.getElementById('scrollProgress');
       function updateScrollProgress() {
         if (!scrollProgress) return;
@@ -1112,9 +1167,6 @@
       window.addEventListener('scroll', updateScrollProgress, { passive: true });
       updateScrollProgress();
 
-      // ------------------------------------------------------------
-      // 主標題逐字彈跳互動：滑過每個字都會Q彈一下
-      // ------------------------------------------------------------
       const heroTitle = document.getElementById('heroTitle');
       if (heroTitle) {
         const originalText = heroTitle.textContent;
@@ -1127,9 +1179,6 @@
         });
       }
 
-      // ------------------------------------------------------------
-      // 心情狀態列：點一下切換不同的小小心情
-      // ------------------------------------------------------------
       const moodSets = {
         moodLeft: ['好想嚕貓😺', '有點想睡覺😴', '在偷偷放空💭', '想吃甜點🍡'],
         moodRight: ['吃飽躺平😋', '正在耍廢🌸', '元氣滿滿✨', '在聽音樂🎵']
@@ -1144,23 +1193,38 @@
         });
       });
 
-      // ------------------------------------------------------------
-      // 作品卡3D傾斜：跟著滑鼠輕輕轉動
-      // ------------------------------------------------------------
+      // --- 新增功能：3D卡片內層高光反射 ---
       const tiltCard = document.getElementById('tiltCard');
+      const glare = document.getElementById('glareOverlay');
       if (tiltCard && window.matchMedia('(hover: hover)').matches) {
         tiltCard.addEventListener('mousemove', (e) => {
           const rect = tiltCard.getBoundingClientRect();
           const x = (e.clientX - rect.left) / rect.width - 0.5;
           const y = (e.clientY - rect.top) / rect.height - 0.5;
           tiltCard.style.transform = `translateY(-8px) rotateX(${(-y * 6).toFixed(2)}deg) rotateY(${(x * 6).toFixed(2)}deg)`;
+          
+          if(glare) {
+            glare.style.background = `radial-gradient(circle at ${e.clientX - rect.left}px ${e.clientY - rect.top}px, rgba(255,255,255,0.4) 0%, transparent 60%)`;
+          }
         });
-        tiltCard.addEventListener('mouseleave', () => { tiltCard.style.transform = ''; });
+        tiltCard.addEventListener('mouseleave', () => { 
+          tiltCard.style.transform = ''; 
+          if(glare) glare.style.background = '';
+        });
       }
 
-      // ------------------------------------------------------------
-      // 蝴蝶吉祥物點擊成就：連續互動會有小小驚喜
-      // ------------------------------------------------------------
+      // --- 新增功能：點擊終端機故障雜訊干擾 ---
+      const terminalPanel = document.getElementById('terminalPanel');
+      const terminalScreen = document.getElementById('terminalScreen');
+      if(terminalPanel && terminalScreen) {
+        terminalPanel.addEventListener('click', () => {
+          terminalScreen.classList.add('glitch');
+          setTimeout(() => terminalScreen.classList.remove('glitch'), 150);
+          setTimeout(() => terminalScreen.classList.add('glitch'), 200);
+          setTimeout(() => terminalScreen.classList.remove('glitch'), 350);
+        });
+      }
+
       let mascotClickCount = 0;
       if (mascotWrap) {
         mascotWrap.addEventListener('click', () => {
@@ -1177,7 +1241,6 @@
         });
       }
 
-      // 蝴蝶保底大彩蛋：滿20次觸發全螢幕花瓣蝶舞
       function triggerMascotPity() {
         const pityText = document.getElementById('mascotPityText');
         if (pityText) {
@@ -1201,9 +1264,6 @@
         }
       }
 
-      // ------------------------------------------------------------
-      // 頁尾：曉風的碎碎念（自動輪播小語）
-      // ------------------------------------------------------------
       const footerQuote = document.getElementById('footerQuote');
       const footerQuoteLines = [
         '歡迎常常回來找我玩喔 🌸',
@@ -1224,9 +1284,6 @@
         }, 4200);
       }
 
-      // ------------------------------------------------------------
-      // 頁尾：即時時鐘
-      // ------------------------------------------------------------
       const clockValue = document.getElementById('clockValue');
       function updateClock() {
         if (!clockValue) return;
@@ -1238,9 +1295,6 @@
       updateClock();
       setInterval(updateClock, 1000 * 15);
 
-      // ------------------------------------------------------------
-      // 頁尾：訪客造訪次數（存在瀏覽器本機）
-      // ------------------------------------------------------------
       const visitCount = document.getElementById('visitCount');
       if (visitCount) {
         try {
@@ -1253,19 +1307,13 @@
         }
       }
 
-      // ------------------------------------------------------------
-      // 頁尾：小窩開張天數
-      // ------------------------------------------------------------
       const daysCount = document.getElementById('daysCount');
       if (daysCount) {
-        const LAUNCH_DATE = new Date('2026-07-15'); // 可自行調整成真正的開站日期
+        const LAUNCH_DATE = new Date('2026-07-15'); 
         const diffDays = Math.max(0, Math.floor((Date.now() - LAUNCH_DATE.getTime()) / 86400000));
         daysCount.textContent = diffDays;
       }
 
-      // ------------------------------------------------------------
-      // 回到頂部按鈕
-      // ------------------------------------------------------------
       const backToTop = document.getElementById('backToTop');
       if (backToTop) {
         window.addEventListener('scroll', () => {
@@ -1274,9 +1322,6 @@
         backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
       }
 
-      // ------------------------------------------------------------
-      // 載入畫面：隨機顯示一句可愛小提示
-      // ------------------------------------------------------------
       const loaderTip = document.getElementById('loaderTip');
       if (loaderTip) {
         const tips = [
@@ -1288,9 +1333,6 @@
         loaderTip.textContent = tips[Math.floor(Math.random() * tips.length)];
       }
 
-      // ------------------------------------------------------------
-      // 成就通知系統：解鎖時從上方彈出提示
-      // ------------------------------------------------------------
       const achievementToast = document.getElementById('achievementToast');
       const achievementToastText = document.getElementById('achievementToastText');
       let achievementTimer = null;
@@ -1302,9 +1344,6 @@
         achievementTimer = setTimeout(() => achievementToast.classList.remove('show'), 2600);
       }
 
-      // ------------------------------------------------------------
-      // 日夜模式切換：溫柔的夜間粉紫色調，並記住偏好
-      // ------------------------------------------------------------
       const themeToggle = document.getElementById('themeToggle');
       function applyTheme(dark) {
         document.body.classList.toggle('dark-mode', dark);
@@ -1322,18 +1361,25 @@
         });
       }
 
-      // ------------------------------------------------------------
-      // 滑鼠星光軌跡（僅桌面版，節流產生）
-      // ------------------------------------------------------------
+      // --- 新增功能：高速滑鼠著火特效 ---
       if (window.matchMedia('(hover: hover)').matches) {
         let lastStarTime = 0;
+        let lastMouseX = -1;
+        let lastMouseY = -1;
         window.addEventListener('mousemove', (e) => {
           const now = Date.now();
+          const dist = lastMouseX > -1 ? Math.hypot(e.clientX - lastMouseX, e.clientY - lastMouseY) : 0;
+          lastMouseX = e.clientX;
+          lastMouseY = e.clientY;
+
           if (now - lastStarTime < 90) return;
           lastStarTime = now;
           const star = document.createElement('span');
           star.className = 'cursor-star';
-          star.textContent = '🌸';
+          
+          // 若滑鼠移動非常快，則顯示火焰
+          star.textContent = dist > 50 ? '🔥' : '🌸';
+          
           star.style.left = e.clientX + (Math.random() * 16 - 8) + 'px';
           star.style.top = e.clientY + (Math.random() * 16 - 8) + 'px';
           document.body.appendChild(star);
@@ -1341,9 +1387,6 @@
         });
       }
 
-      // ------------------------------------------------------------
-      // 雙擊比心特效
-      // ------------------------------------------------------------
       document.addEventListener('dblclick', (e) => {
         if (e.target.closest('.mascot-wrap, .fortune-btn, .fortune-overlay, .theme-toggle')) return;
         const hearts = ['💕', '🩷', '💗'];
@@ -1359,9 +1402,6 @@
         }
       });
 
-      // ------------------------------------------------------------
-      // 導覽列捲動高亮：目前所在區塊會亮起來
-      // ------------------------------------------------------------
       const navLinkEls = document.querySelectorAll('.nav-link');
       const spySections = [...new Set([...navLinkEls].map(a => a.getAttribute('href')))]
         .filter(href => href && href.startsWith('#') && href.length > 1)
@@ -1379,16 +1419,35 @@
         spySections.forEach(sec => spyObserver.observe(sec));
       }
 
-      // ------------------------------------------------------------
-      // 終端機文字逐行浮現：捲動到才依序出現
-      // ------------------------------------------------------------
+      // --- 新增功能：終端機打字電子提示音 (Web Audio API) ---
+      let audioCtx = null;
+      function playTerminalBeep() {
+        try {
+          if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          if(audioCtx.state === 'suspended') audioCtx.resume();
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(880, audioCtx.currentTime); 
+          gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
+          osc.start();
+          gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.1);
+          osc.stop(audioCtx.currentTime + 0.1);
+        } catch(e) {}
+      }
+
       const terminalLines = document.querySelectorAll('.terminal-line');
       if ('IntersectionObserver' in window && terminalLines.length) {
         const terminalObserver = new IntersectionObserver((entries) => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               terminalLines.forEach((line, i) => {
-                setTimeout(() => line.classList.add('line-visible'), i * 260);
+                setTimeout(() => {
+                  line.classList.add('line-visible');
+                  playTerminalBeep();
+                }, i * 260);
               });
               terminalObserver.unobserve(entry.target);
             }
@@ -1399,9 +1458,6 @@
         terminalLines.forEach(line => line.classList.add('line-visible'));
       }
 
-      // ------------------------------------------------------------
-      // 方向鍵彩蛋：上上下下觸發彩虹光暈
-      // ------------------------------------------------------------
       const rainbowFlash = document.getElementById('rainbowFlash');
       let arrowBuffer = [];
       const arrowCode = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown'];
@@ -1416,9 +1472,6 @@
         }
       });
 
-      // ------------------------------------------------------------
-      // 手機搖一搖彩蛋：搖晃裝置觸發花瓣雨
-      // ------------------------------------------------------------
       let lastShakeTime = 0;
       let lastAcceleration = null;
       window.addEventListener('devicemotion', (e) => {
