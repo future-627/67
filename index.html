@@ -92,10 +92,20 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: #fff0f3;
-      transition: opacity 0.5s ease, visibility 0.5s;
+      background: transparent;
+      transition: visibility 0.8s;
     }
-    .loader.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader::before, .loader::after {
+      content: ''; position: absolute; top: 0; width: 50%; height: 100%; background: #fff0f3; z-index: -1;
+      transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    .loader::before { left: 0; }
+    .loader::after { right: 0; }
+    .loader.hidden::before { transform: translateX(-100%); }
+    .loader.hidden::after { transform: translateX(100%); }
+    .loader.hidden { visibility: hidden; pointer-events: none; }
+    .loader-content { transition: opacity 0.4s; text-align: center; }
+    .loader.hidden .loader-content { opacity: 0; }
     
     .loader-stage { text-align: center; margin-bottom: 40px; }
     .loader-scene { margin: 15px 0; opacity: 0; transform: translateY(10px); animation: fadeInLoad 0.8s forwards; }
@@ -507,7 +517,7 @@
     }
     body.dark-mode { background-image: radial-gradient(rgba(255,154,178,0.06) 15%, transparent 15%), radial-gradient(rgba(255,154,178,0.06) 15%, transparent 15%); }
     body.dark-mode .nav { background: rgba(44, 34, 48, 0.85); }
-    body.dark-mode .loader { background: #2c2230; }
+    body.dark-mode .loader::before, body.dark-mode .loader::after { background: #2c2230; }
     body.dark-mode .about-lead,
     body.dark-mode .hero-motto,
     body.dark-mode .about-title span { background: rgba(255,255,255,0.06); }
@@ -640,16 +650,42 @@
       outline: 2px dashed var(--primary-color); outline-offset: 3px; border-radius: 8px;
     }
 
-    /* --- 全站按鈕統一按壓回饋，讓互動更自然有彈性 --- */
+    /* --- 全站按鈕統一互動體驗 --- */
+    .btn, .contact-item, .fortune-btn, .theme-toggle, .sound-toggle,
+    .back-to-top, .nav-cta, .fortune-card-redraw, .fortune-close, .music-widget, .nav-link {
+      -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease, color 0.25s ease;
+    }
     .btn:active, .contact-item:active, .fortune-btn:active, .theme-toggle:active,
-    .back-to-top:active, .nav-cta:active, .fortune-card-redraw:active, .sound-toggle:active {
-      transform: scale(0.94);
+    .back-to-top:active, .nav-cta:active, .fortune-card-redraw:active, .sound-toggle:active,
+    .fortune-close:active, .music-widget:active {
+      transform: scale(0.93, 0.9);
+    }
+    /* 圖示型按鈕滑鼠靠近時的磁性吸附與放大 */
+    .theme-toggle, .sound-toggle, .back-to-top {
+      will-change: transform;
+    }
+    .theme-toggle:hover, .sound-toggle:hover, .back-to-top:hover {
+      box-shadow: 0 8px 18px rgba(255,182,193,0.4);
+    }
+    /* 點擊瞬間的圖示彈跳回饋 */
+    .icon-punch { animation: iconPunch 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    @keyframes iconPunch { 0% { transform: scale(1); } 40% { transform: scale(1.35) rotate(-8deg); } 100% { transform: scale(1) rotate(0deg); } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .icon-punch { animation: none !important; }
     }
 
     /* --- 導覽列捲動時輕微縮小並加陰影，增加層次深度 --- */
-    .nav { transition: box-shadow 0.3s ease, padding 0.3s ease; }
-    .nav.scrolled { box-shadow: 0 6px 20px rgba(255, 182, 193, 0.25); }
-    .nav.scrolled .nav-inner { padding-top: 10px; padding-bottom: 10px; }
+    .nav { transition: box-shadow 0.3s ease, padding 0.3s ease, background 0.4s ease, border-color 0.4s ease; }
+    .nav.scrolled { box-shadow: none; background: transparent; border-bottom-color: transparent; }
+    .nav-inner { transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .nav.scrolled .nav-inner {
+      max-width: 760px; margin: 14px auto 0; border-radius: 50px;
+      border: 2px solid var(--primary-color); background: rgba(255, 245, 247, 0.92);
+      box-shadow: 0 10px 30px rgba(222, 82, 102, 0.22); padding: 10px 22px;
+    }
+    body.dark-mode .nav.scrolled .nav-inner { background: rgba(44, 34, 48, 0.92); }
 
     /* --- 聯絡卡與特質卡也加入高光反射層，質感與作品卡統一 --- */
     .hero-contact-card, .profile-trait-card { position: relative; overflow: hidden; }
@@ -834,21 +870,279 @@
       .section-tag::after, .contact-item:hover .contact-item-hint { animation: none !important; }
     }
 
+    /* ==========================================================================
+       15. 二次元少女風格動畫大補帖 (20+ New Animations)
+       ========================================================================== */
+
+    /* 1. 按鈕液體波紋 */
+    .btn-primary, .btn-secondary, .nav-cta, .fortune-btn, .theme-toggle, .sound-toggle, .fortune-card-redraw, .back-to-top, .music-widget {
+      position: relative; overflow: hidden;
+    }
+    .fortune-close { overflow: hidden; }
+    .btn-ripple {
+      position: absolute; border-radius: 50%; background: rgba(255,255,255,0.55);
+      transform: scale(0); animation: liquidRipple 0.6s ease-out forwards; pointer-events: none;
+    }
+    @keyframes liquidRipple { to { transform: scale(4); opacity: 0; } }
+
+    /* 2. 標籤果凍彈跳進場 */
+    .jelly-bounce { animation: jellyAnim 0.7s cubic-bezier(0.25, 1.5, 0.5, 1) both; }
+    @keyframes jellyAnim {
+      0% { transform: scale(0.5); }
+      45% { transform: scale(1.18, 0.85); }
+      65% { transform: scale(0.92, 1.08); }
+      85% { transform: scale(1.03, 0.98); }
+      100% { transform: scale(1); }
+    }
+
+    /* 3. CRT 掃描線疊加 + 移動掃描光 */
+    .terminal-panel { position: relative; }
+    .terminal-panel::after {
+      content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 5;
+      background: linear-gradient(rgba(18,16,16,0) 50%, rgba(0,0,0,0.2) 50%);
+      background-size: 100% 4px;
+    }
+    .terminal-scanline {
+      position: absolute; left: 0; width: 100%; height: 24px; pointer-events: none; z-index: 6;
+      background: linear-gradient(to bottom, transparent, rgba(255,182,193,0.35), transparent);
+      animation: scanlineDown 4s linear infinite;
+    }
+    @keyframes scanlineDown { 0% { top: -24px; } 100% { top: 100%; } }
+
+    /* 4. 黑膠唱片音樂小工具 */
+    .music-widget {
+      position: fixed; left: 22px; bottom: 86px; z-index: 60;
+      display: flex; align-items: center; gap: 9px; cursor: pointer;
+      background: #fff; padding: 7px 14px 7px 7px; border-radius: 30px;
+      border: 2px solid var(--card-border); box-shadow: 0 4px 15px rgba(255,182,193,0.3);
+      transition: all 0.3s; position: relative;
+    }
+    .music-widget:hover { transform: scale(1.05); border-color: var(--primary-color); }
+    .vinyl-disc {
+      width: 30px; height: 30px; background: #2c2230; border-radius: 50%; position: relative;
+      border: 2px solid #55444d; box-shadow: inset 0 0 5px #000;
+    }
+    .vinyl-disc::after {
+      content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 10px; height: 10px; background: var(--primary-color); border-radius: 50%; border: 2px solid #fff;
+    }
+    .music-widget.playing .vinyl-disc { animation: spinRecord 3s linear infinite; }
+    @keyframes spinRecord { 100% { transform: rotate(360deg); } }
+    .music-widget-label { font-weight: 700; font-size: 0.8rem; color: var(--primary-color); }
+    .beat-pulse { position: absolute; inset: -4px; border-radius: 30px; border: 2px solid var(--primary-color); opacity: 0; pointer-events: none; }
+    .music-widget.playing .beat-pulse { animation: beatExpand 1.6s ease-out infinite; }
+    @keyframes beatExpand { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.35); opacity: 0; } }
+    .floating-note {
+      position: absolute; font-size: 15px; color: var(--primary-color); pointer-events: none;
+      animation: floatNote 1.8s ease-in forwards; z-index: 61;
+    }
+    @keyframes floatNote {
+      0% { transform: translateY(0) scale(0.5); opacity: 1; }
+      100% { transform: translateY(-60px) translateX(16px) scale(1.15) rotate(20deg); opacity: 0; }
+    }
+
+    /* 5. 彼岸螢火漫飄粒子 */
+    .hutao-firefly {
+      position: absolute; width: 6px; height: 6px; background: #ff4d6d; border-radius: 50%;
+      box-shadow: 0 0 8px #ff4d6d, 0 0 16px rgba(255,179,193,0.8); pointer-events: none;
+      animation: floatFirefly linear forwards; z-index: 1;
+    }
+    @keyframes floatFirefly {
+      0% { transform: translateY(0) translateX(0) scale(0); opacity: 0; }
+      15% { opacity: 1; transform: scale(1); }
+      85% { opacity: 0.9; }
+      100% { transform: translateY(-90vh) translateX(40px) scale(0.4); opacity: 0; }
+    }
+
+    /* 6. 吉祥物打瞌睡 */
+    .mascot-zzz {
+      position: absolute; top: -8px; right: -6px; font-size: 1.05rem; font-weight: 700;
+      color: var(--text-muted); opacity: 0; pointer-events: none;
+    }
+    .mascot-wrap.sleeping .mascot-zzz { animation: zzzFloat 2s infinite; }
+    .mascot-wrap.sleeping .mascot-wing { animation-play-state: paused; }
+    .mascot-wrap.sleeping .mascot-body { animation-duration: 6s; }
+    @keyframes zzzFloat {
+      0% { transform: translate(0,0) scale(0.5); opacity: 0; }
+      50% { opacity: 1; }
+      100% { transform: translate(12px,-22px) scale(1.3); opacity: 0; }
+    }
+
+    /* 7. 抽卡震動 + 3D翻牌進場 */
+    .fortune-overlay { perspective: 1000px; }
+    .fortune-card { transform-style: preserve-3d; backface-visibility: hidden; }
+    .fortune-card.shake { animation: gachaShake 0.6s cubic-bezier(0.36, 0.07, 0.19, 0.97) both; }
+    @keyframes gachaShake {
+      10%, 90% { transform: translate3d(-2px, 0, 0); }
+      20%, 80% { transform: translate3d(4px, 0, 0) rotate(1.5deg); }
+      30%, 50%, 70% { transform: translate3d(-6px, -3px, 0) rotate(-1.5deg); }
+      40%, 60% { transform: translate3d(6px, 3px, 0) rotate(1.5deg); }
+    }
+
+    /* 8. 成就通知彈簧進場 */
+    .achievement-toast { transition: all 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important; }
+
+    /* 9. 捲動進度條上的旋轉星星 */
+    .progress-star {
+      position: absolute; right: -8px; top: -6px; font-size: 14px;
+      animation: spin 2s linear infinite; pointer-events: none;
+    }
+    @keyframes spin { 100% { transform: rotate(360deg); } }
+
+    /* 10. 頁尾花朵持續緩慢自轉 */
+    .footer-divider span { animation: spin 9s linear infinite !important; }
+
+    /* 11. 蝴蝶探頭裝飾 (取代不使用的鬼魂造型) */
+    .peekaboo-butterfly {
+      position: fixed; left: -60px; top: 42%; font-size: 42px; z-index: 55;
+      filter: drop-shadow(0 0 8px rgba(255,182,193,0.5));
+      animation: floatBoo 3s infinite ease-in-out, peekBoo 22s infinite; pointer-events: none;
+    }
+    @keyframes floatBoo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+    @keyframes peekBoo {
+      0%, 85% { left: -60px; transform: rotate(0deg); }
+      90% { left: 8px; transform: rotate(12deg); }
+      95% { left: 8px; transform: rotate(12deg); }
+      100% { left: -60px; transform: rotate(0deg); }
+    }
+
+    /* 12. 聯絡按鈕 hover 星芒探出 */
+    .contact-item { overflow: visible; }
+    .contact-item::before {
+      content: '✨'; position: absolute; opacity: 0; left: -6px; top: 50%;
+      transform: translateY(-50%) scale(0); transition: all 0.3s; font-size: 18px; pointer-events: none;
+    }
+    .contact-item:hover::before { opacity: 1; transform: translateY(-50%) scale(1) translateX(-16px); }
+
+    /* 13. hero 裝飾表情心跳感 */
+    .hero-emoji-heartbeat { animation: heroHeartbeat 2.4s ease-in-out infinite; }
+    @keyframes heroHeartbeat {
+      0%, 100% { transform: scale(1) rotate(-2deg); }
+      15% { transform: scale(1.08) rotate(2deg); }
+      30% { transform: scale(1) rotate(-2deg); }
+      45% { transform: scale(1.05) rotate(1deg); }
+    }
+
+    /* 14. 認識我標題底下的緞帶掃入 */
+    .about-title span { position: relative; overflow: hidden; }
+    .about-title span::after {
+      content: ''; position: absolute; left: -100%; top: 0; bottom: 0; width: 40%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.8), transparent);
+    }
+    .about-title.is-visible span::after { animation: ribbonSweep 1s ease 0.5s 1; }
+    @keyframes ribbonSweep { 0% { left: -100%; } 100% { left: 130%; } }
+
+    /* 15. 特質卡花飾偶爾飄落一片花瓣 */
+    .profile-trait-card { overflow: visible; }
+    .petal-shed {
+      position: absolute; right: 6px; bottom: 6px; font-size: 1rem; pointer-events: none;
+      animation: petalFall 3s ease-in forwards; z-index: 1;
+    }
+    @keyframes petalFall {
+      0% { transform: translate(0,0) rotate(0deg); opacity: 0.9; }
+      100% { transform: translate(-30px, 80px) rotate(200deg); opacity: 0; }
+    }
+
+    /* 16. 導覽列品牌表情符號的星光尾巴 */
+    .brand-sparkle {
+      position: absolute; font-size: 10px; pointer-events: none; opacity: 0;
+      animation: brandSparkleFade 0.8s ease-out forwards;
+    }
+    @keyframes brandSparkleFade {
+      0% { opacity: 0.9; transform: translate(0,0) scale(1); }
+      100% { opacity: 0; transform: translate(-6px, -14px) scale(0.4); }
+    }
+
+    /* 17. 聯絡值文字進場時光澤掃過一次 */
+    .contact-item-value { position: relative; overflow: hidden; display: inline-block; }
+    .contact-item-value::after {
+      content: ''; position: absolute; top: 0; left: -60%; width: 40%; height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.9), transparent);
+      transform: skewX(-20deg);
+    }
+    .contact-item.reveal.is-visible .contact-item-value::after { animation: tagShimmer 1s ease 0.6s 1; }
+
+    /* 18. 心情籤詩糰子的小蒸氣 */
+    .fortune-icon { position: relative; }
+    .dango-steam {
+      position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+      font-size: 0.6rem; color: rgba(255,255,255,0.8); opacity: 0; pointer-events: none;
+      animation: steamRise 2.4s ease-in-out infinite;
+    }
+    @keyframes steamRise {
+      0% { opacity: 0; transform: translate(-50%, 0) scale(0.6); }
+      30% { opacity: 0.8; }
+      100% { opacity: 0; transform: translate(-50%, -14px) scale(1.1); }
+    }
+
+    /* 19. 音效切換時的音符跳動 */
+    .sound-toggle.just-toggled { animation: soundBounce 0.4s ease; }
+    @keyframes soundBounce {
+      0%, 100% { transform: scale(1); }
+      40% { transform: scale(1.3) rotate(-8deg); }
+      70% { transform: scale(0.9) rotate(6deg); }
+    }
+
+    /* 20. DC按鈕點擊時的愛心彩帶噴發 */
+    .heart-confetti-particle {
+      position: fixed; pointer-events: none; z-index: 300; font-size: 18px;
+      animation: heartConfettiFly 1s ease-out forwards;
+    }
+    @keyframes heartConfettiFly {
+      0% { transform: translate(-50%, -50%) scale(0.6); opacity: 1; }
+      100% { transform: var(--confetti-end) scale(1.1); opacity: 0; }
+    }
+
+    @media (max-width: 640px) {
+      .music-widget { left: 12px; bottom: 78px; padding: 6px 12px 6px 6px; }
+      .music-widget-label { display: none; }
+      .peekaboo-butterfly { font-size: 32px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .jelly-bounce, .fortune-card.shake, .vinyl-disc, .music-widget.playing .beat-pulse,
+      .hutao-firefly, .mascot-wrap.sleeping .mascot-zzz, .progress-star, .footer-divider span,
+      .peekaboo-butterfly, .hero-emoji-heartbeat, .about-title span::after, .petal-shed,
+      .dango-steam, .terminal-scanline { animation: none !important; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .mascot-body, .mascot-wing, .fortune-icon, .about-meta-dot, .hero-status-left, .hero-status-right, .bg-particle, .footer-divider span, .achievement-toast-icon, .rainbow-flash,
       .btn-primary, body, .nav-brand span, .feature-icon-box, .profile-trait-card::before { animation: none !important; }
       .reveal, .terminal-line { transition: opacity 0.3s ease; transform: none !important; }
       .tilt-card { transform: none !important; }
     }
+    /* 16. 額外收尾動畫小補帖 */
+    .vinyl-disc { animation: vinylIdleWobble 5s ease-in-out infinite; }
+    .music-widget.playing .vinyl-disc { animation: spinRecord 3s linear infinite; }
+    @keyframes vinylIdleWobble { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(4deg); } }
+    .music-widget.playing .music-widget-label { animation: cutePulse 1.4s infinite alternate; }
+    .achievement-toast-icon { animation: cutePulse 1s infinite alternate, iconWiggle 2.2s ease-in-out infinite; }
+    @keyframes iconWiggle { 0%, 100% { transform: rotate(0deg); } 25% { transform: rotate(-8deg); } 75% { transform: rotate(8deg); } }
+    .contact-item { animation: borderBreathe 4s ease-in-out infinite; }
+    @keyframes borderBreathe { 0%, 100% { border-color: rgba(255,182,193,0.3); } 50% { border-color: rgba(255,182,193,0.65); } }
+    .footer-signoff { animation: cutePulse 3.5s ease-in-out infinite alternate; }
+    .nav-cta::before {
+      content: ''; position: absolute; top: 0; left: -60%; width: 30%; height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.6), transparent);
+      transform: skewX(-20deg); animation: navShine 5s ease-in-out infinite;
+    }
+    @keyframes navShine { 0% { left: -60%; } 30%, 100% { left: 130%; } }
+    @media (prefers-reduced-motion: reduce) {
+      .vinyl-disc, .music-widget.playing .music-widget-label, .achievement-toast-icon,
+      .contact-item, .footer-signoff, .nav-cta::before { animation: none !important; }
+    }
+
   </style>
 </head>
 <body class="is-loading">
 
-  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"><span class="progress-star">✨</span></div>
   <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
   <div id="particle-container" style="position: fixed; inset: 0; pointer-events: none; z-index: 1; overflow: hidden;"></div>
 
   <div class="loader" id="loader">
+    <div class="loader-content">
     <div class="loader-stage">
       <div class="loader-scene loader-scene--1">
         <h1 style="font-size: 2.8rem; letter-spacing: 4px; margin: 0;">WELCOME 🌸</h1>
@@ -866,6 +1160,7 @@
         <div class="loader-bar-fill" id="loaderBarFill"></div>
       </div>
       <span class="loader-percent">LOADING... <span id="loaderPercent">0</span>%</span>
+    </div>
     </div>
   </div>
 
@@ -886,7 +1181,7 @@
     <section class="hero" id="hero">
       <div class="hero-grid">
         <div class="hero-stage">
-          <div style="font-size: 3.8rem; margin-bottom: 15px; display:inline-block; animation: float 3s ease-in-out infinite;">胡桃好可愛好可愛好可愛ㄚㄚㄚㄚㄚㄚ~</div>
+          <div class="hero-emoji-heartbeat" style="font-size: 3.8rem; margin-bottom: 15px; display:inline-block;">胡桃好可愛好可愛好可愛ㄚㄚㄚㄚㄚㄚ~</div>
           <h1 class="hero-title" id="heroTitle">尼敖 我是一只曉風子</h1>
           <p class="hero-motto">「願萬物名於微風中輕語 」</p>
           <div>
@@ -1006,6 +1301,7 @@
         </div>
 
         <div class="terminal-panel reveal" aria-hidden="true" id="terminalPanel">
+          <div class="terminal-scanline" aria-hidden="true"></div>
           <div class="terminal-header"> Hubuki_Bot_System ~ Core.log (HuTao Edition)</div>
           <div class="terminal-screen" id="terminalScreen">
             <p class="terminal-line"><span class="t-gray">[System]</span> <span class="t-white">「太陽出來我曬太陽，月亮出來我曬月亮囉~」</span></p>
@@ -1042,7 +1338,20 @@
 
   <button type="button" class="back-to-top" id="backToTop" aria-label="回到頂部">↑</button>
 
+  <!-- 黑膠唱片音樂小工具：需要自行替換成喜歡的背景音樂網址 -->
+  <audio id="bgmAudio" loop preload="none">
+    <source src="https://assets.mixkit.co/music/preview/mixkit-cute-kawaii-background-158.mp3" type="audio/mpeg">
+  </audio>
+  <div class="music-widget" id="musicBtn" role="button" tabindex="0" aria-label="播放背景音樂">
+    <div class="beat-pulse"></div>
+    <div class="vinyl-disc"></div>
+    <span class="music-widget-label">Music</span>
+  </div>
+
+  <div class="peekaboo-butterfly" id="peekaboo" aria-hidden="true">🦋</div>
+
   <div class="mascot-wrap" id="mascotWrap" role="button" tabindex="0" aria-label="點一下小蝴蝶吉祥物">
+    <div class="mascot-zzz">Zzz...</div>
     <div class="mascot-bubble" id="mascotBubble">嗨嗨 🌸</div>
     <div class="mascot-body" id="mascotBody">
       <svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
@@ -1058,11 +1367,11 @@
   </div>
 
   <button type="button" class="fortune-btn" id="fortuneBtn">
-    <span class="fortune-icon">🍡</span> 抽張心情籤
+    <span class="fortune-icon">🍡<span class="dango-steam" aria-hidden="true">~</span></span> 抽張心情籤
   </button>
 
   <div class="fortune-overlay" id="fortuneOverlay">
-    <div class="fortune-card">
+    <div class="fortune-card" id="fortuneCard">
       <button type="button" class="fortune-close" id="fortuneClose" aria-label="關閉">×</button>
       <span class="fortune-card-tag">今日籤詩 🏵️</span>
       <p class="fortune-card-text" id="fortuneText">點一下抽籤按鈕試試看喵～</p>
@@ -1192,7 +1501,7 @@
             loader.classList.add('hidden');
             document.body.classList.remove('is-loading');
             startTypewriter();
-            startParticles();
+            // 背景漫飄表情符號已移除，不再呼叫
           }, 300);
         }
         barFill.style.width = progress + '%';
@@ -1239,22 +1548,7 @@
         setTimeout(type, 200);
       }
 
-      function startParticles() {
-        const container = document.getElementById('particle-container');
-        if (!container) return;
-        const particlePool = ['🌸', '✨', '💗'];
-        setInterval(() => {
-          if (document.body.classList.contains('is-loading')) return;
-          const particle = document.createElement('div');
-          particle.className = 'bg-particle';
-          particle.textContent = particlePool[Math.floor(Math.random() * particlePool.length)];
-          particle.style.left = Math.random() * 100 + 'vw';
-          particle.style.fontSize = (Math.random() * 14 + 12) + 'px';
-          particle.style.animationDuration = (Math.random() * 5 + 6) + 's';
-          container.appendChild(particle);
-          setTimeout(() => { particle.remove(); }, 11000);
-        }, 700);
-      }
+      // 背景漫飄表情符號已依需求移除
 
       const revealTargets = document.querySelectorAll('.reveal');
       if ('IntersectionObserver' in window && revealTargets.length) {
@@ -1262,6 +1556,9 @@
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               entry.target.classList.add('is-visible');
+              if (entry.target.classList.contains('section-tag')) {
+                entry.target.classList.add('jelly-bounce');
+              }
               revealObserver.unobserve(entry.target);
             }
           });
@@ -1291,6 +1588,20 @@
         // 首次問候改由下方「依時間調整吉祥物問候」統一處理
       }
 
+      // --- 吉祥物閒置打瞌睡：10秒沒動靜翅膀會停下來，冒出 Zzz ---
+      let mascotSleepTimer;
+      const resetMascotSleep = () => {
+        mascotWrap.classList.remove('sleeping');
+        clearTimeout(mascotSleepTimer);
+        mascotSleepTimer = setTimeout(() => mascotWrap.classList.add('sleeping'), 10000);
+      };
+      if (mascotWrap) {
+        window.addEventListener('mousemove', resetMascotSleep);
+        window.addEventListener('keydown', resetMascotSleep);
+        window.addEventListener('scroll', resetMascotSleep, { passive: true });
+        resetMascotSleep();
+      }
+
       const fortuneBtn = document.getElementById('fortuneBtn');
       const fortuneOverlay = document.getElementById('fortuneOverlay');
       const fortuneText = document.getElementById('fortuneText');
@@ -1314,9 +1625,15 @@
         const savedFortune = localStorage.getItem('xiaofeng_last_fortune');
         if (savedFortune && fortuneLastTag) fortuneLastTag.textContent = `上次抽到：${savedFortune}`;
       } catch (err) {}
+      const fortuneCardEl = document.getElementById('fortuneCard');
       function drawFortune() {
         const pick = fortuneLines[Math.floor(Math.random() * fortuneLines.length)];
-        fortuneText.textContent = pick;
+        if (fortuneCardEl) {
+          fortuneCardEl.classList.remove('shake');
+          void fortuneCardEl.offsetWidth;
+          fortuneCardEl.classList.add('shake');
+        }
+        setTimeout(() => { fortuneText.textContent = pick; }, 220);
         fortuneDrawCount++;
         try { localStorage.setItem('xiaofeng_last_fortune', pick); } catch (err) {}
         if (fortuneLastTag) fortuneLastTag.textContent = `上次抽到：${pick}`;
@@ -1333,23 +1650,7 @@
         fortuneRedraw.addEventListener('click', drawFortune);
       }
 
-      const burstPool = ['🌸', '✨','🏵️'];
-      document.addEventListener('click', (e) => {
-        if (e.target.closest('.mascot-wrap, .fortune-btn, .fortune-overlay')) return;
-        const count = 6;
-        for (let i = 0; i < count; i++) {
-          const p = document.createElement('span');
-          p.className = 'click-burst-particle';
-          p.textContent = burstPool[Math.floor(Math.random() * burstPool.length)];
-          const angle = (Math.PI * 2 * i) / count + Math.random() * 0.5;
-          const dist = 40 + Math.random() * 40;
-          p.style.setProperty('--burst-end', `translate(${Math.cos(angle) * dist}px, ${Math.sin(angle) * dist}px)`);
-          p.style.left = e.clientX + 'px';
-          p.style.top = e.clientY + 'px';
-          document.body.appendChild(p);
-          setTimeout(() => p.remove(), 950);
-        }
-      });
+      // 點擊表情符號特效已移除，保留水波紋回饋
 
       // --- 新增功能：擴充鍵盤彩蛋 ("xiaofeng", Konami Code, 空白鍵跳躍) ---
       let easterBuffer = '';
@@ -1483,7 +1784,7 @@
           mascotClickCount++;
           if (mascotClickCount === 5) {
             showMascotLine('哇你摸了我五次，最喜歡你了😋');
-            showAchievement('蝴蝶的朋友 👻');
+            showAchievement('蝴蝶的朋友 🦋');
           } else if (mascotClickCount === 15) {
             showMascotLine('十五次了耶，要不要考慮住在這裡 🏵️');
             showAchievement('黏TT小夥伴 🏵️');
@@ -1567,6 +1868,13 @@
       }
 
       const backToTop = document.getElementById('backToTop');
+      document.querySelectorAll('.theme-toggle, .sound-toggle, .back-to-top').forEach(iconBtn => {
+        iconBtn.addEventListener('click', () => {
+          iconBtn.classList.remove('icon-punch');
+          void iconBtn.offsetWidth;
+          iconBtn.classList.add('icon-punch');
+        });
+      });
       if (backToTop) {
         window.addEventListener('scroll', () => {
           backToTop.classList.toggle('show', window.scrollY > 500);
@@ -1863,6 +2171,106 @@
           item.addEventListener('mouseleave', () => { item.style.transform = ''; });
         });
       }
+
+      // --- 按鈕液體波紋：按下時從觸點擴散出圓形水波 ---
+      document.querySelectorAll('.btn-primary, .btn-secondary, .nav-cta, .fortune-btn, .theme-toggle, .sound-toggle, .fortune-card-redraw, .back-to-top, .fortune-close, .music-widget').forEach(btn => {
+        btn.addEventListener('mousedown', function (e) {
+          const rect = this.getBoundingClientRect();
+          const ripple = document.createElement('span');
+          ripple.className = 'btn-ripple';
+          const size = Math.max(rect.width, rect.height);
+          ripple.style.width = ripple.style.height = size + 'px';
+          ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+          ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+          this.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 650);
+        });
+      });
+
+      // --- 黑膠唱片音樂小工具：點擊播放/暫停，播放時飄出音符 ---
+      const bgm = document.getElementById('bgmAudio');
+      const musicBtn = document.getElementById('musicBtn');
+      let isPlaying = false;
+      if (musicBtn && bgm) {
+        const toggleMusic = () => {
+          if (isPlaying) {
+            bgm.pause();
+            musicBtn.classList.remove('playing');
+          } else {
+            bgm.play().catch(() => {});
+            musicBtn.classList.add('playing');
+          }
+          isPlaying = !isPlaying;
+        };
+        musicBtn.addEventListener('click', toggleMusic);
+        musicBtn.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMusic(); } });
+        setInterval(() => {
+          if (!isPlaying) return;
+          const note = document.createElement('div');
+          note.className = 'floating-note';
+          note.textContent = ['🎵', '🎶', '✨'][Math.floor(Math.random() * 3)];
+          note.style.left = (Math.random() * 20 + 8) + 'px';
+          note.style.top = '-6px';
+          musicBtn.appendChild(note);
+          setTimeout(() => note.remove(), 1900);
+        }, 750);
+      }
+
+      // --- 彼岸螢火：頁面上緩緩漂浮的胡桃紅色螢火粒子 ---
+      setInterval(() => {
+        if (document.body.classList.contains('is-loading')) return;
+        const firefly = document.createElement('div');
+        firefly.className = 'hutao-firefly';
+        firefly.style.left = Math.random() * 100 + 'vw';
+        firefly.style.bottom = '-10px';
+        firefly.style.animationDuration = (Math.random() * 5 + 6) + 's';
+        document.getElementById('particle-container').appendChild(firefly);
+        setTimeout(() => firefly.remove(), 12000);
+      }, 1600);
+
+      // --- 音效開關按鈕點擊時的小跳動回饋 ---
+      if (soundToggle) {
+        soundToggle.addEventListener('click', () => {
+          soundToggle.classList.remove('just-toggled');
+          void soundToggle.offsetWidth;
+          soundToggle.classList.add('just-toggled');
+        });
+      }
+
+      // --- 特質卡花飾偶爾飄落一片小花瓣 ---
+      const traitCardEl = document.querySelector('.profile-trait-card');
+      if (traitCardEl) {
+        setInterval(() => {
+          if (document.body.classList.contains('is-loading')) return;
+          const petal = document.createElement('span');
+          petal.className = 'petal-shed';
+          petal.textContent = '🌸';
+          traitCardEl.appendChild(petal);
+          setTimeout(() => petal.remove(), 3000);
+        }, 6000);
+      }
+
+      // --- DC 群組按鈕點擊時噴發愛心彩帶 ---
+      document.querySelectorAll('a[href*="discord.gg"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+          const rect = link.getBoundingClientRect();
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const hearts = ['💕', '🩷', '💗', '✨'];
+          for (let i = 0; i < 10; i++) {
+            const h = document.createElement('span');
+            h.className = 'heart-confetti-particle';
+            h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+            const angle = (Math.PI * 2 * i) / 10 + Math.random() * 0.4;
+            const dist = 50 + Math.random() * 50;
+            h.style.setProperty('--confetti-end', `translate(${Math.cos(angle) * dist}px, ${Math.sin(angle) * dist - 30}px)`);
+            h.style.left = cx + 'px';
+            h.style.top = cy + 'px';
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 1050);
+          }
+        });
+      });
     });
   </script>
 </body>
