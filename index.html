@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="閒來無事就來更新">
+  <meta name="theme-color" content="#de5266">
+  <meta property="og:title" content="曉風的個人網頁喵">
+  <meta property="og:description" content="閒來無事就來更新 —— 曉風的小小角落">
+  <meta property="og:type" content="website">
   <title>曉風的個人網頁喵</title>
   
   <!-- 引入日系可愛與精美字體 -->
@@ -11,6 +15,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Huninn&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%B8%3C/text%3E%3C/svg%3E">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23fff5f7'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle'%3E%F0%9F%8C%B8%3C/text%3E%3C/svg%3E">
 
 
 
@@ -334,7 +339,7 @@
     .reveal.is-visible { opacity: 1; transform: translateY(0); }
 
     /* ==========================================================================
-       10. 胡桃小蝴蝶吉祥物 (Mascot)
+       10. 胡桃風可愛吉祥物 (Mascot)
        ========================================================================== */
     .mascot-wrap {
       position: fixed; right: 22px; bottom: 22px; z-index: 60;
@@ -363,8 +368,9 @@
     @keyframes mascotJumpAnim { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-40px) scale(1.1); } }
 
     @keyframes mascotBob { 0%, 100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-9px) rotate(2deg); } }
-    .mascot-wing { animation: wingFlap 1.4s ease-in-out infinite; transform-origin: 50% 50%; }
-    .mascot-wing.right { animation-delay: 0.15s; }
+    .mascot-tail { animation: tailSway 2.4s ease-in-out infinite; transform-origin: 50% 20%; }
+    .mascot-tail.right { animation-delay: 0.3s; }
+    @keyframes tailSway { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(6deg); } }
     @keyframes wingFlap { 0%, 100% { transform: scaleX(1) rotate(0deg); } 50% { transform: scaleX(0.85) rotate(-8deg); } }
 
     /* ==========================================================================
@@ -482,7 +488,7 @@
     .footer-signoff { color: var(--text-muted); font-size: 0.85rem; font-weight: 600; }
 
     .back-to-top {
-      position: fixed; right: 22px; bottom: 108px; z-index: 59;
+      position: fixed; left: 22px; bottom: 150px; z-index: 59;
       width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--card-border);
       background: #fff; color: var(--primary-color); font-size: 1.1rem; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
@@ -493,12 +499,14 @@
     .back-to-top.show { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
     .back-to-top:hover { transform: translateY(-4px) scale(1.08); background: var(--primary-color); color: #fff; }
 
+    .nav-actions { display: flex; align-items: center; gap: 14px; }
+    .nav-tools { display: flex; align-items: center; gap: 8px; background: rgba(255,182,193,0.12); padding: 5px; border-radius: 30px; }
     .theme-toggle {
       width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--card-border);
       background: #fff; font-size: 1.05rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); margin-left: 10px; flex-shrink: 0;
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); flex-shrink: 0; color: var(--text-color);
     }
-    .theme-toggle:hover { transform: rotate(20deg) scale(1.1); border-color: var(--primary-color); }
+    .theme-toggle:hover { transform: rotate(20deg) scale(1.1); border-color: var(--primary-color); color: var(--primary-color); }
     
     /* Konami Mode Override：柔化為呼吸式飽和光暈，不再刺眼反色 */
     body.konami-mode { animation: partyGlow 2.6s ease-in-out infinite; }
@@ -601,7 +609,7 @@
     .ctx-item:hover { background: rgba(255, 182, 193, 0.3); color: var(--primary-color); }
 
     @media (max-width: 640px) {
-      .back-to-top { right: 12px; bottom: 84px; width: 38px; height: 38px; font-size: 1rem; }
+      .back-to-top { left: 12px; bottom: 130px; width: 38px; height: 38px; font-size: 1rem; }
       .footer-quote-box { padding: 20px 18px; }
       .footer-stat-chip { font-size: 0.78rem; padding: 8px 14px; }
       .achievement-toast { top: 76px; font-size: 0.8rem; padding: 10px 16px; }
@@ -723,9 +731,9 @@
     .sound-toggle {
       width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--card-border);
       background: #fff; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); margin-left: 8px; flex-shrink: 0;
+      transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); flex-shrink: 0; color: var(--text-color);
     }
-    .sound-toggle:hover { transform: scale(1.1); border-color: var(--primary-color); }
+    .sound-toggle:hover { transform: scale(1.1); border-color: var(--primary-color); color: var(--primary-color); }
     body.dark-mode .sound-toggle { background: rgba(58, 44, 63, 0.9); color: var(--text-color); }
 
     /* --- 成就收藏展示 chip，hover 顯示提示 --- */
@@ -767,6 +775,9 @@
 
     @media (max-width: 640px) {
       .sound-toggle { width: 34px; height: 34px; font-size: 0.9rem; }
+      .theme-toggle { width: 34px; height: 34px; font-size: 0.9rem; }
+      .nav-tools { padding: 4px; gap: 6px; }
+      .nav-actions { gap: 10px; }
     }
 
     /* ==========================================================================
@@ -913,13 +924,14 @@
     .music-widget {
       position: fixed; left: 22px; bottom: 86px; z-index: 60;
       display: flex; align-items: center; gap: 9px; cursor: pointer;
-      background: #fff; padding: 7px 14px 7px 7px; border-radius: 30px;
+      background: #fff; padding: 7px 8px 7px 7px; border-radius: 30px;
       border: 2px solid var(--card-border); box-shadow: 0 4px 15px rgba(255,182,193,0.3);
-      transition: all 0.3s; position: relative;
+      transition: all 0.3s; position: relative; max-width: 210px;
     }
-    .music-widget:hover { transform: scale(1.05); border-color: var(--primary-color); }
+    .music-widget:hover { transform: scale(1.03); border-color: var(--primary-color); box-shadow: 0 6px 20px rgba(255,182,193,0.45); }
+    .music-widget.playing { border-color: var(--primary-color); }
     .vinyl-disc {
-      width: 30px; height: 30px; background: #2c2230; border-radius: 50%; position: relative;
+      width: 30px; height: 30px; background: #2c2230; border-radius: 50%; position: relative; flex-shrink: 0;
       border: 2px solid #55444d; box-shadow: inset 0 0 5px #000;
     }
     .vinyl-disc::after {
@@ -928,7 +940,16 @@
     }
     .music-widget.playing .vinyl-disc { animation: spinRecord 3s linear infinite; }
     @keyframes spinRecord { 100% { transform: rotate(360deg); } }
-    .music-widget-label { font-weight: 700; font-size: 0.8rem; color: var(--primary-color); }
+    .music-widget-label {
+      font-weight: 700; font-size: 0.78rem; color: var(--primary-color);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 78px;
+    }
+    .music-upload-btn {
+      width: 22px; height: 22px; border-radius: 50%; border: none; background: rgba(255,182,193,0.25);
+      color: var(--primary-color); font-size: 0.65rem; cursor: pointer; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center; transition: all 0.25s;
+    }
+    .music-upload-btn:hover { background: var(--primary-color); color: #fff; transform: scale(1.15); }
     .beat-pulse { position: absolute; inset: -4px; border-radius: 30px; border: 2px solid var(--primary-color); opacity: 0; pointer-events: none; }
     .music-widget.playing .beat-pulse { animation: beatExpand 1.6s ease-out infinite; }
     @keyframes beatExpand { 0% { transform: scale(1); opacity: 0.7; } 100% { transform: scale(1.35); opacity: 0; } }
@@ -960,7 +981,7 @@
       color: var(--text-muted); opacity: 0; pointer-events: none;
     }
     .mascot-wrap.sleeping .mascot-zzz { animation: zzzFloat 2s infinite; }
-    .mascot-wrap.sleeping .mascot-wing { animation-play-state: paused; }
+    .mascot-wrap.sleeping .mascot-tail { animation-play-state: paused; }
     .mascot-wrap.sleeping .mascot-body { animation-duration: 6s; }
     @keyframes zzzFloat {
       0% { transform: translate(0,0) scale(0.5); opacity: 0; }
@@ -991,20 +1012,6 @@
 
     /* 10. 頁尾花朵持續緩慢自轉 */
     .footer-divider span { animation: spin 9s linear infinite !important; }
-
-    /* 11. 蝴蝶探頭裝飾 (取代不使用的鬼魂造型) */
-    .peekaboo-butterfly {
-      position: fixed; left: -60px; top: 42%; font-size: 42px; z-index: 55;
-      filter: drop-shadow(0 0 8px rgba(255,182,193,0.5));
-      animation: floatBoo 3s infinite ease-in-out, peekBoo 22s infinite; pointer-events: none;
-    }
-    @keyframes floatBoo { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-    @keyframes peekBoo {
-      0%, 85% { left: -60px; transform: rotate(0deg); }
-      90% { left: 8px; transform: rotate(12deg); }
-      95% { left: 8px; transform: rotate(12deg); }
-      100% { left: -60px; transform: rotate(0deg); }
-    }
 
     /* 12. 聯絡按鈕 hover 星芒探出 */
     .contact-item { overflow: visible; }
@@ -1096,18 +1103,17 @@
     @media (max-width: 640px) {
       .music-widget { left: 12px; bottom: 78px; padding: 6px 12px 6px 6px; }
       .music-widget-label { display: none; }
-      .peekaboo-butterfly { font-size: 32px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .jelly-bounce, .fortune-card.shake, .vinyl-disc, .music-widget.playing .beat-pulse,
       .hutao-firefly, .mascot-wrap.sleeping .mascot-zzz, .progress-star, .footer-divider span,
-      .peekaboo-butterfly, .hero-emoji-heartbeat, .about-title span::after, .petal-shed,
+      .hero-emoji-heartbeat, .about-title span::after, .petal-shed,
       .dango-steam, .terminal-scanline { animation: none !important; }
     }
 
     @media (prefers-reduced-motion: reduce) {
-      .mascot-body, .mascot-wing, .fortune-icon, .about-meta-dot, .hero-status-left, .hero-status-right, .bg-particle, .footer-divider span, .achievement-toast-icon, .rainbow-flash,
+      .mascot-body, .mascot-tail, .fortune-icon, .about-meta-dot, .hero-status-left, .hero-status-right, .bg-particle, .footer-divider span, .achievement-toast-icon, .rainbow-flash,
       .btn-primary, body, .nav-brand span, .feature-icon-box, .profile-trait-card::before { animation: none !important; }
       .reveal, .terminal-line { transition: opacity 0.3s ease; transform: none !important; }
       .tilt-card { transform: none !important; }
@@ -1133,9 +1139,247 @@
       .contact-item, .footer-signoff, .nav-cta::before { animation: none !important; }
     }
 
+    /* ==========================================================================
+       17. 按鈕判定範圍優化 (Larger Tap Targets)
+       ========================================================================== */
+    .theme-toggle, .sound-toggle, .fortune-close { position: relative; }
+    .theme-toggle::before, .sound-toggle::before, .fortune-close::before, .back-to-top::before {
+      content: ''; position: absolute; inset: -10px; border-radius: inherit;
+    }
+    .mascot-wrap { padding: 6px; margin: -6px; }
+    .contact-item, .nav-link { min-height: 44px; }
+
+    /* ==========================================================================
+       18. 音樂功能實裝：迷你視覺化條 + 淡入淡出 + 播放狀態記憶
+       ========================================================================== */
+    .music-bars { display: flex; align-items: flex-end; gap: 2px; height: 14px; }
+    .music-bars span { width: 3px; background: var(--primary-color); border-radius: 2px; height: 4px; opacity: 0.5; }
+    .music-widget.playing .music-bars span { animation: barBounce 0.9s ease-in-out infinite; opacity: 1; }
+    .music-bars span:nth-child(1) { animation-delay: 0s; }
+    .music-bars span:nth-child(2) { animation-delay: 0.15s; }
+    .music-bars span:nth-child(3) { animation-delay: 0.3s; }
+    @keyframes barBounce { 0%, 100% { height: 4px; } 50% { height: 14px; } }
+    .music-widget.loading .vinyl-disc { animation: spinRecord 0.6s linear infinite; opacity: 0.6; }
+
+    /* ==========================================================================
+       19. 二次元少女動畫大補帖 II (30 New Animations)
+       ========================================================================== */
+    /* 1 */ .hero-motto { animation: mottoFloat 4s ease-in-out infinite; }
+    @keyframes mottoFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+    /* 2 */ .about-lead { animation: leadGlow 5s ease-in-out infinite; }
+    @keyframes leadGlow { 0%, 100% { box-shadow: 0 0 0 rgba(255,182,193,0); } 50% { box-shadow: 0 0 16px rgba(255,182,193,0.35); } }
+    /* 3 */ .trait-card-title { animation: titleSway 6s ease-in-out infinite; }
+    @keyframes titleSway { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-1.2deg); } }
+    /* 4 */ .section-desc { animation: cutePulse 3s infinite alternate; }
+    /* 5 */ .feature-header-text h3 { animation: cutePulse 2.6s infinite alternate; }
+    /* 6 */ .terminal-header { animation: headerFlicker 6s infinite; }
+    @keyframes headerFlicker { 0%, 96%, 100% { opacity: 1; } 97% { opacity: 0.7; } 98% { opacity: 1; } }
+    /* 7 */ .t-green { animation: cutePulse 1.4s infinite alternate; }
+    /* 8 */ .fortune-card-hint { animation: cutePulse 2.8s infinite alternate; }
+    /* 9 */ .fortune-last-tag { animation: fadeSlideIn 0.5s ease; }
+    @keyframes fadeSlideIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    /* 10 */ .achv-tooltip { animation: none; }
+    .footer-stat-chip.has-tip:hover .achv-tooltip { animation: fadeSlideIn 0.25s ease; }
+    /* 11 */ .footer-quote-label { animation: cutePulse 3.2s infinite alternate; }
+    /* 12 */ .about-chapter-label { animation: labelPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; }
+    @keyframes labelPop { 0% { transform: scale(0.6); } 60% { transform: scale(1.1); } 100% { transform: scale(1); } }
+    /* 13 */ .game-list code { animation: codeGlow 4s ease-in-out infinite; }
+    @keyframes codeGlow { 0%, 100% { box-shadow: 0 0 0 rgba(222,82,102,0); } 50% { box-shadow: 0 0 6px rgba(222,82,102,0.25); } }
+    /* 14 */ .about-meta-dot { animation: cutePulse 1.5s infinite alternate, dotSpin 4s linear infinite; }
+    @keyframes dotSpin { 100% { transform: rotate(360deg); } }
+    /* 15 */ .hero-status-left, .hero-status-right { animation: cutePulse 2s infinite alternate; }
+    /* 16 */ .contact-item-label { transition: color 0.2s; }
+    .contact-item:hover .contact-item-label { color: var(--primary-color); }
+    /* 17 */ .fortune-card-tag { animation: jellyAnim 0.6s cubic-bezier(0.25, 1.5, 0.5, 1) both; }
+    /* 18 */ .mascot-bubble.show { animation: bubblePop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    @keyframes bubblePop { 0% { transform: translateY(8px) scale(0.7); } 60% { transform: translateY(-2px) scale(1.06); } 100% { transform: translateY(0) scale(1); } }
+    /* 19 */ .mascot-tail { filter: drop-shadow(0 2px 3px rgba(255,105,135,0.3)); }
+    .mascot-wrap:hover .mascot-tail { animation-duration: 0.5s; }
+    /* 20 */ .footer-stat-chip strong { animation: cutePulse 2.2s infinite alternate; }
+    /* 21 */ .back-to-top { animation: backToTopIdle 3s ease-in-out infinite; }
+    .back-to-top:not(.show) { animation: none; }
+    @keyframes backToTopIdle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+    /* 22 */ .achievement-toast { animation: none; }
+    /* 23 */ .rainbow-flash.show::after { content:''; }
+    /* 24 */ .fortune-btn .fortune-icon { transition: transform 0.3s; }
+    .fortune-btn:hover .fortune-icon { transform: rotate(15deg) scale(1.15); }
+    /* 25 */ .theme-toggle { transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    .theme-toggle:hover { transform: rotate(25deg) scale(1.15); }
+    /* 26 */ .sound-toggle:hover { transform: scale(1.15); }
+    /* 27 */ .nav-brand:hover span { animation: brandWiggle 0.5s ease; }
+    @keyframes brandWiggle { 0%, 100% { transform: rotate(0deg) scale(1.08); } 50% { transform: rotate(-6deg) scale(1.12); } }
+    /* 28 */ .about-pull-quote { animation: quoteBorderPulse 5s ease-in-out infinite; }
+    @keyframes quoteBorderPulse { 0%, 100% { border-left-color: var(--primary-color); } 50% { border-left-color: var(--accent-color); } }
+    /* 29 */ .terminal-line.line-visible .t-white { animation: fadeSlideIn 0.4s ease; }
+    /* 30 */ .music-widget-label { transition: letter-spacing 0.3s; }
+    .music-widget:hover .music-widget-label { letter-spacing: 1px; }
+
+    /* ==========================================================================
+       20. 二次元少女動畫大補帖 III (再 30 種)
+       ========================================================================== */
+    /* 1 */ .mascot-tail { transform-origin: 50% 15%; }
+    .mascot-wrap:hover .mascot-body { animation-play-state: paused; }
+    /* 2 */ .mascot-body { animation: mascotBob 3.2s ease-in-out infinite, mascotBreathe 2s ease-in-out infinite; }
+    @keyframes mascotBreathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.015); } }
+    /* 3 */ .hero-status-bar { animation: barGlow 5s ease-in-out infinite; }
+    @keyframes barGlow { 0%, 100% { border-bottom-color: var(--card-border); } 50% { border-bottom-color: var(--primary-color); } }
+    /* 4 */ .trait-key { transition: color 0.2s; } .trait-item:hover .trait-key { color: var(--text-color); }
+    /* 5 */ .about-story-card, .profile-trait-card, .feature-showcase-box { animation: cardBreathe 7s ease-in-out infinite; }
+    @keyframes cardBreathe { 0%, 100% { border-color: var(--card-border); } 50% { border-color: rgba(255,182,193,0.85); } }
+    .about-story-card:hover, .profile-trait-card:hover, .feature-showcase-box:hover { animation-play-state: paused; }
+    /* 6 */ .hero-contact-card { animation: cardBreathe 7.5s ease-in-out infinite; }
+    .hero-contact-card:hover { animation-play-state: paused; }
+    /* 7 */ .footer-quote-box { animation: cardBreathe 8s ease-in-out infinite; }
+    /* 8 */ .achievement-toast-icon { transform-origin: 50% 60%; }
+    /* 9 */ .fortune-card-redraw { transition: transform 0.3s; } .fortune-card-redraw:hover { transform: rotate(-4deg) scale(1.05); }
+    /* 10 */ .btn-secondary:hover { animation: shakeSoft 0.4s ease; }
+    @keyframes shakeSoft { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-3px); } 75% { transform: translateX(3px); } }
+    /* 11 */ .terminal-panel:hover { transform: scale(1.008); transition: transform 0.3s; }
+    /* 12 */ .feature-header-text p { transition: opacity 0.3s; } .feature-showcase-box:hover .feature-header-text p { opacity: 0.85; }
+    /* 13 */ .about-typewriter-line { animation: cutePulse 3s infinite alternate; }
+    /* 14 */ .hero-card-title { animation: titleSway 5s ease-in-out infinite; }
+    /* 15 */ .trait-card-title.is-visible { animation: labelPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; }
+    /* 16 */ .about-title.is-visible { animation: fadeSlideIn 0.6s ease; }
+    /* 17 */ .section-title.is-visible { animation: fadeSlideIn 0.6s ease 0.1s both; }
+    /* 18 */ .fortune-overlay.open { animation: overlayFade 0.35s ease; }
+    @keyframes overlayFade { from { background: rgba(74,55,57,0); } to { background: rgba(74,55,57,0.5); } }
+    /* 19 */ .achv-tooltip { transform-origin: bottom center; }
+    /* 20 */ .footer-divider { animation: cutePulse 4s infinite alternate; }
+    /* 21 */ .contact-grid { animation: none; }
+    .contact-item:nth-child(1) { animation: fadeSlideIn 0.5s ease 0.05s both; }
+    .contact-item:nth-child(2) { animation: fadeSlideIn 0.5s ease 0.15s both; }
+    /* 22 */ .trait-value { transform-origin: right center; }
+    .trait-item:hover .trait-value { animation: valuePop 0.3s ease; }
+    @keyframes valuePop { 50% { transform: scale(1.08); } }
+    /* 23 */ .music-widget.playing { animation: widgetGlow 1.6s ease-in-out infinite; }
+    @keyframes widgetGlow { 0%, 100% { box-shadow: 0 4px 15px rgba(255,182,193,0.3); } 50% { box-shadow: 0 4px 20px rgba(255,105,135,0.5); } }
+    /* 24 */ .hutao-firefly { animation-timing-function: ease-in-out; }
+    /* 25 */ .rainbow-flash.show { animation: rainbowShift 3s ease infinite, flashPulse 1.2s ease-in-out infinite; }
+    @keyframes flashPulse { 0%, 100% { opacity: 0.7; } 50% { opacity: 0.9; } }
+    /* 26 */ .mascot-pity-text.show { animation: bubblePop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    /* 27 */ .idle-overlay span { animation: float 3s infinite ease-in-out, cutePulse 2s infinite alternate; }
+    /* 28 */ .ctx-item { transition: padding-left 0.2s; } .ctx-item:hover { padding-left: 26px; }
+    /* 29 */ .custom-context-menu.show { animation: bubblePop 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    /* 30 */ .loader-percent { animation: cutePulse 1.2s infinite alternate; }
+
+    /* ==========================================================================
+       21. 體驗加強：可及性、分享、GitHub Pages 友善細節
+       ========================================================================== */
+    .skip-link {
+      position: fixed; top: -60px; left: 12px; z-index: 10000;
+      background: var(--primary-color); color: #fff; padding: 10px 18px; border-radius: 10px;
+      text-decoration: none; font-weight: 700; transition: top 0.25s ease;
+    }
+    .skip-link:focus { top: 12px; }
+
+    #about, #skills, #hero { scroll-margin-top: 90px; }
+
+    .share-btn {
+      position: fixed; right: 22px; bottom: 108px; z-index: 59;
+      width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--card-border);
+      background: #fff; color: var(--primary-color); font-size: 1.05rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 16px rgba(255,182,193,0.3);
+      opacity: 0; transform: translateY(10px) scale(0.8); pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .share-btn.show { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+    .share-btn:hover { background: var(--primary-color); color: #fff; }
+    body.dark-mode .share-btn { background: rgba(58, 44, 63, 0.9); color: var(--text-color); }
+
+    .onboard-tip {
+      position: fixed; left: 84px; bottom: 30px; z-index: 61; max-width: 190px;
+      background: #fff; border: 2px solid var(--card-border); border-radius: 14px 14px 14px 4px;
+      padding: 10px 14px; font-size: 0.78rem; font-weight: 700; color: var(--primary-color);
+      box-shadow: 0 8px 20px rgba(255,182,193,0.35);
+      opacity: 0; transform: translateY(6px) scale(0.92); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+    }
+    .onboard-tip.show { opacity: 1; transform: translateY(0) scale(1); }
+
+    @media (max-width: 640px) {
+      .share-btn { right: 12px; bottom: 84px; width: 38px; height: 38px; font-size: 0.95rem; }
+      .onboard-tip { left: 12px; bottom: 60px; }
+    }
+
+    @media print {
+      .nav, .mascot-wrap, .fortune-btn, .music-widget, .back-to-top, .share-btn,
+      .achievement-toast, .rainbow-flash, .mascot-pity-text, .cursor-glow,
+      #particle-container, .scroll-progress, .fortune-overlay, .idle-overlay, .skip-link { display: none !important; }
+      body { background: #fff !important; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .mascot-body, .hero-status-bar, .about-story-card, .profile-trait-card, .feature-showcase-box,
+      .hero-contact-card, .footer-quote-box, .about-typewriter-line, .hero-card-title, .footer-divider,
+      .music-widget.playing, .idle-overlay span, .loader-percent { animation: none !important; }
+    }
+
+    /* ==========================================================================
+       22. 動畫大補帖 IV (再30種) + 10項體驗加強
+       ========================================================================== */
+    /* 1 */ .music-upload-btn { animation: cutePulse 2.4s infinite alternate; }
+    /* 2 */ .music-widget:not(.playing):not(:hover) .vinyl-disc { animation: vinylBreathe 4s ease-in-out infinite; }
+    @keyframes vinylBreathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.04); } }
+    /* 3 */ .share-btn { animation: shareIdle 4s ease-in-out infinite; }
+    .share-btn:not(.show) { animation: none; }
+    @keyframes shareIdle { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-3px) rotate(-4deg); } }
+    /* 4 */ .onboard-tip.show { animation: bubblePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+    /* 5 */ .skip-link:focus { animation: fadeSlideIn 0.2s ease; }
+    /* 6 */ .mascot-tail { filter: drop-shadow(0 2px 3px rgba(201,66,85,0.25)); }
+    /* 7 */ .mascot-body:hover { animation-duration: 1.6s; }
+    /* 8 */ .onboard-tip { animation: tipSway 3s ease-in-out infinite; }
+    @keyframes tipSway { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
+    .onboard-tip:not(.show) { animation: none; }
+    /* 9 */ .music-widget-label { animation: cutePulse 3.6s infinite alternate; }
+    /* 10 */ .nav-tools { transition: background 0.3s; }
+    .nav-tools:hover { background: rgba(255,182,193,0.22); }
+    /* 11 */ .theme-toggle, .sound-toggle { transform-origin: center; }
+    /* 12 */ .back-to-top.show { animation: fadeSlideIn 0.3s ease; }
+    /* 13 */ .fortune-card { animation: cardSettle 0.5s ease; }
+    @keyframes cardSettle { 0% { transform: scale(0.95); } 100% { transform: scale(1); } }
+    /* 14 */ .fortune-overlay.open .fortune-card { animation: none; }
+    /* 15 */ .contact-item-hint { transition: transform 0.2s; }
+    /* 16 */ .mascot-zzz { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    /* 17 */ .hero-title { transition: text-shadow 0.3s; }
+    .hero-title:hover { text-shadow: 3px 3px 0px rgba(255, 182, 193, 0.6); }
+    /* 18 */ .about-story-card .section-tag { transform-origin: left center; }
+    /* 19 */ .feature-icon-box svg { transition: transform 0.3s; }
+    .feature-showcase-box:hover .feature-icon-box svg { transform: scale(1.1); }
+    /* 20 */ .trait-list { animation: fadeSlideIn 0.5s ease; }
+    /* 21 */ .about-meta-row span { transition: color 0.2s; }
+    .about-meta-row:hover span { color: var(--primary-color); }
+    /* 22 */ .footer-stat-chip { animation: chipSettle 0.4s ease both; }
+    @keyframes chipSettle { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    /* 23 */ .footer-stat-chip:nth-child(1) { animation-delay: 0.05s; }
+    .footer-stat-chip:nth-child(2) { animation-delay: 0.1s; }
+    .footer-stat-chip:nth-child(3) { animation-delay: 0.15s; }
+    .footer-stat-chip:nth-child(4) { animation-delay: 0.2s; }
+    /* 24 */ .about-lead:hover { transform: translateY(-2px); transition: transform 0.25s; }
+    /* 25 */ .game-list:hover code { animation: none; }
+    .game-list code:hover { animation: codeGlow 1.2s ease-in-out infinite; }
+    /* 26 */ .fortune-btn .fortune-icon .dango-steam { animation: steamRise 2.4s ease-in-out infinite; }
+    /* 27 */ .achievement-toast-icon { transform-origin: 50% 70%; }
+    /* 28 */ .achv-tooltip::after { content:''; position:absolute; bottom:-6px; left:50%; transform:translateX(-50%); border:6px solid transparent; border-top-color: var(--text-color); }
+    /* 29 */ .music-bars { transition: opacity 0.3s; }
+    /* 30 */ .contact-item, .trait-item, .footer-stat-chip { will-change: transform; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .music-upload-btn, .music-widget:not(.playing):not(:hover) .vinyl-disc, .share-btn,
+      .onboard-tip, .music-widget-label, .footer-stat-chip { animation: none !important; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-motto, .about-lead, .trait-card-title, .section-desc, .feature-header-text h3,
+      .terminal-header, .t-green, .fortune-card-hint, .about-chapter-label, .game-list code,
+      .about-meta-dot, .hero-status-left, .hero-status-right, .footer-stat-chip strong,
+      .back-to-top, .about-pull-quote { animation: none !important; }
+    }
+
   </style>
 </head>
 <body class="is-loading">
+  <a href="#mainContent" class="skip-link">跳到主要內容</a>
 
   <div class="scroll-progress" id="scrollProgress" aria-hidden="true"><span class="progress-star">✨</span></div>
   <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
@@ -1171,9 +1415,13 @@
         <a href="#about" class="nav-link">關於我</a>
         <a href="#skills" class="nav-link">我的作品</a>
       </nav>
-      <a href="https://discord.gg/HmA3quvtqp" target="_blank" class="nav-cta">加入DC</a>
-      <button type="button" class="theme-toggle" id="themeToggle" aria-label="切換日夜模式">🌙</button>
-      <button type="button" class="sound-toggle" id="soundToggle" aria-label="切換音效">🔈</button>
+      <div class="nav-actions">
+        <div class="nav-tools">
+          <button type="button" class="theme-toggle" id="themeToggle" aria-label="切換日夜模式">🌙</button>
+          <button type="button" class="sound-toggle" id="soundToggle" aria-label="切換音效">🔈</button>
+        </div>
+        <a href="https://discord.gg/HmA3quvtqp" target="_blank" rel="noopener" class="nav-cta">加入DC</a>
+      </div>
     </div>
   </header>
 
@@ -1185,7 +1433,7 @@
           <h1 class="hero-title" id="heroTitle">尼敖 我是一只曉風子</h1>
           <p class="hero-motto">「願萬物名於微風中輕語 」</p>
           <div>
-            <a href="https://discord.gg/HmA3quvtqp" target="_blank" class="btn btn-primary">這是我的DC群組💛</a>
+            <a href="https://discord.gg/HmA3quvtqp" target="_blank" rel="noopener" class="btn btn-primary">這是我的DC群組💛</a>
           </div>
         </div>
 
@@ -1337,31 +1585,62 @@
   </footer>
 
   <button type="button" class="back-to-top" id="backToTop" aria-label="回到頂部">↑</button>
+  <button type="button" class="share-btn" id="shareBtn" aria-label="分享這個頁面">🔗</button>
+  <div class="onboard-tip" id="onboardTip">左下角可以抽張心情籤試試看喔 🍡</div>
 
-  <!-- 黑膠唱片音樂小工具：需要自行替換成喜歡的背景音樂網址 -->
-  <audio id="bgmAudio" loop preload="none">
-    <source src="https://assets.mixkit.co/music/preview/mixkit-cute-kawaii-background-158.mp3" type="audio/mpeg">
-  </audio>
+  <!--
+    黑膠唱片音樂小工具：
+    方法一（推薦，永久生效）：把你的音樂檔案放進 GitHub 專案裡（例如 assets/bgm.mp3），
+      再把下面 <audio> 的 src 換成那個路徑，例如 src="assets/bgm.mp3"。
+    方法二（暫時預覽）：直接點音樂小工具上的 🎵＋ 按鈕，從你的電腦選一首歌試聽，
+      這個方式重新整理頁面後就會失效，只適合測試效果用。
+  -->
+  <audio id="bgmAudio" loop preload="none"></audio>
+  <input type="file" id="musicFileInput" accept="audio/*" hidden>
   <div class="music-widget" id="musicBtn" role="button" tabindex="0" aria-label="播放背景音樂">
     <div class="beat-pulse"></div>
     <div class="vinyl-disc"></div>
-    <span class="music-widget-label">Music</span>
+    <span class="music-widget-label" id="musicLabel">選擇音樂</span>
+    <div class="music-bars" aria-hidden="true"><span></span><span></span><span></span></div>
+    <button type="button" class="music-upload-btn" id="musicUploadBtn" aria-label="自訂音樂檔案">🎵＋</button>
   </div>
 
-  <div class="peekaboo-butterfly" id="peekaboo" aria-hidden="true">🦋</div>
-
-  <div class="mascot-wrap" id="mascotWrap" role="button" tabindex="0" aria-label="點一下小蝴蝶吉祥物">
+  <div class="mascot-wrap" id="mascotWrap" role="button" tabindex="0" aria-label="點一下可愛小吉祥物">
     <div class="mascot-zzz">Zzz...</div>
     <div class="mascot-bubble" id="mascotBubble">嗨嗨 🌸</div>
     <div class="mascot-body" id="mascotBody">
       <svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-        <ellipse class="mascot-wing" cx="28" cy="46" rx="20" ry="26" fill="#ffb6c8" opacity="0.9" transform="rotate(-18 28 46)"/>
-        <ellipse class="mascot-wing right" cx="72" cy="46" rx="20" ry="26" fill="#ff8fa8" opacity="0.9" transform="rotate(18 72 46)"/>
-        <circle cx="50" cy="50" r="14" fill="var(--primary-color)"/>
-        <circle cx="45" cy="47" r="2.4" fill="#fff"/>
-        <circle cx="55" cy="47" r="2.4" fill="#fff"/>
-        <path d="M45 55 Q50 59 55 55" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/>
-        <circle cx="50" cy="38" r="3.5" fill="#ffd9e2"/>
+        <defs>
+          <linearGradient id="hairGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stop-color="#ff9ebb"/>
+            <stop offset="100%" stop-color="var(--primary-color)"/>
+          </linearGradient>
+        </defs>
+        <!-- 雙馬尾（乾淨的水滴形，減少雜訊） -->
+        <path class="mascot-tail" d="M20 48 C6 50 4 66 14 76 C20 80 26 76 25 68 C24 60 24 54 20 48 Z" fill="url(#hairGrad)" stroke="#c94255" stroke-width="1.5"/>
+        <path class="mascot-tail right" d="M80 48 C94 50 96 66 86 76 C80 80 74 76 75 68 C76 60 76 54 80 48 Z" fill="url(#hairGrad)" stroke="#c94255" stroke-width="1.5"/>
+        <!-- 頭型 -->
+        <circle cx="50" cy="52" r="27" fill="url(#hairGrad)" stroke="#c94255" stroke-width="1.5"/>
+        <!-- 瀏海髮絲分區，增加設計感而不雜亂 -->
+        <path d="M23 46 A27 27 0 0 1 77 46 L77 50 Q50 36 23 50 Z" fill="#ffb6c8"/>
+        <!-- 臉部（微微內縮，呈現立體層次） -->
+        <ellipse cx="50" cy="58" rx="20" ry="18" fill="#fff5f7"/>
+        <!-- 腮紅 -->
+        <ellipse cx="38" cy="63" rx="4.2" ry="2.6" fill="#ffb6c8" opacity="0.75"/>
+        <ellipse cx="62" cy="63" rx="4.2" ry="2.6" fill="#ffb6c8" opacity="0.75"/>
+        <!-- 眼睛：簡單圓潤，單一高光 -->
+        <circle cx="42" cy="58" r="3.2" fill="#3a2c3f"/>
+        <circle cx="58" cy="58" r="3.2" fill="#3a2c3f"/>
+        <circle cx="43.1" cy="56.6" r="1" fill="#fff"/>
+        <circle cx="59.1" cy="56.6" r="1" fill="#fff"/>
+        <!-- 微笑 -->
+        <path d="M45 66 Q50 69 55 66" stroke="#c73e56" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+        <!-- 頭頂緞帶 -->
+        <g transform="translate(50 21)">
+          <path d="M0 0 L-8 -5.5 L-8 5.5 Z" fill="#ffd9e2" stroke="#c94255" stroke-width="1"/>
+          <path d="M0 0 L8 -5.5 L8 5.5 Z" fill="#ffc2d4" stroke="#c94255" stroke-width="1"/>
+          <circle r="2.8" fill="var(--primary-color)" stroke="#c94255" stroke-width="1"/>
+        </g>
       </svg>
     </div>
   </div>
@@ -1584,6 +1863,20 @@
       if (mascotWrap) {
         const triggerMascot = () => showMascotLine(mascotLines[Math.floor(Math.random() * mascotLines.length)]);
         mascotWrap.addEventListener('click', triggerMascot);
+        mascotWrap.addEventListener('dblclick', (e) => {
+          const hearts = ['💕', '🩷', '💗'];
+          for (let i = 0; i < 6; i++) {
+            const h = document.createElement('span');
+            h.className = 'heart-burst-particle';
+            h.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+            const rect = mascotWrap.getBoundingClientRect();
+            h.style.left = (rect.left + rect.width / 2 + (Math.random() * 30 - 15)) + 'px';
+            h.style.top = (rect.top + (Math.random() * 20 - 10)) + 'px';
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 1200);
+          }
+          showMascotLine('最喜歡你了 🩷');
+        });
         mascotWrap.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); triggerMascot(); } });
         // 首次問候改由下方「依時間調整吉祥物問候」統一處理
       }
@@ -1784,7 +2077,7 @@
           mascotClickCount++;
           if (mascotClickCount === 5) {
             showMascotLine('哇你摸了我五次，最喜歡你了😋');
-            showAchievement('蝴蝶的朋友 🦋');
+            showAchievement('元氣好朋友 🌸');
           } else if (mascotClickCount === 15) {
             showMascotLine('十五次了耶，要不要考慮住在這裡 🏵️');
             showAchievement('黏TT小夥伴 🏵️');
@@ -1882,10 +2175,49 @@
         backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
       }
 
+      // --- 分享按鈕：手機用 Web Share API，桌面用複製連結 ---
+      const shareBtn = document.getElementById('shareBtn');
+      if (shareBtn) {
+        window.addEventListener('scroll', () => {
+          shareBtn.classList.toggle('show', window.scrollY > 500);
+        }, { passive: true });
+        shareBtn.addEventListener('click', async () => {
+          if (navigator.share) {
+            try { await navigator.share({ title: document.title, url: location.href }); } catch (err) {}
+          } else {
+            try {
+              await navigator.clipboard.writeText(location.href);
+              showAchievement('連結已複製 🔗');
+            } catch (err) {}
+          }
+        });
+      }
+
+      // --- 新手引導提示：第一次造訪時，指一下心情籤按鈕 ---
+      const onboardTip = document.getElementById('onboardTip');
+      if (onboardTip) {
+        try {
+          if (!localStorage.getItem('xiaofeng_onboarded')) {
+            setTimeout(() => onboardTip.classList.add('show'), 2600);
+            setTimeout(() => onboardTip.classList.remove('show'), 7000);
+            localStorage.setItem('xiaofeng_onboarded', '1');
+          }
+        } catch (err) {}
+      }
+
+      // --- 鍵盤快捷鍵：m 切換音樂、d 切換日夜、f 開啟籤詩 ---
+      window.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+        if (e.key === 'm' || e.key === 'M') { document.getElementById('musicBtn')?.click(); }
+        if (e.key === 'd' || e.key === 'D') { document.getElementById('themeToggle')?.click(); }
+        if (e.key === 'f' || e.key === 'F') { document.getElementById('fortuneBtn')?.click(); }
+      });
+
+
       const loaderTip = document.getElementById('loaderTip');
       if (loaderTip) {
         const tips = [
-          '小提示：右下角的蝴蝶戳戳看喵',
+          '小提示：右下角的吉祥物戳戳看喵',
           '小提示：左下角可以抽張心情籤',
           '小提示：試著在頁面上打出 hutao 看看',
           '小提示：滑過標題文字會有小小驚喜'
@@ -2187,23 +2519,88 @@
         });
       });
 
-      // --- 黑膠唱片音樂小工具：點擊播放/暫停，播放時飄出音符 ---
+      // --- 黑膠唱片音樂小工具：點擊播放/暫停，具備淡入淡出、狀態記憶、載入提示 ---
       const bgm = document.getElementById('bgmAudio');
       const musicBtn = document.getElementById('musicBtn');
+      const musicLabel = document.getElementById('musicLabel');
+      const musicFileInput = document.getElementById('musicFileInput');
+      const musicUploadBtn = document.getElementById('musicUploadBtn');
       let isPlaying = false;
-      if (musicBtn && bgm) {
-        const toggleMusic = () => {
-          if (isPlaying) {
-            bgm.pause();
-            musicBtn.classList.remove('playing');
+      let hasTrack = false;
+      let fadeTimer = null;
+      function fadeAudio(target, done) {
+        clearInterval(fadeTimer);
+        fadeTimer = setInterval(() => {
+          const step = 0.08;
+          if (target > bgm.volume) {
+            bgm.volume = Math.min(1, bgm.volume + step);
           } else {
-            bgm.play().catch(() => {});
+            bgm.volume = Math.max(0, bgm.volume - step);
+          }
+          if (Math.abs(bgm.volume - target) < 0.05) {
+            bgm.volume = target;
+            clearInterval(fadeTimer);
+            if (done) done();
+          }
+        }, 60);
+      }
+      if (musicBtn && bgm) {
+        bgm.volume = 0;
+        // 若 audio 標籤本身已經有固定音源（例如你自己放進repo的檔案），視為已經選好歌
+        if (bgm.currentSrc || bgm.querySelector('source')) {
+          hasTrack = true;
+          if (musicLabel) musicLabel.textContent = 'Music';
+        }
+        const toggleMusic = () => {
+          if (!hasTrack) {
+            musicFileInput.click();
+            return;
+          }
+          if (isPlaying) {
+            fadeAudio(0, () => bgm.pause());
+            musicBtn.classList.remove('playing');
+            try { localStorage.setItem('xiaofeng_music', 'off'); } catch (err) {}
+          } else {
+            musicBtn.classList.add('loading');
+            bgm.play().then(() => {
+              musicBtn.classList.remove('loading');
+              fadeAudio(0.4);
+            }).catch(() => { musicBtn.classList.remove('loading'); });
             musicBtn.classList.add('playing');
+            try { localStorage.setItem('xiaofeng_music', 'on'); } catch (err) {}
           }
           isPlaying = !isPlaying;
         };
-        musicBtn.addEventListener('click', toggleMusic);
+        musicBtn.addEventListener('click', (e) => {
+          if (e.target === musicUploadBtn) return;
+          toggleMusic();
+        });
         musicBtn.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMusic(); } });
+        if (musicUploadBtn) {
+          musicUploadBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            musicFileInput.click();
+          });
+        }
+        if (musicFileInput) {
+          musicFileInput.addEventListener('click', (e) => e.stopPropagation());
+          musicFileInput.addEventListener('change', () => {
+            const file = musicFileInput.files && musicFileInput.files[0];
+            if (!file) return;
+            if (isPlaying) { bgm.pause(); musicBtn.classList.remove('playing'); isPlaying = false; }
+            bgm.src = URL.createObjectURL(file);
+            hasTrack = true;
+            if (musicLabel) musicLabel.textContent = file.name.replace(/\.[^/.]+$/, '');
+            showAchievement('已選好音樂 🎵（重新整理後需要再選一次）');
+            toggleMusic();
+          });
+        }
+        // 記得上次的播放偏好，但因瀏覽器自動播放限制，需使用者互動後才會真正恢復播放
+        try {
+          if (localStorage.getItem('xiaofeng_music') === 'on' && hasTrack) {
+            showAchievement && setTimeout(() => showAchievement('點一下音樂鈕繼續播放 🎵'), 2200);
+          }
+        } catch (err) {}
         setInterval(() => {
           if (!isPlaying) return;
           const note = document.createElement('div');
