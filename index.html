@@ -26,9 +26,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Huninn&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%B8%3C/text%3E%3C/svg%3E">
-  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23fff5f7'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle'%3E%F0%9F%8C%B8%3C/text%3E%3C/svg%3E">
-  <!-- og-image.png 需和 index.html 放在同一個資料夾，才能讓分享預覽圖正常顯示 -->
-  <!-- manifest.json 也需放在同一層，讓手機「加到主畫面」時有正確名稱與圖示 -->
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <!-- iOS 不支援 SVG 當作主畫面圖示，一定要用上面這個 PNG 版本 -->
+  <!-- og-image.png、favicon-32.png、favicon-192.png、icon-512.png、apple-touch-icon.png、manifest.json、sw.js、robots.txt、sitemap.xml 都需和 index.html 放在同一個資料夾 -->
 
 
 
@@ -1655,7 +1657,7 @@
     <div class="loader-content">
     <div class="loader-stage">
       <div class="loader-scene loader-scene--1">
-        <h1 style="font-size: 2.8rem; letter-spacing: 4px; margin: 0;" data-en="WELCOME 🌸">WELCOME 🌸</h1>
+        <p role="heading" aria-level="2" style="font-size: 2.8rem; letter-spacing: 4px; margin: 0;" data-en="WELCOME 🌸">WELCOME 🌸</p>
       </div>
       <div class="loader-scene loader-scene--2">
         <p style="line-height: 1.8; font-size: 1.2rem; font-weight: 600;" data-en-html="Welcome to my little nook 🌸&lt;br&gt;Hope you have a wonderful day .w.">歡迎來到我的喵窩🌸<br>祝你能有個美好的一天 .w.</p>
@@ -1913,10 +1915,10 @@
     <p class="footer-version">v2.1 · 持續施工中</p>
   </footer>
 
-  <div class="help-panel" id="helpPanel">
+  <div class="help-panel" id="helpPanel" role="dialog" aria-modal="true" aria-labelledby="helpPanelTitle">
     <div class="help-panel-card">
       <button type="button" class="fortune-close" id="helpClose" aria-label="關閉">×</button>
-      <h3 data-en="Little Guidebook 🌸">小小說明書 🌸</h3>
+      <h3 id="helpPanelTitle" data-en="Little Guidebook 🌸">小小說明書 🌸</h3>
       <ul>
         <li data-en-html="Shortcuts: &lt;code&gt;M&lt;/code&gt; Music &lt;code&gt;D&lt;/code&gt; Dark mode &lt;code&gt;F&lt;/code&gt; Fortune slip">快捷鍵：<code>M</code> 音樂　<code>D</code> 日夜模式　<code>F</code> 心情籤</li>
         <li data-en-html="Type &lt;code&gt;hutao&lt;/code&gt; for a little surprise">打出 <code>hutao</code> 會有小驚喜</li>
@@ -1927,10 +1929,10 @@
     </div>
   </div>
 
-  <div class="help-panel" id="changelogPanel">
+  <div class="help-panel" id="changelogPanel" role="dialog" aria-modal="true" aria-labelledby="changelogPanelTitle">
     <div class="help-panel-card changelog-card">
       <button type="button" class="fortune-close" id="changelogClose" aria-label="關閉">×</button>
-      <h3 data-en="Changelog 🌸">更新日誌 🌸</h3>
+      <h3 id="changelogPanelTitle" data-en="Changelog 🌸">更新日誌 🌸</h3>
       <ul class="changelog-list" id="changelogList"></ul>
     </div>
   </div>
@@ -2011,10 +2013,10 @@
     <span class="fortune-icon">🍡<span class="dango-steam" aria-hidden="true">~</span></span> <span data-en="Draw a Fortune">抽張心情籤</span>
   </button>
 
-  <div class="fortune-overlay" id="fortuneOverlay">
+  <div class="fortune-overlay" id="fortuneOverlay" role="dialog" aria-modal="true" aria-labelledby="fortuneOverlayTitle">
     <div class="fortune-card" id="fortuneCard">
       <button type="button" class="fortune-close" id="fortuneClose" aria-label="關閉">×</button>
-      <span class="fortune-card-tag" data-en="Today&#39;s Fortune 🏵️">今日籤詩 🏵️</span>
+      <span class="fortune-card-tag" id="fortuneOverlayTitle" data-en="Today&#39;s Fortune 🏵️">今日籤詩 🏵️</span>
       <p class="fortune-card-text" id="fortuneText" data-en="Tap the draw button to try~">點一下抽籤按鈕試試看喵～</p>
       <p class="fortune-card-hint" data-en="— XiaoFeng&#39;s Fortune Jar —">— 曉風的喵窩籤筒 —</p>
       <p class="fortune-last-tag" id="fortuneLastTag"></p>
@@ -3149,6 +3151,36 @@
         changelogPanel.addEventListener('click', (e) => { if (e.target === changelogPanel) changelogPanel.classList.remove('open'); });
       }
 
+      // --- 彈出視窗鍵盤無障礙加強：Esc 關閉、Tab 焦點鎖在視窗內、關閉後焦點回到原本按的按鈕 ---
+      function makeModalAccessible(overlayEl, triggerEl, closeSelector) {
+        if (!overlayEl) return;
+        let lastFocused = null;
+        const closeBtn = overlayEl.querySelector(closeSelector);
+        triggerEl?.addEventListener('click', () => {
+          lastFocused = document.activeElement;
+          requestAnimationFrame(() => closeBtn?.focus());
+        });
+        overlayEl.addEventListener('keydown', (e) => {
+          if (!overlayEl.classList.contains('open')) return;
+          if (e.key === 'Escape') { overlayEl.classList.remove('open'); return; }
+          if (e.key !== 'Tab') return;
+          const focusables = [...overlayEl.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')];
+          if (!focusables.length) return;
+          const first = focusables[0], last = focusables[focusables.length - 1];
+          if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+          else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        });
+        new MutationObserver(() => {
+          if (!overlayEl.classList.contains('open') && lastFocused) {
+            lastFocused.focus();
+            lastFocused = null;
+          }
+        }).observe(overlayEl, { attributes: true, attributeFilter: ['class'] });
+      }
+      makeModalAccessible(fortuneOverlay, fortuneBtn, '#fortuneClose');
+      makeModalAccessible(helpPanel, helpBtn, '#helpClose');
+      makeModalAccessible(changelogPanel, changelogBtn, '#changelogClose');
+
       // --- 文字大小調整，記住偏好 ---
       let fontScale = 1;
       try { fontScale = parseFloat(localStorage.getItem('xiaofeng_font_scale') || '1'); } catch (err) {}
@@ -3202,6 +3234,13 @@
       if (offlineBanner) {
         window.addEventListener('offline', () => offlineBanner.classList.add('show'));
         window.addEventListener('online', () => offlineBanner.classList.remove('show'));
+      }
+
+      // --- 註冊 Service Worker，讓網站被開過一次之後可以離線瀏覽 ---
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js').catch(() => {});
+        });
       }
 
       // --- 停留時間顯示 ---

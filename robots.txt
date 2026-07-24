@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://future-627.github.io/67/sitemap.xml
