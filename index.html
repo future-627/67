@@ -8,6 +8,17 @@
   <meta property="og:title" content="曉風的個人網頁喵">
   <meta property="og:description" content="閒來無事就來更新 —— 曉風的小小角落">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://future-627.github.io/67/">
+  <meta property="og:image" content="https://future-627.github.io/67/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="zh_TW">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="曉風的個人網頁喵">
+  <meta name="twitter:description" content="閒來無事就來更新 —— 曉風的小小角落">
+  <meta name="twitter:image" content="https://future-627.github.io/67/og-image.png">
+  <link rel="canonical" href="https://future-627.github.io/67/">
+  <link rel="manifest" href="manifest.json">
   <title>曉風的個人網頁喵</title>
   
   <!-- 引入日系可愛與精美字體 -->
@@ -16,6 +27,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Huninn&display=swap" rel="stylesheet">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%B8%3C/text%3E%3C/svg%3E">
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23fff5f7'/%3E%3Ctext x='50' y='68' font-size='60' text-anchor='middle'%3E%F0%9F%8C%B8%3C/text%3E%3C/svg%3E">
+  <!-- og-image.png 需和 index.html 放在同一個資料夾，才能讓分享預覽圖正常顯示 -->
+  <!-- manifest.json 也需放在同一層，讓手機「加到主畫面」時有正確名稱與圖示 -->
 
 
 
@@ -42,6 +55,7 @@
       color: var(--text-color);
       font-family: 'Fredoka', 'Huninn', sans-serif;
       overflow-x: hidden;
+      transition: background-color 0.4s ease, color 0.4s ease;
       /* 背景點綴可愛微粒感覺 */
       background-image: radial-gradient(rgba(255, 107, 139, 0.05) 15%, transparent 15%),
                         radial-gradient(rgba(255, 107, 139, 0.05) 15%, transparent 15%);
@@ -121,6 +135,7 @@
     
     .loader-foot { width: 250px; text-align: center; }
     .loader-bar { width: 100%; height: 8px; background: rgba(0,0,0,0.04); border-radius: 4px; overflow: hidden; margin-bottom: 10px; border: 1px solid rgba(255, 182, 193, 0.3); }
+    body.dark-mode .loader-bar { background: rgba(255,255,255,0.06); }
     .loader-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent-color), var(--primary-color)); box-shadow: 0 0 10px var(--accent-color); }
     .loader-percent { font-size: 0.85rem; color: var(--text-muted); font-weight: bold; display: block; margin-top: 5px; }
 
@@ -174,20 +189,31 @@
     .btn {
       display: inline-block; padding: 14px 35px; border-radius: 40px; font-weight: 700; text-decoration: none; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: none; cursor: pointer;
     }
-    .btn-primary { background: linear-gradient(135deg, #ff85a2, var(--primary-color)); color: #fff; box-shadow: 0 6px 20px rgba(222,82,102,0.3); }
-    .btn-primary:hover { transform: translateY(-5px) scale(1.05); box-shadow: 0 10px 25px rgba(222,82,102,0.5); }
-    .btn-secondary { background: #fff; color: var(--primary-color); border: 2px solid var(--card-border); margin-top: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.02); width: 100%; padding: 14px; font-size: 1rem; font-weight: 700; transition: all 0.3s ease; }
-    .btn-secondary:hover { background: var(--bg-color); transform: translateY(-3px); border-color: var(--primary-color); box-shadow: 0 6px 15px rgba(222,82,102,0.15); }
+    .btn-primary {
+      background: linear-gradient(135deg, #ff85a2, var(--primary-color)); color: #fff;
+      box-shadow: 0 6px 0 #a83a4a, 0 10px 20px rgba(222,82,102,0.35);
+      border-bottom: none;
+    }
+    .btn-primary:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 9px 0 #a83a4a, 0 16px 28px rgba(222,82,102,0.5); }
+    .btn-primary:active { transform: translateY(3px) scale(0.99); box-shadow: 0 2px 0 #a83a4a, 0 4px 10px rgba(222,82,102,0.4); }
+    .btn-secondary {
+      background: #fff; color: var(--primary-color); border: 2px solid var(--card-border); margin-top: 15px;
+      box-shadow: 0 4px 0 rgba(0,0,0,0.04), 0 6px 14px rgba(0,0,0,0.04);
+      width: 100%; padding: 14px; font-size: 1rem; font-weight: 700; transition: all 0.3s ease;
+    }
+    .btn-secondary:hover { background: var(--bg-color); transform: translateY(-3px); border-color: var(--primary-color); box-shadow: 0 5px 0 rgba(222,82,102,0.12), 0 8px 18px rgba(222,82,102,0.15); }
+    .btn-secondary:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 3px 8px rgba(0,0,0,0.06); }
 
     .hero-contact-card {
       background: var(--card-bg); border: 3px solid var(--card-border); border-radius: 32px; padding: 30px;
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 15px 35px rgba(255, 182, 193, 0.2);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 2px 0 rgba(255,255,255,0.6) inset, 0 -1px 0 rgba(0,0,0,0.03) inset, 0 15px 35px rgba(255, 182, 193, 0.25), 0 3px 8px rgba(222,82,102,0.08);
       transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s, border-color 0.4s;
     }
     .hero-contact-card:hover {
       transform: translateY(-8px) scale(1.02);
       border-color: var(--primary-color);
-      box-shadow: 0 20px 40px rgba(255, 182, 193, 0.35);
+      box-shadow: 0 2px 0 rgba(255,255,255,0.6) inset, 0 -1px 0 rgba(0,0,0,0.03) inset, 0 24px 45px rgba(255, 182, 193, 0.4), 0 6px 14px rgba(222,82,102,0.15);
     }
     .hero-card-title { font-size: 0.9rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--primary-color); margin-bottom: 20px; text-align: center; }
     
@@ -224,13 +250,14 @@
 
     .about-story-card {
       background: var(--card-bg); border: 3px solid var(--card-border); border-radius: 32px; padding: 45px;
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 15px 35px rgba(255, 182, 193, 0.15);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 2px 0 rgba(255,255,255,0.6) inset, 0 15px 35px rgba(255, 182, 193, 0.2), 0 3px 8px rgba(222,82,102,0.08);
       transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s, border-color 0.4s;
     }
     .about-story-card:hover {
       transform: translateY(-8px);
       border-color: var(--primary-color);
-      box-shadow: 0 20px 40px rgba(255, 182, 193, 0.3);
+      box-shadow: 0 2px 0 rgba(255,255,255,0.6) inset, 0 24px 45px rgba(255, 182, 193, 0.35), 0 6px 14px rgba(222,82,102,0.15);
     }
     
     .section-tag { display: inline-block; font-size: 0.8rem; font-weight: 700; color: #fff; background: var(--primary-color); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 20px; padding: 4px 12px; border-radius: 20px; transition: transform 0.3s; }
@@ -257,14 +284,15 @@
 
     .profile-trait-card {
       background: var(--card-bg); border: 3px solid var(--card-border); border-radius: 32px; padding: 40px;
-      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); height: fit-content; box-shadow: 0 15px 35px rgba(255, 182, 193, 0.15);
+      backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); height: fit-content;
+      box-shadow: 0 2px 0 rgba(255,255,255,0.6) inset, 0 15px 35px rgba(255, 182, 193, 0.2), 0 3px 8px rgba(222,82,102,0.08);
       position: relative; overflow: hidden;
       transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s, border-color 0.4s;
     }
     .profile-trait-card:hover {
       transform: translateY(-8px) scale(1.02);
       border-color: var(--primary-color);
-      box-shadow: 0 20px 40px rgba(255, 182, 193, 0.3);
+      box-shadow: 0 2px 0 rgba(255,255,255,0.6) inset, 0 24px 45px rgba(255, 182, 193, 0.35), 0 6px 14px rgba(222,82,102,0.15);
     }
     .profile-trait-card::before {
       content: '🏵️'; position: absolute; font-size: 5rem; right: -10px; bottom: -10px; opacity: 0.12; transform: rotate(-15deg); transition: transform 0.4s, opacity 0.4s;
@@ -286,16 +314,47 @@
     .section-title { font-size: 2.4rem; font-weight: 700; margin-bottom: 10px; color: var(--primary-color); }
     .section-desc { color: var(--text-muted); font-weight: 600; }
 
+    /* --- 里程碑時間軸 --- */
+    .timeline-wrap { max-width: 600px; margin: 0 auto; position: relative; padding-left: 30px; }
+    .timeline-wrap::before { content: ''; position: absolute; left: 5px; top: 6px; bottom: 6px; width: 3px; background: linear-gradient(var(--accent-color), var(--primary-color)); border-radius: 3px; }
+    .timeline-item { position: relative; margin-bottom: 32px; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot { position: absolute; left: -30px; top: 4px; width: 13px; height: 13px; border-radius: 50%; background: var(--primary-color); border: 3px solid #fff; box-shadow: 0 0 0 3px rgba(255,182,193,0.4); }
+    .timeline-content {
+      background: var(--card-bg); border: 3px solid var(--card-border); border-radius: 20px; padding: 16px 22px;
+      backdrop-filter: blur(10px); box-shadow: 0 2px 0 rgba(255,255,255,0.6) inset, 0 10px 24px rgba(255,182,193,0.18);
+      transition: all 0.3s;
+    }
+    .timeline-content:hover { transform: translateX(6px); border-color: var(--primary-color); }
+    .timeline-date { display: inline-block; background: var(--primary-color); color: #fff; font-weight: 700; font-size: 0.8rem; padding: 2px 12px; border-radius: 20px; margin-bottom: 8px; }
+    .timeline-text { font-weight: 700; color: var(--text-color); }
+
+    /* --- 朋友連結卡片 --- */
+    .friends-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px; max-width: 600px; margin: 0 auto; }
+    .friend-card {
+      background: var(--card-bg); border: 3px solid var(--card-border); border-radius: 20px; padding: 22px;
+      text-decoration: none; text-align: center; backdrop-filter: blur(10px);
+      box-shadow: 0 2px 0 rgba(255,255,255,0.6) inset, 0 10px 24px rgba(255,182,193,0.18);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); display: flex; flex-direction: column; gap: 6px;
+    }
+    .friend-card:hover { transform: translateY(-6px); border-color: var(--primary-color); box-shadow: 0 2px 0 rgba(255,255,255,0.6) inset, 0 16px 30px rgba(255,182,193,0.3); }
+    .friend-card-name { font-weight: 700; font-size: 1.1rem; color: var(--primary-color); }
+    .friend-card-hint { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; transition: color 0.25s ease, transform 0.25s ease; display: inline-block; }
+    .friend-card:hover .friend-card-hint { color: var(--primary-color); animation: hintNudgeX 0.9s ease-in-out infinite; }
+    @keyframes hintNudgeX { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(4px); } }
+    .timeline-item:hover .timeline-dot { animation: cutePulse 0.6s ease-in-out infinite alternate; }
+
     .feature-showcase-box {
       background: var(--card-bg); border: 3px solid var(--card-border); border-radius: 32px; padding: 40px;
-      max-width: 800px; margin: 0 auto; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 15px 35px rgba(255, 182, 193, 0.15);
+      max-width: 800px; margin: 0 auto; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 2px 0 rgba(255,255,255,0.6) inset, 0 15px 35px rgba(255, 182, 193, 0.2), 0 3px 8px rgba(222,82,102,0.08);
       transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s, border-color 0.4s;
       position: relative;
     }
     .feature-showcase-box:hover {
       transform: translateY(-8px);
       border-color: var(--primary-color);
-      box-shadow: 0 20px 40px rgba(255, 182, 193, 0.3);
+      box-shadow: 0 2px 0 rgba(255,255,255,0.6) inset, 0 24px 45px rgba(255, 182, 193, 0.35), 0 6px 14px rgba(222,82,102,0.15);
     }
     
     /* --- 新增功能 3：3D卡片內層高光反射特效 (JS聯動) --- */
@@ -312,10 +371,10 @@
     .feature-header-text h3 { font-size: 1.5rem; margin-bottom: 6px; color: var(--primary-color); font-weight: 700; }
     .feature-header-text p { color: var(--text-muted); font-weight: 600; line-height: 1.6; }
 
-    .terminal-panel { background: #36292b; border: 2px solid #4a3739; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(74, 55, 57, 0.25); margin-bottom: 25px; transition: border-color 0.3s; position: relative; z-index: 2; cursor: pointer; }
+    .terminal-panel { background: #36292b; border: 2px solid #4a3739; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 35px rgba(74, 55, 57, 0.3), 0 4px 10px rgba(74,55,57,0.2); margin-bottom: 25px; transition: border-color 0.3s; position: relative; z-index: 2; cursor: pointer; }
     .feature-showcase-box:hover .terminal-panel { border-color: var(--primary-color); }
     .terminal-header { background: #291f20; padding: 14px 20px; font-size: 0.85rem; color: #ffb3c1; border-bottom: 2px solid #4a3739; letter-spacing: 0.5px; font-weight: bold; }
-    .terminal-screen { padding: 25px; font-family: 'Courier New', Courier, monospace; font-size: 1rem; line-height: 1.8; transition: filter 0.1s; }
+    .terminal-screen { padding: 25px; font-family: 'Courier New', Courier, monospace; font-size: 1rem; line-height: 1.8; transition: filter 0.1s; box-shadow: inset 0 8px 16px rgba(0,0,0,0.35), inset 0 -4px 10px rgba(0,0,0,0.2); }
     
     /* --- 新增功能 4：終端機點擊閃爍特效 --- */
     .terminal-screen.glitch { filter: contrast(2) brightness(1.5) hue-rotate(90deg); transform: skewX(-5deg); }
@@ -354,6 +413,7 @@
       pointer-events: none;
     }
     .mascot-bubble.show { opacity: 1; transform: translateY(0) scale(1); }
+    body.dark-mode .mascot-bubble { background: #3a2c3f; color: var(--accent-color); }
     .mascot-body {
       width: 74px; height: 74px; position: relative;
       animation: mascotBob 3.2s ease-in-out infinite;
@@ -380,12 +440,12 @@
       position: fixed; left: 22px; bottom: 22px; z-index: 60;
       background: linear-gradient(135deg, #ff85a2, var(--primary-color)); color: #fff;
       border: none; border-radius: 50px; padding: 12px 22px; font-family: inherit; font-weight: 700; font-size: 0.9rem;
-      box-shadow: 0 8px 20px rgba(222,82,102,0.35); cursor: pointer;
+      box-shadow: 0 4px 0 #a83a4a, 0 8px 20px rgba(222,82,102,0.4); cursor: pointer;
       transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       display: flex; align-items: center; gap: 8px;
     }
-    .fortune-btn:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 12px 25px rgba(222,82,102,0.5); }
-    .fortune-btn:active { transform: scale(0.94); }
+    .fortune-btn:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 6px 0 #a83a4a, 0 14px 28px rgba(222,82,102,0.5); }
+    .fortune-btn:active { transform: translateY(2px) scale(0.96); box-shadow: 0 1px 0 #a83a4a, 0 3px 10px rgba(222,82,102,0.4); }
     .fortune-icon { display: inline-block; animation: cutePulse 1.6s infinite alternate; }
 
     .fortune-overlay {
@@ -469,10 +529,72 @@
     .footer-quote-box {
       background: var(--card-bg); border: 3px dashed var(--card-border); border-radius: 24px; padding: 26px 24px;
       backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); margin-bottom: 28px;
-      box-shadow: 0 10px 25px rgba(255,182,193,0.15);
+      box-shadow: 0 10px 25px rgba(255,182,193,0.15); position: relative;
     }
     .footer-quote-label { font-size: 0.8rem; font-weight: 700; color: var(--primary-color); letter-spacing: 1px; margin-bottom: 10px; display: block; }
     .footer-quote-text { font-size: 1.05rem; font-weight: 700; color: var(--text-color); min-height: 2.6rem; display: flex; align-items: center; justify-content: center; text-align: center; line-height: 1.6; transition: opacity 0.4s; }
+    .quote-refresh-btn {
+      position: absolute; top: 14px; right: 16px; background: none; border: none; cursor: pointer;
+      font-size: 0.95rem; color: var(--text-muted); transition: all 0.3s;
+    }
+    .quote-refresh-btn:hover { color: var(--primary-color); transform: rotate(180deg); }
+
+    .footer-links-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin-bottom: 18px; }
+    .footer-text-btn {
+      background: none; border: none; color: var(--text-muted); font-family: inherit; font-weight: 700;
+      font-size: 0.82rem; cursor: pointer; text-decoration: none; border-bottom: 1px dashed var(--card-border);
+      transition: color 0.25s, border-color 0.25s, opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .footer-text-btn:hover { color: var(--primary-color); border-color: var(--primary-color); }
+
+    .help-panel {
+      position: fixed; inset: 0; z-index: 210; background: rgba(74,55,57,0.4); backdrop-filter: blur(4px);
+      display: flex; align-items: center; justify-content: center; padding: 20px;
+      opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .help-panel.open { opacity: 1; pointer-events: auto; }
+    .help-panel-card {
+      background: #fff; border: 3px solid var(--card-border); border-radius: 24px; padding: 30px 28px;
+      max-width: 360px; width: 100%; position: relative; transform: scale(0.9); transition: transform 0.3s;
+    }
+    .help-panel.open .help-panel-card { transform: scale(1); }
+    .help-panel-card h3 { color: var(--primary-color); margin-bottom: 16px; }
+    .help-panel-card ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .help-panel-card li { font-size: 0.88rem; color: var(--text-color); line-height: 1.6; }
+    .help-panel-card code { background: #ffeef1; color: var(--primary-color); padding: 1px 6px; border-radius: 6px; font-size: 0.85em; }
+    body.dark-mode .help-panel-card { background: #2c2230; }
+    body.dark-mode .help-panel-card code { background: rgba(255,182,193,0.15); }
+    .changelog-list { max-height: 50vh; overflow-y: auto; }
+    .changelog-date { display: inline-block; background: var(--primary-color); color: #fff; font-size: 0.72rem; font-weight: 700; padding: 1px 10px; border-radius: 12px; margin-right: 8px; }
+
+    .font-toggle {
+      width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--card-border);
+      background: #fff; color: var(--text-color); font-size: 0.7rem; font-weight: 700; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); flex-shrink: 0;
+    }
+    .font-toggle:hover { transform: scale(1.1); border-color: var(--primary-color); color: var(--primary-color); }
+    body.dark-mode .font-toggle { background: rgba(58,44,63,0.9); color: var(--text-color); }
+    .lang-toggle {
+      width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--card-border);
+      background: #fff; color: var(--text-color); font-size: 0.65rem; font-weight: 700; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); flex-shrink: 0;
+    }
+    .lang-toggle:hover { transform: scale(1.1); border-color: var(--primary-color); color: var(--primary-color); }
+    .lang-toggle.active { background: var(--primary-color); color: #fff; border-color: var(--primary-color); }
+    body.dark-mode .lang-toggle { background: rgba(58,44,63,0.9); color: var(--text-color); }
+
+    .offline-banner {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 300; text-align: center;
+      background: var(--primary-color); color: #fff; font-weight: 700; font-size: 0.85rem; padding: 8px;
+      transform: translateY(-100%); transition: transform 0.35s ease;
+    }
+    .offline-banner.show { transform: translateY(0); }
+
+    @media (max-width: 640px) {
+      .footer-links-row { gap: 12px; font-size: 0.78rem; }
+    }
 
     .footer-stats-row {
       display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; margin-bottom: 30px;
@@ -480,24 +602,36 @@
     .footer-stat-chip {
       background: #fff; border: 2px solid var(--card-border); border-radius: 20px; padding: 10px 18px;
       font-size: 0.85rem; font-weight: 700; color: var(--text-muted); display: flex; align-items: center; gap: 6px;
-      box-shadow: 0 4px 10px rgba(255,182,193,0.12); transition: transform 0.25s;
+      box-shadow: 0 4px 10px rgba(255,182,193,0.12); transition: transform 0.25s, opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .footer-stat-chip:hover { transform: translateY(-3px); border-color: var(--primary-color); }
     .footer-stat-chip strong { color: var(--primary-color); }
 
     .footer-signoff { color: var(--text-muted); font-size: 0.85rem; font-weight: 600; }
+    .footer-version { color: var(--text-muted); font-size: 0.7rem; opacity: 0.6; margin-top: 8px; }
+    .reaction-row { display: flex; justify-content: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+    .reaction-btn {
+      background: #fff; border: 2px solid var(--card-border); border-radius: 20px; padding: 6px 14px;
+      font-family: inherit; font-size: 0.85rem; font-weight: 700; color: var(--text-color); cursor: pointer;
+      display: flex; align-items: center; gap: 6px; transition: all 0.25s;
+    }
+    .reaction-btn:hover { border-color: var(--primary-color); transform: translateY(-2px); }
+    .reaction-btn.picked { background: rgba(255,182,193,0.2); border-color: var(--primary-color); }
+    .reaction-btn.pop { animation: valuePop 0.3s ease; }
+    body.dark-mode .reaction-btn { background: rgba(58, 44, 63, 0.9); color: var(--text-color); }
 
     .back-to-top {
       position: fixed; left: 22px; bottom: 150px; z-index: 59;
       width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--card-border);
       background: #fff; color: var(--primary-color); font-size: 1.1rem; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 6px 16px rgba(255,182,193,0.3);
+      box-shadow: 0 3px 0 rgba(0,0,0,0.06), 0 6px 16px rgba(255,182,193,0.35);
       opacity: 0; transform: translateY(10px) scale(0.8); pointer-events: none;
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .back-to-top.show { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
-    .back-to-top:hover { transform: translateY(-4px) scale(1.08); background: var(--primary-color); color: #fff; }
+    .back-to-top:hover { transform: translateY(-4px) scale(1.08); background: var(--primary-color); color: #fff; box-shadow: 0 5px 0 rgba(0,0,0,0.1), 0 10px 22px rgba(255,182,193,0.5); }
+    .back-to-top:active { transform: translateY(1px) scale(0.95); box-shadow: 0 1px 0 rgba(0,0,0,0.06), 0 3px 8px rgba(255,182,193,0.3); }
 
     .nav-actions { display: flex; align-items: center; gap: 14px; }
     .nav-tools { display: flex; align-items: center; gap: 8px; background: rgba(255,182,193,0.12); padding: 5px; border-radius: 30px; }
@@ -623,6 +757,8 @@
       .nav-links { gap: 14px; }
       .nav-link { font-size: 0.85rem; padding: 4px 6px; }
       .nav-cta { padding: 7px 14px; font-size: 0.8rem; }
+      .font-toggle { display: none; }
+      .lang-toggle { display: none; }
       .hero { padding: 110px 16px 50px; min-height: auto; }
       .hero-title { font-size: 2.1rem; line-height: 1.35; }
       .hero-motto { font-size: 1.05rem; padding: 4px 12px; }
@@ -740,10 +876,11 @@
     .footer-stat-chip.has-tip { position: relative; cursor: help; }
     .achv-tooltip {
       position: absolute; bottom: 130%; left: 50%; transform: translateX(-50%) translateY(4px);
-      background: var(--text-color); color: #fff; font-size: 0.72rem; font-weight: 600;
+      background: #3a2c3f; color: #f4e4ea; font-size: 0.72rem; font-weight: 600;
       padding: 8px 12px; border-radius: 10px; white-space: nowrap; max-width: 220px; white-space: normal;
       text-align: center; opacity: 0; pointer-events: none; transition: opacity 0.25s, transform 0.25s; z-index: 30;
     }
+    .achv-tooltip::after { border-top-color: #3a2c3f !important; }
     .footer-stat-chip.has-tip:hover .achv-tooltip { opacity: 1; transform: translateX(-50%) translateY(0); }
 
     /* --- loader 進度條光澤掃過效果，提升載入質感 --- */
@@ -845,6 +982,27 @@
     .trait-list .trait-item:nth-child(6) { transition-delay: 0.32s; }
     .trait-list .trait-item:nth-child(7) { transition-delay: 0.38s; }
     .trait-list .trait-item:nth-child(8) { transition-delay: 0.44s; }
+    .section-header > .section-title.reveal { transition-delay: 0.1s; }
+    .timeline-wrap .timeline-item:nth-child(1) { transition-delay: 0.05s; }
+    .timeline-wrap .timeline-item:nth-child(2) { transition-delay: 0.18s; }
+    .timeline-wrap .timeline-item:nth-child(3) { transition-delay: 0.31s; }
+    .friends-grid .friend-card:nth-child(1) { transition-delay: 0.05s; }
+    .friends-grid .friend-card:nth-child(2) { transition-delay: 0.15s; }
+    .friends-grid .friend-card:nth-child(3) { transition-delay: 0.25s; }
+    .friends-grid .friend-card:nth-child(4) { transition-delay: 0.35s; }
+    .footer-stats-row .footer-stat-chip:nth-child(1) { transition-delay: 0.03s; }
+    .footer-stats-row .footer-stat-chip:nth-child(2) { transition-delay: 0.08s; }
+    .footer-stats-row .footer-stat-chip:nth-child(3) { transition-delay: 0.13s; }
+    .footer-stats-row .footer-stat-chip:nth-child(4) { transition-delay: 0.18s; }
+    .footer-stats-row .footer-stat-chip:nth-child(5) { transition-delay: 0.23s; }
+    .footer-links-row .footer-text-btn:nth-child(1) { transition-delay: 0.03s; }
+    .footer-links-row .footer-text-btn:nth-child(2) { transition-delay: 0.09s; }
+    .footer-links-row .footer-text-btn:nth-child(3) { transition-delay: 0.15s; }
+    .footer-links-row .footer-text-btn:nth-child(4) { transition-delay: 0.21s; }
+    .reaction-row .reaction-btn:nth-child(1) { transition-delay: 0.03s; }
+    .reaction-row .reaction-btn:nth-child(2) { transition-delay: 0.09s; }
+    .reaction-row .reaction-btn:nth-child(3) { transition-delay: 0.15s; }
+    .reaction-row .reaction-btn:nth-child(4) { transition-delay: 0.21s; }
 
     /* --- 導覽連結 hover 時底線輕輕滑入，取代單純變色，質感更細緻 --- */
     .nav-link { position: relative; }
@@ -877,8 +1035,13 @@
     .trait-item:hover .trait-value { color: var(--primary-color); }
 
     @media (prefers-reduced-motion: reduce) {
-      .about-story > .reveal, .trait-list .trait-item { transition-delay: 0s !important; }
-      .section-tag::after, .contact-item:hover .contact-item-hint { animation: none !important; }
+      .about-story > .reveal, .trait-list .trait-item,
+      .timeline-wrap .timeline-item, .friends-grid .friend-card,
+      .section-header > .section-title.reveal,
+      .footer-stats-row .footer-stat-chip, .footer-links-row .footer-text-btn,
+      .reaction-row .reaction-btn { transition-delay: 0s !important; }
+      .section-tag::after, .contact-item:hover .contact-item-hint,
+      .friend-card:hover .friend-card-hint, .timeline-item:hover .timeline-dot { animation: none !important; }
     }
 
     /* ==========================================================================
@@ -930,6 +1093,8 @@
     }
     .music-widget:hover { transform: scale(1.03); border-color: var(--primary-color); box-shadow: 0 6px 20px rgba(255,182,193,0.45); }
     .music-widget.playing { border-color: var(--primary-color); }
+    body.dark-mode .music-widget { background: rgba(58, 44, 63, 0.9); }
+    body.dark-mode .music-widget-label { color: var(--accent-color); }
     .vinyl-disc {
       width: 30px; height: 30px; background: #2c2230; border-radius: 50%; position: relative; flex-shrink: 0;
       border: 2px solid #55444d; box-shadow: inset 0 0 5px #000;
@@ -1287,6 +1452,21 @@
     .share-btn:hover { background: var(--primary-color); color: #fff; }
     body.dark-mode .share-btn { background: rgba(58, 44, 63, 0.9); color: var(--text-color); }
 
+    .random-jump-btn {
+      position: fixed; right: 22px; bottom: 194px; z-index: 59;
+      width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--card-border);
+      background: #fff; color: var(--primary-color); font-size: 1rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 16px rgba(255,182,193,0.3);
+      opacity: 0; transform: translateY(10px) scale(0.8); pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .random-jump-btn.show { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+    .random-jump-btn:hover { background: var(--primary-color); color: #fff; }
+    .random-jump-btn.spinning { animation: dice360 0.5s ease; }
+    @keyframes dice360 { to { transform: rotate(360deg); } }
+    body.dark-mode .random-jump-btn { background: rgba(58, 44, 63, 0.9); color: var(--text-color); }
+
     .onboard-tip {
       position: fixed; left: 84px; bottom: 30px; z-index: 61; max-width: 190px;
       background: #fff; border: 2px solid var(--card-border); border-radius: 14px 14px 14px 4px;
@@ -1297,9 +1477,28 @@
     }
     .onboard-tip.show { opacity: 1; transform: translateY(0) scale(1); }
 
+    .dot-nav {
+      position: fixed; right: 26px; top: 50%; transform: translateY(-50%); z-index: 58;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+    .dot-nav-item {
+      width: 10px; height: 10px; border-radius: 50%; background: var(--card-border);
+      display: block; position: relative; transition: all 0.3s;
+    }
+    .dot-nav-item::after {
+      content: attr(data-label); position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+      background: #3a2c3f; color: #f4e4ea; font-size: 0.72rem; padding: 4px 10px; border-radius: 8px;
+      white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    }
+    .dot-nav-item:hover::after { opacity: 1; }
+    body.dark-mode .dot-nav-item { background: rgba(255,182,193,0.35); }
+    .dot-nav-item.active { background: var(--primary-color); transform: scale(1.4); }
+    @media (max-width: 1200px) { .dot-nav { display: none; } }
+
     @media (max-width: 640px) {
       .share-btn { right: 12px; bottom: 84px; width: 38px; height: 38px; font-size: 0.95rem; }
       .onboard-tip { left: 12px; bottom: 60px; }
+      .random-jump-btn { display: none; }
     }
 
     @media print {
@@ -1364,10 +1563,77 @@
     /* 29 */ .music-bars { transition: opacity 0.3s; }
     /* 30 */ .contact-item, .trait-item, .footer-stat-chip { will-change: transform; }
 
+    /* ==========================================================================
+       23. 精選微互動 (精簡過，移除看不出效果的填充項目)
+       ========================================================================== */
+    .quote-refresh-btn:active { transform: rotate(360deg) scale(0.9); transition: transform 0.4s; }
+    .footer-text-btn { position: relative; }
+    .footer-text-btn::after { content:''; position:absolute; left:0; bottom:-2px; width:0; height:1px; background:var(--primary-color); transition: width 0.25s; }
+    .footer-text-btn:hover::after { width:100%; }
+    .help-panel-card li { animation: fadeSlideIn 0.35s ease both; }
+    .help-panel-card li:nth-child(1) { animation-delay: 0.05s; }
+    .help-panel-card li:nth-child(2) { animation-delay: 0.1s; }
+    .help-panel-card li:nth-child(3) { animation-delay: 0.15s; }
+    .help-panel-card li:nth-child(4) { animation-delay: 0.2s; }
+    .help-panel-card li:nth-child(5) { animation-delay: 0.25s; }
+    .help-panel-card h3 { animation: labelPop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) both; }
+    .offline-banner.show { animation: bannerWiggle 0.5s ease; }
+    @keyframes bannerWiggle { 0%, 100% { transform: translateY(0); } 25% { transform: translateY(2px); } 75% { transform: translateY(-2px); } }
+    #stayChip strong { animation: cutePulse 2.4s infinite alternate; }
+    .hero-grid > * { animation: fadeSlideIn 0.7s ease both; }
+    .hero-stage { animation-delay: 0.1s; }
+    .hero-contact-card { animation-delay: 0.25s; }
+    .contact-item:hover .contact-item-hint { animation: hintNudge 0.9s ease-in-out infinite; }
+    .footer-stat-chip:hover strong { animation: valuePop 0.3s ease; }
+    .help-panel-card { animation: cardSettle 0.35s ease; }
+    .fortune-close:hover { animation: iconWiggle 0.4s ease; }
+    .trait-item:hover { background: rgba(255,182,193,0.08); border-radius: 10px; }
+    .terminal-line:hover { background: rgba(255,182,193,0.08); }
+    .section-tag:hover { transform: scale(1.06); transition: transform 0.2s; }
+    .fortune-card-tag:hover { animation: jellyAnim 0.5s cubic-bezier(0.25, 1.5, 0.5, 1); }
+    .contact-item:hover .contact-item-value { color: var(--primary-color); }
+
+    @media (prefers-reduced-motion: reduce) {
+      .help-panel-card li, .help-panel-card h3, .hero-grid > *,
+      .offline-banner.show { animation: none !important; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .music-upload-btn, .music-widget:not(.playing):not(:hover) .vinyl-disc, .share-btn,
       .onboard-tip, .music-widget-label, .footer-stat-chip { animation: none !important; }
     }
+
+    /* ==========================================================================
+       24. 立體感強化動畫 (20+)
+       ========================================================================== */
+    .timeline-dot { box-shadow: 0 2px 0 rgba(0,0,0,0.15), 0 0 0 3px rgba(255,182,193,0.4); }
+    .timeline-content:hover { box-shadow: 0 2px 0 rgba(255,255,255,0.6) inset, 0 14px 28px rgba(255,182,193,0.28); }
+    .friend-card:active { transform: translateY(2px) scale(0.98); transition: transform 0.15s; }
+    .fortune-card-redraw {
+      box-shadow: 0 3px 0 rgba(222,82,102,0.2); transition: all 0.3s;
+    }
+    .fortune-card-redraw:active { transform: translateY(2px); box-shadow: 0 1px 0 rgba(222,82,102,0.2); }
+    .contact-item { box-shadow: 0 2px 0 rgba(255,255,255,0.7) inset, 0 4px 10px rgba(255,182,193,0.12); }
+    .contact-item:hover { box-shadow: 0 2px 0 rgba(255,255,255,0.7) inset, 0 8px 18px rgba(255,182,193,0.25); }
+    .trait-item:hover { box-shadow: 0 2px 6px rgba(255,182,193,0.15); }
+    .footer-stat-chip { box-shadow: 0 2px 0 rgba(255,255,255,0.6) inset, 0 4px 10px rgba(255,182,193,0.12); }
+    .reaction-btn { box-shadow: 0 2px 0 rgba(0,0,0,0.03); transition: all 0.25s; }
+    .reaction-btn:active { transform: translateY(2px) scale(0.95); box-shadow: none; }
+    .achievement-toast { box-shadow: 0 3px 0 rgba(222,82,102,0.15), 0 16px 34px rgba(255,182,193,0.4); }
+    .mascot-body { filter: drop-shadow(0 10px 12px rgba(201,66,85,0.35)); }
+    .vinyl-disc { box-shadow: inset 0 0 5px #000, 0 3px 6px rgba(0,0,0,0.3); }
+    .music-widget { box-shadow: 0 3px 0 rgba(0,0,0,0.05), 0 6px 16px rgba(255,182,193,0.35); }
+    .music-widget:hover { box-shadow: 0 5px 0 rgba(0,0,0,0.08), 0 12px 24px rgba(255,182,193,0.5); }
+    .friend-card-name { text-shadow: 0 1px 0 rgba(255,255,255,0.6); }
+    .hero-motto { box-shadow: 0 2px 0 rgba(255,255,255,0.7) inset, 0 4px 10px rgba(255,182,193,0.1); }
+    .achv-tooltip { box-shadow: 0 6px 14px rgba(0,0,0,0.25); }
+    .loader-bar { box-shadow: inset 0 2px 4px rgba(0,0,0,0.1); }
+    .contact-item-hint { text-shadow: 0 1px 0 rgba(255,255,255,0.5); }
+    .section-tag { box-shadow: 0 2px 0 rgba(0,0,0,0.08); }
+    .footer-text-btn:hover { text-shadow: 0 1px 0 rgba(255,255,255,0.5); }
+    .lang-toggle.active { box-shadow: 0 2px 0 rgba(0,0,0,0.15) inset; }
+    .dot-nav-item.active { box-shadow: 0 0 0 4px rgba(255,182,193,0.5), 0 2px 4px rgba(222,82,102,0.3); }
+    .random-jump-btn { box-shadow: 0 3px 0 rgba(0,0,0,0.05), 0 6px 16px rgba(255,182,193,0.3); }
 
     @media (prefers-reduced-motion: reduce) {
       .hero-motto, .about-lead, .trait-card-title, .section-desc, .feature-header-text h3,
@@ -1389,10 +1655,10 @@
     <div class="loader-content">
     <div class="loader-stage">
       <div class="loader-scene loader-scene--1">
-        <h1 style="font-size: 2.8rem; letter-spacing: 4px; margin: 0;">WELCOME 🌸</h1>
+        <h1 style="font-size: 2.8rem; letter-spacing: 4px; margin: 0;" data-en="WELCOME 🌸">WELCOME 🌸</h1>
       </div>
       <div class="loader-scene loader-scene--2">
-        <p style="line-height: 1.8; font-size: 1.2rem; font-weight: 600;">歡迎來到我的喵窩🌸<br>祝你能有個美好的一天 .w.</p>
+        <p style="line-height: 1.8; font-size: 1.2rem; font-weight: 600;" data-en-html="Welcome to my little nook 🌸&lt;br&gt;Hope you have a wonderful day .w.">歡迎來到我的喵窩🌸<br>祝你能有個美好的一天 .w.</p>
       </div>
       <div class="loader-scene loader-scene--3">
         <p style="font-size: 1.5rem; font-weight: 700; letter-spacing: 2px; color: var(--primary-color);">XiaoFeng 🌸</p>
@@ -1412,15 +1678,18 @@
     <div class="nav-inner">
       <a href="#" class="nav-brand"><span>MY.SPACE 🌸</span></a>
       <nav class="nav-links">
-        <a href="#about" class="nav-link">關於我</a>
-        <a href="#skills" class="nav-link">我的作品</a>
+        <a href="#about" class="nav-link" data-en="About">關於我</a>
+        <a href="#skills" class="nav-link" data-en="Projects">我的作品</a>
       </nav>
       <div class="nav-actions">
         <div class="nav-tools">
           <button type="button" class="theme-toggle" id="themeToggle" aria-label="切換日夜模式">🌙</button>
           <button type="button" class="sound-toggle" id="soundToggle" aria-label="切換音效">🔈</button>
+          <button type="button" class="font-toggle" id="fontDecrease" aria-label="縮小文字">A-</button>
+          <button type="button" class="font-toggle" id="fontIncrease" aria-label="放大文字">A+</button>
+          <button type="button" class="lang-toggle" id="langToggle" aria-label="切換語言">EN</button>
         </div>
-        <a href="https://discord.gg/HmA3quvtqp" target="_blank" rel="noopener" class="nav-cta">加入DC</a>
+        <a href="https://discord.gg/HmA3quvtqp" target="_blank" rel="noopener" class="nav-cta" data-en="Join DC">加入DC</a>
       </div>
     </div>
   </header>
@@ -1429,9 +1698,9 @@
     <section class="hero" id="hero">
       <div class="hero-grid">
         <div class="hero-stage">
-          <div class="hero-emoji-heartbeat" style="font-size: 3.8rem; margin-bottom: 15px; display:inline-block;">胡桃好可愛好可愛好可愛ㄚㄚㄚㄚㄚㄚ~</div>
-          <h1 class="hero-title" id="heroTitle">尼敖 我是一只曉風子</h1>
-          <p class="hero-motto">「願萬物名於微風中輕語 」</p>
+          <div class="hero-emoji-heartbeat" style="font-size: 3.8rem; margin-bottom: 15px; display:inline-block;" data-en="Hu Tao is so cute so cute so cuuuute~">胡桃好可愛好可愛好可愛ㄚㄚㄚㄚㄚㄚ~</div>
+          <h1 class="hero-title" id="heroTitle" data-en="Hey, I am XiaoFeng">尼敖 我是一只曉風子</h1>
+          <p class="hero-motto" data-en="May all things whisper gently in the breeze">「願萬物名於微風中輕語 」</p>
           <div>
             <a href="https://discord.gg/HmA3quvtqp" target="_blank" rel="noopener" class="btn btn-primary">這是我的DC群組💛</a>
           </div>
@@ -1439,7 +1708,7 @@
 
         <aside class="hero-contact-card" aria-label="快速聯絡名片">
           <div class="card-glare" aria-hidden="true"></div>
-          <p class="hero-card-title reveal">🌸 聯絡資訊 🌸</p>
+          <p class="hero-card-title reveal" data-en="🌸 Contact 🌸">🌸 聯絡資訊 🌸</p>
           <div class="hero-card-content">
             <div class="hero-status-bar reveal">
               <span class="hero-status-left" id="moodLeft" data-original="好想嚕貓😺">好想嚕貓😺</span>
@@ -1448,14 +1717,14 @@
 
             <div class="contact-grid">
               <button type="button" class="contact-item reveal" data-copy="XiaoFeng_627">
-                <span class="contact-item-label">Discord 帳號 (點擊複製)</span>
+                <span class="contact-item-label" data-en="Discord (click to copy)">Discord 帳號 (點擊複製)</span>
                 <span class="contact-item-value">XiaoFeng_627</span>
                 <span class="contact-item-hint">點擊複製 🌸</span>
                 <span class="copy-feedback">已複製 🌸</span>
               </button>
 
               <button type="button" class="contact-item reveal" data-copy="https://www.instagram.com/future_627/">
-                <span class="contact-item-label">Instagram (點擊複製連結)</span>
+                <span class="contact-item-label" data-en="Instagram (click to copy)">Instagram (點擊複製連結)</span>
                 <span class="contact-item-value">Future_627</span>
                 <span class="contact-item-hint">點擊複製 🌸</span>
                 <span class="copy-feedback">已複製 🌸</span>
@@ -1471,7 +1740,7 @@
         
         <div class="about-story-card spin-target">
           <span class="section-tag reveal">About Me 🌸</span>
-          <h2 class="about-title reveal">認識我<br><span>「以曉之光，照亮生命。以風之息，吹散陰霾」</span></h2>
+          <h2 class="about-title reveal" data-en-html="About Me<br><span>&#12300;With Xiao's light, illuminate life. With Feng's breath, blow away the clouds.&#12301;</span>">認識我<br><span>「以曉之光，照亮生命。以風之息，吹散陰霾」</span></h2>
 
           <blockquote class="about-pull-quote reveal">
             <p class="about-typewriter-line">
@@ -1481,48 +1750,53 @@
           </blockquote>
 
           <div class="about-story">
-            <p class="about-lead reveal">
+            <p class="about-lead reveal" data-en-html="Welcome to my little page, I&#39;m XiaoFeng, a lazy bum with a five-minute attention span 🌸&lt;br&gt;Here you&#39;ll find my basic info and the DC bot I&#39;m building!">
               歡迎你來到這個網頁，我是曉風，一個只有三分鐘熱度的廢人 🌸<br>
               在這裡你能得到我的基本資訊以及我正在開發中的DC 機器人！
             </p>
 
             <div class="reveal">
-              <span class="about-chapter-label">興趣愛好 📑</span>
-              <p>閒暇時光會看小說、日漫...等 ✨<br>平常喜歡打遊戲和舒服地睡覺 zZ</p>
+              <span class="about-chapter-label" data-en="Hobbies 📑">興趣愛好 📑</span>
+              <p data-en-html="In my free time I read novels, watch anime, etc ✨&lt;br&gt;Usually I like gaming and comfy naps zZ&lt;br&gt;Also love listening to JPOP">閒暇時光會看小說、日漫...等 ✨<br>平常喜歡打遊戲和舒服地睡覺 zZ<br>也喜歡聽JPOP</p>
             </div>
 
             <div class="game-list reveal">
-              <span class="about-chapter-label">遊戲資訊 🎮</span>
+              <span class="about-chapter-label" data-en="Games 🎮">遊戲資訊 🎮</span>
               <p style="line-height: 1.9;">
-                <strong>Roblox：</strong><code>@max59487ya</code> 不知道要幹啥的時候會打開來玩<br>
-                <strong>Valorant：</strong><code>一只曉風子丨XiaoFeng#胡桃我婆</code> <span style="color: var(--text-muted); font-size:0.95rem;">(黑鐵小新手，只有在朋友找我時才會打開喵)</span><br>
-                <strong>原神：</strong><code>881710840</code> 千音雅集玩家 🌸<br>
-                <strong>麥塊：</strong><code>XiaoFeng_627</code> 正在努力學習生電的萌新，養老人 🌾
+                <strong>Roblox：</strong><code>@max59487ya</code> <span data-en="Open it when bored">不知道要幹啥的時候會打開來玩</span><br>
+                <strong>Valorant：</strong><code>一只曉風子丨XiaoFeng#胡桃我婆</code> <span style="color: var(--text-muted); font-size:0.95rem;" data-en="(Iron-rank newbie, only play when friends ask)">(黑鐵小新手，只有在朋友找我時才會打開喵)</span><br>
+                <strong>原神：</strong><code>881710840</code> <span data-en="Qianyin Yaji server player 🌸">千音雅集玩家 🌸</span><br>
+                <strong>麥塊：</strong><code>XiaoFeng_627</code> <span data-en="A newbie learning redstone, chilling on a laid-back server 🌾">正在努力學習生電的萌新，養老人 🌾</span>
               </p>
             </div>
           </div>
 
           <div class="about-meta-row reveal">
-            <span>Gamer 🎮</span>
+            <span data-en="Gamer 🎮">Gamer 🎮</span>
             <span class="about-meta-dot" aria-hidden="true"></span>
-            <span>二次元 🌸</span>
+            <span data-en="Anime Fan 🌸">二次元 🌸</span>
             <span class="about-meta-dot" aria-hidden="true"></span>
-            <span>Taiwan 👑</span>
+            <span data-en="Taiwan 👑">Taiwan 👑</span>
           </div>
         </div>
 
         <aside class="profile-trait-card spin-target">
           <div class="card-glare" aria-hidden="true"></div>
-          <h3 class="trait-card-title reveal">🌸 個人特質 🌸</h3>
+          <h3 class="trait-card-title reveal" data-en="🌸 Profile 🌸">🌸 個人特質 🌸</h3>
           <div class="trait-list">
-            <div class="trait-item reveal"><span class="trait-key">暱稱</span><span class="trait-value">一只曉風子 XiaoFeng</span></div>
-            <div class="trait-item reveal"><span class="trait-key">性別</span><span class="trait-value" style="color: var(--accent-color);">男(娘) 🥵</span></div>
-            <div class="trait-item reveal"><span class="trait-key">年齡</span><span class="trait-value">剛滿3歲.w.</span></div>
-            <div class="trait-item reveal"><span class="trait-key">生日</span><span class="trait-value">0627 ♋</span></div>
-            <div class="trait-item reveal"><span class="trait-key">星座</span><span class="trait-value">巨蟹座</span></div>
-            <div class="trait-item reveal"><span class="trait-key">專長</span><span class="trait-value">鋼琴，哄小孩(?</span></div>
-            <div class="trait-item reveal"><span class="trait-key">老婆</span><span class="trait-value" style="color: var(--primary-color); background: #ffeef1; padding: 2px 8px; border-radius: 8px;">🔥 胡桃 </span></div>
-            <div class="trait-item reveal"><span class="trait-key">身分</span><span class="trait-value">高中生</span></div>
+            <div class="trait-item reveal"><span class="trait-key" data-en="Nickname">暱稱</span><span class="trait-value" data-en="XiaoFeng">一只曉風子 XiaoFeng</span></div>
+            <div class="trait-item reveal"><span class="trait-key" data-en="Gender">性別</span><span class="trait-value" style="color: var(--accent-color);" data-en="Male (femboy) 🥵">男(娘) 🥵</span></div>
+            <div class="trait-item reveal"><span class="trait-key" data-en="Age">年齡</span><span class="trait-value" data-en="Just turned 3 .w.">剛滿3歲.w.</span></div>
+            <div class="trait-item reveal"><span class="trait-key" data-en="Birthday">生日</span><span class="trait-value">0627 ♋</span></div>
+            <div class="trait-item reveal"><span class="trait-key" data-en="Zodiac">星座</span><span class="trait-value" data-en="Cancer">巨蟹座</span></div>
+            <div class="trait-item reveal"><span class="trait-key" data-en="Skills">專長</span><span class="trait-value" data-en="Piano, soothing kids (?">鋼琴，哄小孩(?</span></div>
+            <div class="trait-item reveal"><span class="trait-key" data-en="Waifu">老婆</span><span class="trait-value" style="color: var(--primary-color); background: #ffeef1; padding: 2px 8px; border-radius: 8px;" data-en="🔥 Hu Tao ">🔥 胡桃 </span></div>
+            <div class="trait-item reveal"><span class="trait-key" data-en="Status">身分</span><span class="trait-value" data-en="High Schooler">高中生</span></div>
+            <div class="trait-item reveal"><span class="trait-key">MBTI</span><span class="trait-value">INFP</span></div>
+            <div class="trait-item reveal"><span class="trait-key" data-en="Favorite Anime">主推動漫</span><span class="trait-value" data-en="No Game No Life">遊戲人生</span></div>
+            <div class="trait-item reveal"><span class="trait-key" data-en="Blood Type">血型</span><span class="trait-value" data-en="Type A">A型</span></div>
+            <div class="trait-item reveal"><span class="trait-key" data-en="Personality">個性</span><span class="trait-value" data-en="Abstract Vibes">抽象人</span></div>
+            <div class="trait-item reveal"><span class="trait-key" data-en="Relationship">感情狀態</span><span class="trait-value" data-en="Forever Single">母胎單身</span></div>
           </div>
         </aside>
 
@@ -1532,8 +1806,8 @@
     <section class="section" id="skills">
       <div class="section-header">
         <span class="section-tag reveal">My Projects 🌸</span>
-        <h2 class="section-title reveal">一些小東西</h2>
-        <p class="section-desc reveal">正在努力讓她變得更好 ✨</p>
+        <h2 class="section-title reveal" data-en="Little Projects">一些小東西</h2>
+        <p class="section-desc reveal" data-en="Working hard to make her better ✨">正在努力讓她變得更好 ✨</p>
       </div>
       
       <div class="feature-showcase-box tilt-card spin-target" id="tiltCard">
@@ -1543,8 +1817,8 @@
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#de5266" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.5 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
           </div>
           <div class="feature-header-text">
-            <h3>DC BOT</h3>
-            <p>正在努力讓她變得更好</p>
+            <h3 data-en="DC BOT">DC BOT</h3>
+            <p data-en="Working hard to make her better">正在努力讓她變得更好</p>
           </div>
         </div>
 
@@ -1552,41 +1826,129 @@
           <div class="terminal-scanline" aria-hidden="true"></div>
           <div class="terminal-header"> Hubuki_Bot_System ~ Core.log (HuTao Edition)</div>
           <div class="terminal-screen" id="terminalScreen">
-            <p class="terminal-line"><span class="t-gray">[System]</span> <span class="t-white">「太陽出來我曬太陽，月亮出來我曬月亮囉~」</span></p>
-            <p class="terminal-line"><span class="t-green">✔ 休比機器人已更新到V6.0.0 </span></p>
-            <p class="terminal-line"><span class="t-gray">[Status]</span> <span style="color: #ff94a4;">等待召喚中...  嗷！</span></p>
+            <p class="terminal-line"><span class="t-gray">[System]</span> <span class="t-white" data-en="&#12300;Sun&#39;s out, I bask in it. Moon&#39;s out, I bask in that too~&#12301;">「太陽出來我曬太陽，月亮出來我曬月亮囉~」</span></p>
+            <p class="terminal-line"><span class="t-green" data-en="✔ Hubuki Bot updated to V6.0.0 ">✔ 休比機器人已更新到V6.0.0 </span></p>
+            <p class="terminal-line"><span class="t-gray">[Status]</span> <span style="color: #ff94a4;" data-en="Awaiting summon... Ow!">等待召喚中...  嗷！</span></p>
           </div>
         </div>
 
         <div style="text-align: center;" class="reveal">
           <a href="https://discord.com/oauth2/authorize?client_id=1472251542156611777&permissions=8&response_type=code&redirect_uri=https%3A%2F%2Ffuture-627.github.io%2F67%2F&integration_type=0&scope=bot+voice+messages.read+applications.commands">
-            🤖 點此邀請「休比機器人」加入伺服器 
+            <span data-en="🤖 Click to invite Hubuki Bot to your server">🤖 點此邀請「休比機器人」加入伺服器</span> 
           </a>
         </div>
+      </div>
+    </section>
+
+    <section class="section" id="milestones">
+      <div class="section-header">
+        <span class="section-tag reveal">Timeline 🌸</span>
+        <h2 class="section-title reveal" data-en="Milestones">小小里程碑</h2>
+      </div>
+      <div class="timeline-wrap">
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">2/15</span>
+            <p class="timeline-text" data-en="DC Bot development started, still ongoing">DC Bot 開始創作，持續更新中</p>
+          </div>
+        </div>
+        <div class="timeline-item reveal">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <span class="timeline-date">7/15</span>
+            <p class="timeline-text" data-en="Site launched, still being updated">網站架設完成，持續更新中</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="friends">
+      <div class="section-header">
+        <span class="section-tag reveal">Friends 🌸</span>
+        <h2 class="section-title reveal" data-en="Friends">朋友連結</h2>
+      </div>
+      <div class="friends-grid">
+        <a href="https://r4q8.github.io/introduce/" target="_blank" rel="noopener" class="friend-card reveal">
+          <span class="friend-card-name">r4q8</span>
+          <span class="friend-card-hint" data-en="Visit →">前往看看 →</span>
+        </a>
+        <a href="https://discord.gg/TJuYmXvc8F" target="_blank" rel="noopener" class="friend-card reveal">
+          <span class="friend-card-name">yozi</span>
+          <span class="friend-card-hint" data-en="Visit →">前往看看 →</span>
+        </a>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
-    <div class="footer-divider"><span>🌸</span></div>
-    <div class="footer-quote-box">
-      <span class="footer-quote-label">曉風的碎碎念</span>
-      <p class="footer-quote-text" id="footerQuote">歡迎常常回來找我玩喔</p>
+    <div class="footer-divider reveal"><span>🌸</span></div>
+    <div class="footer-quote-box reveal">
+      <span class="footer-quote-label" data-en="XiaoFeng's Thoughts">曉風的碎碎念</span>
+      <p class="footer-quote-text" id="footerQuote" data-en="Come back and hang out anytime">歡迎常常回來找我玩喔</p>
+      <button type="button" class="quote-refresh-btn" id="quoteRefreshBtn" aria-label="換一句話">🔄</button>
     </div>
     <div class="footer-stats-row">
-      <span class="footer-stat-chip" id="clockChip">現在時間 <strong id="clockValue">--:--</strong></span>
-      <span class="footer-stat-chip" id="visitChip">這是你第 <strong id="visitCount">1</strong> 次來找我玩</span>
-      <span class="footer-stat-chip" id="daysChip">小窩已經開張 <strong id="daysCount">0</strong> 天了</span>
-      <span class="footer-stat-chip has-tip" id="achvChip">已解鎖成就 <strong id="achvCount">0</strong> 個
-        <span class="achv-tooltip" id="achvTooltip">還沒解鎖任何成就，多逛逛看看吧</span>
+      <span class="footer-stat-chip reveal" id="clockChip"><span data-en="Now">現在時間</span> <strong id="clockValue">--:--</strong></span>
+      <span class="footer-stat-chip reveal" id="visitChip"><span data-en="Visit #">這是你第</span> <strong id="visitCount">1</strong> <span data-en="">次來找我玩</span></span>
+      <span class="footer-stat-chip reveal" id="daysChip"><span data-en="Site age:">小窩已經開張</span> <strong id="daysCount">0</strong> <span data-en="days">天了</span></span>
+      <span class="footer-stat-chip has-tip reveal" id="achvChip"><span data-en="Achievements:">已解鎖成就</span> <strong id="achvCount">0</strong> <span data-en="unlocked">個</span>
+        <span class="achv-tooltip" id="achvTooltip" data-en="No achievements unlocked yet, keep exploring!">還沒解鎖任何成就，多逛逛看看吧</span>
       </span>
+      <span class="footer-stat-chip reveal" id="stayChip"><span data-en="Time here:">已經待了</span> <strong id="stayTime">0秒</strong></span>
     </div>
-    <p class="footer-signoff">用心經營的小小角落，謝謝你看到這裡 🌸</p>
+    <div class="footer-links-row">
+      <button type="button" class="footer-text-btn reveal" id="copyInviteBtn" data-en="Copy Discord Invite">複製DC邀請連結</button>
+      <a class="footer-text-btn reveal" href="mailto:?subject=給曉風的小建議&body=想跟你說..." data-en="Feedback">意見回饋</a>
+      <button type="button" class="footer-text-btn reveal" id="helpBtn" data-en="Easter Eggs &amp; Shortcuts">彩蛋與快捷鍵一覽</button>
+      <button type="button" class="footer-text-btn reveal" id="changelogBtn" data-en="Changelog">更新日誌</button>
+    </div>
+    <div class="reaction-row" id="reactionRow">
+      <button type="button" class="reaction-btn reveal" data-emoji="🌸">🌸 <span>0</span></button>
+      <button type="button" class="reaction-btn reveal" data-emoji="💕">💕 <span>0</span></button>
+      <button type="button" class="reaction-btn reveal" data-emoji="😆">😆 <span>0</span></button>
+      <button type="button" class="reaction-btn reveal" data-emoji="😢">😢 <span>0</span></button>
+    </div>
+    <p class="footer-signoff reveal" data-en="A little corner made with care, thanks for stopping by 🌸">用心經營的小小角落，謝謝你看到這裡 🌸</p>
+    <p class="footer-version">v2.1 · 持續施工中</p>
   </footer>
+
+  <div class="help-panel" id="helpPanel">
+    <div class="help-panel-card">
+      <button type="button" class="fortune-close" id="helpClose" aria-label="關閉">×</button>
+      <h3 data-en="Little Guidebook 🌸">小小說明書 🌸</h3>
+      <ul>
+        <li data-en-html="Shortcuts: &lt;code&gt;M&lt;/code&gt; Music &lt;code&gt;D&lt;/code&gt; Dark mode &lt;code&gt;F&lt;/code&gt; Fortune slip">快捷鍵：<code>M</code> 音樂　<code>D</code> 日夜模式　<code>F</code> 心情籤</li>
+        <li data-en-html="Type &lt;code&gt;hutao&lt;/code&gt; for a little surprise">打出 <code>hutao</code> 會有小驚喜</li>
+        <li data-en="The arrow keys &quot;up up down down&quot; hide an egg too">方向鍵「上上下下」也藏著彩蛋喔</li>
+        <li data-en="Poke the mascot in the corner, keep poking for different reactions">戳一戳右下角的吉祥物，多戳幾次會有不同反應</li>
+        <li data-en="Double-click the mascot for a special response">雙擊吉祥物會有特別回應</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="help-panel" id="changelogPanel">
+    <div class="help-panel-card changelog-card">
+      <button type="button" class="fortune-close" id="changelogClose" aria-label="關閉">×</button>
+      <h3 data-en="Changelog 🌸">更新日誌 🌸</h3>
+      <ul class="changelog-list" id="changelogList"></ul>
+    </div>
+  </div>
+
+  <div class="offline-banner" id="offlineBanner" data-en="📡 Looks like you&#39;re offline">📡 目前似乎沒有網路連線</div>
 
   <button type="button" class="back-to-top" id="backToTop" aria-label="回到頂部">↑</button>
   <button type="button" class="share-btn" id="shareBtn" aria-label="分享這個頁面">🔗</button>
-  <div class="onboard-tip" id="onboardTip">左下角可以抽張心情籤試試看喔 🍡</div>
+  <button type="button" class="random-jump-btn" id="randomJumpBtn" aria-label="隨機逛逛">🎲</button>
+  <div class="onboard-tip" id="onboardTip" data-en="Try drawing a fortune slip in the bottom-left 🍡">左下角可以抽張心情籤試試看喔 🍡</div>
+
+  <nav class="dot-nav" id="dotNav" aria-label="章節導覽">
+    <a href="#hero" class="dot-nav-item" data-label="首頁" data-label-en="Home"></a>
+    <a href="#about" class="dot-nav-item" data-label="關於我" data-label-en="About"></a>
+    <a href="#skills" class="dot-nav-item" data-label="我的作品" data-label-en="Projects"></a>
+    <a href="#milestones" class="dot-nav-item" data-label="里程碑" data-label-en="Milestones"></a>
+    <a href="#friends" class="dot-nav-item" data-label="朋友連結" data-label-en="Friends"></a>
+  </nav>
 
   <!--
     黑膠唱片音樂小工具：
@@ -1602,12 +1964,12 @@
     <div class="vinyl-disc"></div>
     <span class="music-widget-label" id="musicLabel">選擇音樂</span>
     <div class="music-bars" aria-hidden="true"><span></span><span></span><span></span></div>
-    <button type="button" class="music-upload-btn" id="musicUploadBtn" aria-label="自訂音樂檔案">🎵＋</button>
+    <button type="button" class="music-upload-btn" id="musicUploadBtn" aria-label="自訂音樂檔案" title="從電腦選一首歌試聽，重新整理頁面後會失效">🎵＋</button>
   </div>
 
   <div class="mascot-wrap" id="mascotWrap" role="button" tabindex="0" aria-label="點一下可愛小吉祥物">
     <div class="mascot-zzz">Zzz...</div>
-    <div class="mascot-bubble" id="mascotBubble">嗨嗨 🌸</div>
+    <div class="mascot-bubble" id="mascotBubble" data-en="Hi hi 🌸">嗨嗨 🌸</div>
     <div class="mascot-body" id="mascotBody">
       <svg viewBox="0 0 100 100" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
         <defs>
@@ -1646,17 +2008,17 @@
   </div>
 
   <button type="button" class="fortune-btn" id="fortuneBtn">
-    <span class="fortune-icon">🍡<span class="dango-steam" aria-hidden="true">~</span></span> 抽張心情籤
+    <span class="fortune-icon">🍡<span class="dango-steam" aria-hidden="true">~</span></span> <span data-en="Draw a Fortune">抽張心情籤</span>
   </button>
 
   <div class="fortune-overlay" id="fortuneOverlay">
     <div class="fortune-card" id="fortuneCard">
       <button type="button" class="fortune-close" id="fortuneClose" aria-label="關閉">×</button>
-      <span class="fortune-card-tag">今日籤詩 🏵️</span>
-      <p class="fortune-card-text" id="fortuneText">點一下抽籤按鈕試試看喵～</p>
-      <p class="fortune-card-hint">— 曉風的喵窩籤筒 —</p>
+      <span class="fortune-card-tag" data-en="Today&#39;s Fortune 🏵️">今日籤詩 🏵️</span>
+      <p class="fortune-card-text" id="fortuneText" data-en="Tap the draw button to try~">點一下抽籤按鈕試試看喵～</p>
+      <p class="fortune-card-hint" data-en="— XiaoFeng&#39;s Fortune Jar —">— 曉風的喵窩籤筒 —</p>
       <p class="fortune-last-tag" id="fortuneLastTag"></p>
-      <button type="button" class="fortune-card-redraw" id="fortuneRedraw">再抽一次 🌸</button>
+      <button type="button" class="fortune-card-redraw" id="fortuneRedraw" data-en="Draw Again 🌸">再抽一次 🌸</button>
     </div>
   </div>
 
@@ -1853,6 +2215,10 @@
         '嗨嗨 🌸', '今天也要元氣滿滿喔 .w.', '記得多喝水喵～', '歡迎逛逛我的小窩 ',
         '要不要抽張籤詩看看？🍡', '按左下角有小驚喜喔', '謝謝你來找我玩 ✨', '晚安要早點睡覺喔 zZ'
       ];
+      const mascotLinesEn = [
+        'Hi hi 🌸', 'Stay energetic today .w.', 'Remember to drink water~', 'Welcome to my little nook ',
+        'Wanna draw a fortune slip? 🍡', 'There is a small surprise in the corner', 'Thanks for stopping by ✨', 'Sleep early tonight zZ'
+      ];
       let mascotTimer = null;
       function showMascotLine(text) {
         mascotBubble.textContent = text;
@@ -1861,7 +2227,10 @@
         mascotTimer = setTimeout(() => mascotBubble.classList.remove('show'), 2400);
       }
       if (mascotWrap) {
-        const triggerMascot = () => showMascotLine(mascotLines[Math.floor(Math.random() * mascotLines.length)]);
+        const triggerMascot = () => {
+          const pool = (typeof isEnglish !== 'undefined' && isEnglish) ? mascotLinesEn : mascotLines;
+          showMascotLine(pool[Math.floor(Math.random() * pool.length)]);
+        };
         mascotWrap.addEventListener('click', triggerMascot);
         mascotWrap.addEventListener('dblclick', (e) => {
           const hearts = ['💕', '🩷', '💗'];
@@ -1912,6 +2281,18 @@
         '記得抬頭看看月亮，它也在看你喔 🌙',
         '今天說不定會有好事發生喵～'
       ];
+      const fortuneLinesEn = [
+        'Today is a great day to relax and do nothing 🍡',
+        'A little inconsistency is fine, happiness matters most 🌸',
+        'A little cat will pass by you, remember to pet it 😺',
+        'Your games will go smoothly, no bad teammates (probably) 🎮',
+        'Sleep early tonight, tomorrow-you will thank you zZ',
+        'A gentle breeze passes wherever you are 🌸',
+        'Today is a good day to treat yourself to something sweet 🍡',
+        'Taking it slow is okay, you are already doing great 🌷',
+        'Look up at the moon, it is watching you too 🌙',
+        'Something good might happen today~'
+      ];
       let fortuneDrawCount = 0;
       const fortuneLastTag = document.getElementById('fortuneLastTag');
       try {
@@ -1920,7 +2301,9 @@
       } catch (err) {}
       const fortuneCardEl = document.getElementById('fortuneCard');
       function drawFortune() {
-        const pick = fortuneLines[Math.floor(Math.random() * fortuneLines.length)];
+        const lang = (typeof isEnglish !== 'undefined' && isEnglish) ? 'en' : 'zh';
+        const pool = lang === 'en' ? fortuneLinesEn : fortuneLines;
+        const pick = pool[Math.floor(Math.random() * pool.length)];
         if (fortuneCardEl) {
           fortuneCardEl.classList.remove('shake');
           void fortuneCardEl.offsetWidth;
@@ -1929,9 +2312,9 @@
         setTimeout(() => { fortuneText.textContent = pick; }, 220);
         fortuneDrawCount++;
         try { localStorage.setItem('xiaofeng_last_fortune', pick); } catch (err) {}
-        if (fortuneLastTag) fortuneLastTag.textContent = `上次抽到：${pick}`;
-        if (fortuneDrawCount === 1) showAchievement('初次抽籤 🍡');
-        if (fortuneDrawCount === 5) showAchievement('籤筒常客 🌸');
+        if (fortuneLastTag) fortuneLastTag.textContent = (lang === 'en' ? 'Last draw: ' : '上次抽到：') + pick;
+        if (fortuneDrawCount === 1) showAchievement(lang === 'en' ? 'First Fortune 🍡' : '初次抽籤 🍡');
+        if (fortuneDrawCount === 5) showAchievement(lang === 'en' ? 'Fortune Regular 🌸' : '籤筒常客 🌸');
       }
       if (fortuneBtn && fortuneOverlay) {
         fortuneBtn.addEventListener('click', () => {
@@ -2029,13 +2412,18 @@
         moodLeft: ['好想嚕貓😺', '有點想睡覺😴', '在偷偷放空💭', '想吃甜點🍡'],
         moodRight: ['吃飽躺平😋', '正在耍廢🌸', '元氣滿滿✨', '在聽音樂🎵']
       };
+      const moodSetsEn = {
+        moodLeft: ['Wanna pet a cat😺', 'A little sleepy😴', 'Secretly zoning out💭', 'Craving dessert🍡'],
+        moodRight: ['Full and lazy😋', 'Being a slacker🌸', 'Full of energy✨', 'Listening to music🎵']
+      };
       ['moodLeft', 'moodRight'].forEach(id => {
         const el = document.getElementById(id);
         if (!el) return;
         let idx = 0;
         el.addEventListener('click', () => {
           idx = (idx + 1) % moodSets[id].length;
-          el.textContent = moodSets[id][idx];
+          const sets = (typeof isEnglish !== 'undefined' && isEnglish) ? moodSetsEn : moodSets;
+          el.textContent = sets[id][idx];
         });
       });
 
@@ -2118,13 +2506,21 @@
         '如果喜歡這裡，記得加入DC群組聊聊天 💛',
         '謝謝你花時間看完這個小小的自我介紹 🌸'
       ];
+      const footerQuoteLinesEn = [
+        'Come back and hang out anytime 🌸',
+        'Every visit makes this little place a bit livelier ✨',
+        'Take your time, no rush 🍡',
+        'If you like it here, join my Discord and say hi 💛',
+        'Thanks for taking the time to read this little intro 🌸'
+      ];
       if (footerQuote) {
         let quoteIdx = 0;
         setInterval(() => {
-          quoteIdx = (quoteIdx + 1) % footerQuoteLines.length;
+          const pool = (typeof isEnglish !== 'undefined' && isEnglish) ? footerQuoteLinesEn : footerQuoteLines;
+          quoteIdx = (quoteIdx + 1) % pool.length;
           footerQuote.style.opacity = '0';
           setTimeout(() => {
-            footerQuote.textContent = footerQuoteLines[quoteIdx];
+            footerQuote.textContent = pool[quoteIdx];
             footerQuote.style.opacity = '1';
           }, 400);
         }, 4200);
@@ -2216,7 +2612,14 @@
 
       const loaderTip = document.getElementById('loaderTip');
       if (loaderTip) {
-        const tips = [
+        let tipLangEn = false;
+        try { tipLangEn = localStorage.getItem('xiaofeng_lang') === 'en'; } catch (err) {}
+        const tips = tipLangEn ? [
+          'Tip: try poking the mascot in the corner',
+          'Tip: draw a fortune slip in the bottom-left',
+          'Tip: try typing hutao on the page',
+          'Tip: hover the title text for a surprise'
+        ] : [
           '小提示：右下角的吉祥物戳戳看喵',
           '小提示：左下角可以抽張心情籤',
           '小提示：試著在頁面上打出 hutao 看看',
@@ -2233,11 +2636,12 @@
       let achievementQueue = [];
       let achievementShowing = false;
       let unlockedAchievements = [];
+      const TOTAL_ACHIEVEMENTS = 14;
       try {
         unlockedAchievements = JSON.parse(localStorage.getItem('xiaofeng_achievements') || '[]');
       } catch (err) { unlockedAchievements = []; }
       function refreshAchievementDisplay() {
-        if (achvCountEl) achvCountEl.textContent = unlockedAchievements.length;
+        if (achvCountEl) achvCountEl.textContent = unlockedAchievements.length + ' / ' + TOTAL_ACHIEVEMENTS;
         if (achvTooltipEl) {
           achvTooltipEl.textContent = unlockedAchievements.length
             ? unlockedAchievements.join('、')
@@ -2262,11 +2666,32 @@
           }, 300);
         }, 2200);
       }
+      function celebrateFullUnlock() {
+        for (let i = 0; i < 50; i++) {
+          setTimeout(() => {
+            const p = document.createElement('div');
+            p.className = 'bg-particle';
+            p.textContent = ['🌸', '🏵️', '✨'][Math.floor(Math.random() * 3)];
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.bottom = '-40px';
+            p.style.fontSize = (Math.random() * 16 + 14) + 'px';
+            p.style.animationDuration = (Math.random() * 4 + 5) + 's';
+            document.getElementById('particle-container').appendChild(p);
+            setTimeout(() => p.remove(), 10000);
+          }, i * 40);
+        }
+      }
       function showAchievement(text) {
         if (!unlockedAchievements.includes(text)) {
           unlockedAchievements.push(text);
           try { localStorage.setItem('xiaofeng_achievements', JSON.stringify(unlockedAchievements)); } catch (err) {}
           refreshAchievementDisplay();
+          if (unlockedAchievements.length === TOTAL_ACHIEVEMENTS) {
+            setTimeout(() => {
+              showAchievement('全成就達成 🎉');
+              celebrateFullUnlock();
+            }, 2600);
+          }
         }
         achievementQueue.push(text);
         processAchievementQueue();
@@ -2668,6 +3093,222 @@
           }
         });
       });
+
+      // --- 語錄手動刷新按鈕 ---
+      const quoteRefreshBtn = document.getElementById('quoteRefreshBtn');
+      if (quoteRefreshBtn && typeof footerQuoteLines !== 'undefined') {
+        quoteRefreshBtn.addEventListener('click', () => {
+          const pool = (typeof isEnglish !== 'undefined' && isEnglish) ? footerQuoteLinesEn : footerQuoteLines;
+          const pick = pool[Math.floor(Math.random() * pool.length)];
+          const el = document.getElementById('footerQuote');
+          if (el) { el.style.opacity = '0'; setTimeout(() => { el.textContent = pick; el.style.opacity = '1'; }, 300); }
+        });
+      }
+
+      // --- 複製DC邀請連結 ---
+      const copyInviteBtn = document.getElementById('copyInviteBtn');
+      if (copyInviteBtn) {
+        copyInviteBtn.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText('https://discord.gg/HmA3quvtqp');
+            showAchievement('邀請連結已複製 💛');
+          } catch (err) {}
+        });
+      }
+
+      // --- 說明面板：彩蛋與快捷鍵一覽 ---
+      const helpBtn = document.getElementById('helpBtn');
+      const helpPanel = document.getElementById('helpPanel');
+      const helpClose = document.getElementById('helpClose');
+      if (helpBtn && helpPanel) {
+        helpBtn.addEventListener('click', () => helpPanel.classList.add('open'));
+        helpClose?.addEventListener('click', () => helpPanel.classList.remove('open'));
+        helpPanel.addEventListener('click', (e) => { if (e.target === helpPanel) helpPanel.classList.remove('open'); });
+      }
+
+      // --- 更新日誌：想新增紀錄，直接在下面陣列加一行就好 ---
+      const changelogEntries = [
+        { date: '2/15', text: 'DC Bot 開始創作' },
+        { date: '7/15', text: '網站正式架設完成' },
+        { date: '持續', text: '陸續新增互動小工具、音樂播放器與各種小彩蛋，之後想到什麼會再補上來～' }
+      ];
+      const changelogBtn = document.getElementById('changelogBtn');
+      const changelogPanel = document.getElementById('changelogPanel');
+      const changelogClose = document.getElementById('changelogClose');
+      const changelogList = document.getElementById('changelogList');
+      if (changelogList) {
+        changelogEntries.forEach(entry => {
+          const li = document.createElement('li');
+          li.innerHTML = `<span class="changelog-date">${entry.date}</span>${entry.text}`;
+          changelogList.appendChild(li);
+        });
+      }
+      if (changelogBtn && changelogPanel) {
+        changelogBtn.addEventListener('click', () => changelogPanel.classList.add('open'));
+        changelogClose?.addEventListener('click', () => changelogPanel.classList.remove('open'));
+        changelogPanel.addEventListener('click', (e) => { if (e.target === changelogPanel) changelogPanel.classList.remove('open'); });
+      }
+
+      // --- 文字大小調整，記住偏好 ---
+      let fontScale = 1;
+      try { fontScale = parseFloat(localStorage.getItem('xiaofeng_font_scale') || '1'); } catch (err) {}
+      function applyFontScale() { document.documentElement.style.fontSize = (fontScale * 100) + '%'; }
+      applyFontScale();
+      document.getElementById('fontIncrease')?.addEventListener('click', () => {
+        fontScale = Math.min(1.3, fontScale + 0.1);
+        applyFontScale();
+        try { localStorage.setItem('xiaofeng_font_scale', fontScale); } catch (err) {}
+      });
+      document.getElementById('fontDecrease')?.addEventListener('click', () => {
+        fontScale = Math.max(0.85, fontScale - 0.1);
+        applyFontScale();
+        try { localStorage.setItem('xiaofeng_font_scale', fontScale); } catch (err) {}
+      });
+
+      // --- 英文模式：切換所有標記 data-en / data-en-html 的元素文字 ---
+      const langToggle = document.getElementById('langToggle');
+      let isEnglish = false;
+      try { isEnglish = localStorage.getItem('xiaofeng_lang') === 'en'; } catch (err) {}
+      function applyLang() {
+        document.querySelectorAll('[data-en]').forEach(el => {
+          if (!el.dataset.zhBackup) el.dataset.zhBackup = el.textContent;
+          el.textContent = isEnglish ? el.getAttribute('data-en') : el.dataset.zhBackup;
+        });
+        document.querySelectorAll('[data-en-html]').forEach(el => {
+          if (!el.dataset.zhHtmlBackup) el.dataset.zhHtmlBackup = el.innerHTML;
+          el.innerHTML = isEnglish ? el.getAttribute('data-en-html') : el.dataset.zhHtmlBackup;
+        });
+        document.querySelectorAll('[data-label-en]').forEach(el => {
+          el.setAttribute('data-label', isEnglish ? el.getAttribute('data-label-en') : el.dataset.zhLabelBackup || el.getAttribute('data-label'));
+        });
+        if (langToggle) {
+          langToggle.textContent = isEnglish ? '中' : 'EN';
+          langToggle.classList.toggle('active', isEnglish);
+        }
+        document.documentElement.lang = isEnglish ? 'en' : 'zh-TW';
+      }
+      document.querySelectorAll('[data-label-en]').forEach(el => { el.dataset.zhLabelBackup = el.getAttribute('data-label'); });
+      applyLang();
+      if (langToggle) {
+        langToggle.addEventListener('click', () => {
+          isEnglish = !isEnglish;
+          applyLang();
+          try { localStorage.setItem('xiaofeng_lang', isEnglish ? 'en' : 'zh'); } catch (err) {}
+        });
+      }
+
+      // --- 離線提示 ---
+      const offlineBanner = document.getElementById('offlineBanner');
+      if (offlineBanner) {
+        window.addEventListener('offline', () => offlineBanner.classList.add('show'));
+        window.addEventListener('online', () => offlineBanner.classList.remove('show'));
+      }
+
+      // --- 停留時間顯示 ---
+      const stayTimeEl = document.getElementById('stayTime');
+      const siteEnterTime = Date.now();
+      if (stayTimeEl) {
+        setInterval(() => {
+          const seconds = Math.floor((Date.now() - siteEnterTime) / 1000);
+          if (seconds < 60) stayTimeEl.textContent = seconds + '秒';
+          else stayTimeEl.textContent = Math.floor(seconds / 60) + '分鐘';
+        }, 1000);
+      }
+
+      // --- 首次造訪時，若尚未手動選過主題，依系統偏好自動套用深色模式 ---
+      try {
+        if (!localStorage.getItem('xiaofeng_theme') && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          applyTheme(true);
+        }
+      } catch (err) {}
+
+      // --- 章節導覽圓點：捲動時自動標示目前區塊，點擊可平滑跳轉 ---
+      const dotNavItems = document.querySelectorAll('.dot-nav-item');
+      if (dotNavItems.length) {
+        const dotSections = [...dotNavItems].map(d => document.querySelector(d.getAttribute('href'))).filter(Boolean);
+        const dotObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              const id = '#' + entry.target.id;
+              dotNavItems.forEach(d => {
+                const isCurrent = d.getAttribute('href') === id;
+                d.classList.toggle('active', isCurrent);
+                if (isCurrent) d.setAttribute('aria-current', 'true');
+                else d.removeAttribute('aria-current');
+              });
+            }
+          });
+        }, { rootMargin: '-45% 0px -45% 0px' });
+        dotSections.forEach(sec => dotObserver.observe(sec));
+      }
+
+      // --- 隨機逛逛按鈕：隨機跳到某個區塊 ---
+      const randomJumpBtn = document.getElementById('randomJumpBtn');
+      if (randomJumpBtn) {
+        window.addEventListener('scroll', () => {
+          randomJumpBtn.classList.toggle('show', window.scrollY > 300);
+        }, { passive: true });
+        randomJumpBtn.addEventListener('click', () => {
+          randomJumpBtn.classList.remove('spinning');
+          void randomJumpBtn.offsetWidth;
+          randomJumpBtn.classList.add('spinning');
+          const sections = ['#hero', '#about', '#skills', '#milestones', '#friends'];
+          const current = location.hash || '#hero';
+          const options = sections.filter(s => s !== current);
+          const target = options[Math.floor(Math.random() * options.length)];
+          document.querySelector(target)?.scrollIntoView({ behavior: 'smooth' });
+        });
+      }
+
+      // --- 心情反應按鈕：純前端計數，記在這個瀏覽器裡 ---
+      document.querySelectorAll('.reaction-btn').forEach(btn => {
+        const emoji = btn.getAttribute('data-emoji');
+        const key = 'xiaofeng_reaction_' + emoji;
+        const countEl = btn.querySelector('span');
+        try {
+          const saved = parseInt(localStorage.getItem(key) || '0', 10);
+          if (saved > 0) { countEl.textContent = saved; btn.classList.add('picked'); }
+        } catch (err) {}
+        btn.addEventListener('click', () => {
+          try {
+            const current = parseInt(localStorage.getItem(key) || '0', 10);
+            const next = current > 0 ? 0 : 1;
+            localStorage.setItem(key, String(next));
+            countEl.textContent = next;
+            btn.classList.toggle('picked', next > 0);
+            btn.classList.remove('pop');
+            void btn.offsetWidth;
+            btn.classList.add('pop');
+          } catch (err) {}
+        });
+      });
+
+      // --- 記住上次瀏覽位置，重新整理後自動回到那裡 ---
+      window.addEventListener('beforeunload', () => {
+        try { sessionStorage.setItem('xiaofeng_scroll_pos', window.scrollY); } catch (err) {}
+      });
+      try {
+        const savedPos = sessionStorage.getItem('xiaofeng_scroll_pos');
+        if (savedPos && parseInt(savedPos, 10) > 100) {
+          setTimeout(() => window.scrollTo({ top: parseInt(savedPos, 10), behavior: 'auto' }), 600);
+        }
+      } catch (err) {}
+
+      // --- 深色模式時段建議：晚上10點後若還沒手動選過主題，溫柔提醒一次（不強制切換）---
+      try {
+        const hourNow = new Date().getHours();
+        if (!localStorage.getItem('xiaofeng_theme') && !localStorage.getItem('xiaofeng_dark_suggested') && (hourNow >= 22 || hourNow < 6)) {
+          const suggestDarkMode = () => {
+            if (localStorage.getItem('xiaofeng_dark_suggested')) return;
+            showAchievement('夜深了，右上角可以切換深色模式喔 🌙');
+            localStorage.setItem('xiaofeng_dark_suggested', '1');
+            window.removeEventListener('scroll', onScrollSuggest);
+          };
+          const onScrollSuggest = () => { if (window.scrollY > 250) suggestDarkMode(); };
+          window.addEventListener('scroll', onScrollSuggest, { passive: true });
+          setTimeout(suggestDarkMode, 8000);
+        }
+      } catch (err) {}
     });
   </script>
 </body>
